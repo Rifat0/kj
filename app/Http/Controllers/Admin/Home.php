@@ -6,12 +6,61 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 use Carbon;
+use Hash;
+use Session;
 
 class Home extends Controller
 {
     public function login()
     {
-        return view('Admin.login');
+        if (Session::get('admin_user_data')[0] ['admin_user_id']){
+            return redirect('/admin/home');
+        }else{
+            return view('Admin.login');
+        }
+    }
+
+    public function login_submit(Request $request)
+    {
+        $this->validate($request, [
+            'email'=> 'required',
+            'password' => 'required|min:6'
+         ]);
+
+        $admin_user = DB::table('admin_user')->where('admin_user_email', $request->input('email'))->get();
+
+        if (count($admin_user)>0) {
+
+            if (Hash::check($request->input('password'), $admin_user[0]->admin_user_password))
+            {
+                if ( $admin_user[0]->admin_user_status==1 ) {
+                    $session_data = [
+                            'admin_user_id' => $admin_user[0]->admin_user_id,
+                            'admin_user_role' => $admin_user[0]->admin_user_role,
+                            'admin_user_name' => $admin_user[0]->admin_user_name,
+                            'admin_user_email' => $admin_user[0]->admin_user_email
+                        ];
+
+                    Session::push('admin_user_data', $session_data);
+
+                    return redirect('/admin');
+                } else {
+                    return redirect('/admin')->with('error_message', 'Sorry, Your account is temporary locked. Contact to support center!');
+                }
+
+            }elseif ( $admin_user[0]->admin_user_status==0 ) {
+                return redirect('/admin')->with('error_message', 'Password do not match!');
+            }
+
+        }else {
+            return redirect('/admin')->with('error_message', 'Email or Password do not match!');
+        }
+    }
+
+    public function logout_submit(Request $request)
+    {
+        Session::flush();
+        return redirect('/admin');
     }
 
     public function index()

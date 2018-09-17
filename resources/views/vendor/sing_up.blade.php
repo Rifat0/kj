@@ -15,29 +15,45 @@
 </head>
 
 <body class="gray-bg">
-
-    <div class="middle-box text-center loginscreen animated fadeInDown">
+    <div class="row">
+        <div class="col-sm-3">
+        </div>
+    <div class="col-sm-6" text-center loginscreen animated fadeInDown">
         <div>
-            <div>
-
-                <h1 class="logo-name">K</h1>
-
-            </div>
-            <h2>Login in. To see it in action.</h2>
+            
+            <h2>Vendor Sing up.</h2>
             @include('Admin.Layouts.message')
-            <form method="POST" action="{{ url('admin/login') }}" aria-label="{{ __('Login') }}">
+            <form method="POST" action="{{ url('vendore/sing_up') }}">
                         @csrf
-                <div class="form-group">
+                <div class="col-sm-6">
+                    <div class="form-group">
 
-                    <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Enter email" >
-                  
+                        <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Enter Name" >
+                      
+                    </div>
+                    <div class="form-group">
+
+                        <input type="text" class="form-control" name="vendor_type" value="{{ old('vendor_type') }}" placeholder="Enter Vendor Type" >
+                    </div>
                 </div>
-                <div class="form-group">
 
-                    <input type="password" class="form-control" name="password" placeholder="Password" >
+                <div class="col-sm-6">
+                    <div class="form-group">
+
+                        <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Enter email" >
+                      
+                    </div>
+                    <div class="form-group">
+
+                        <input type="password" class="form-control" name="password" placeholder="Password" >
+                    </div>
+                    <div class="form-group">
+
+                        <input type="password" class="form-control" name="password_confirmation" placeholder="Confirmed Password" >
+                    </div>
                 </div>
 
-                <button class="btn btn-primary block full-width m-b">Login</button>
+                <button class="btn btn-primary block full-width m-b">Sing up</button>
 
                <!--  <a href="#"><small>Forgot password?</small></a>
                 <p class="text-muted text-center"><small>Do not have an account?</small></p>
@@ -45,6 +61,9 @@
             </form>
         </div>
     </div>
+    <div class="col-sm-3">
+        </div>
+</div>
 </div>
 </div>
 

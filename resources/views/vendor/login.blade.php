@@ -18,14 +18,9 @@
 
     <div class="middle-box text-center loginscreen animated fadeInDown">
         <div>
-            <div>
-
-                <h1 class="logo-name">K</h1>
-
-            </div>
             <h2>Login in. To see it in action.</h2>
             @include('Admin.Layouts.message')
-            <form method="POST" action="{{ url('admin/login') }}" aria-label="{{ __('Login') }}">
+            <form method="POST" action="{{ url('vendore/login') }}" aria-label="{{ __('Login') }}">
                         @csrf
                 <div class="form-group">
 

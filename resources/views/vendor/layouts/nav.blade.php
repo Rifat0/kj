@@ -6,8 +6,7 @@
                             <img alt="image" class="img-circle" src="img/profile_small.jpg" />
                              </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">David Williams</strong>
-                             </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> </span> </a>
+                            <span class="clear"> <span class="text-muted text-xs block"><strong class="font-bold">{{ Session::get('vendore_user_data')[0] ['vendore_name'] }}</strong> <b class="caret"></b></span> </span> </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                 <li><a href="profile.html">Profile</a></li>
                                 <li><a href="contacts.html">Contacts</a></li>
@@ -168,9 +167,16 @@
 
 
                 <li>
-                    <a href="login.html">
-                        <i class="fa fa-sign-out"></i> Log out
+                    <a href="{{ url('/vendore/logout') }}"
+                                   onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                    <i class="fa fa-sign-out"></i> {{ __('Logout') }}
                     </a>
+
+                    <form id="logout-form" action="{{ url('/vendore/logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+
                 </li>
                 <li>
                     <a class="right-sidebar-toggle">

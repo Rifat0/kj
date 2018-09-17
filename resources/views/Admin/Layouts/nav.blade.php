@@ -6,14 +6,12 @@
                             <img alt="image" class="img-circle" src="img/profile_small.jpg" />
                              </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">David Williams</strong>
-                             </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> </span> </a>
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{ Session::get('admin_user_data')[0] ['admin_user_name'] }}</strong>
+                             </span> <span class="text-muted text-xs block">User Role {{ Session::get('admin_user_data')[0] ['admin_user_role'] }}<b class="caret"></b></span> </span> </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                 <li><a href="profile.html">Profile</a></li>
                                 <li><a href="contacts.html">Contacts</a></li>
                                 <li><a href="mailbox.html">Mailbox</a></li>
-                                <li class="divider"></li>
-                                <li><a href="login.html">Logout</a></li>
                             </ul>
                         </div>
                         <div class="logo-element">
@@ -208,9 +206,16 @@
 
 
                 <li>
-                    <a href="login.html">
-                        <i class="fa fa-sign-out"></i> Log out
+                    <a href="{{ url('/admin/logout') }}"
+                                   onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                    <i class="fa fa-sign-out"></i> {{ __('Logout') }}
                     </a>
+
+                    <form id="logout-form" action="{{ url('/admin/logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+
                 </li>
                 <li>
                     <a class="right-sidebar-toggle">
