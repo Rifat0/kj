@@ -83,8 +83,10 @@ Route::get('/admin/adv_sec_1', 'Admin\Home@adv_sec_1')->name('admin_adv_sec_1');
 Route::get('/admin/add_adv_sec_1', 'Admin\Home@add_adv_sec_1')->name('admin_add_adv_sec_1');
 Route::get('/admin/adv_sec_2', 'Admin\Home@adv_sec_2')->name('admin_adv_sec_2');
 Route::get('/admin/add_adv_sec_2', 'Admin\Home@add_adv_sec_2')->name('admin_add_adv_sec_2');
+
 Route::get('/admin/others', 'Admin\Home@others')->name('admin_others');
-Route::get('/admin/add_others', 'Admin\Home@add_others')->name('admin_add_others');
+Route::post('/admin/others_update', 'Admin\Home@others_update');
+
 Route::get('/admin/product_ap_rj', 'Admin\Home@product_ap_rj')->name('admin_product_ap_rj');
 Route::get('/admin/update_product_ap_rj', 'Admin\Home@update_product_ap_rj')->name('admin_update_product_ap_rj');
 Route::get('/admin/product_data', 'Admin\Home@product_data')->name('admin_product_data');

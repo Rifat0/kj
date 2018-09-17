@@ -259,12 +259,35 @@ class Home extends Controller
 
     public function others(){
 
-    	$get_general_settings = DB::table('vendor_general_settings')->get();
-        return view('Admin.Others.others_list', compact('get_general_settings'));
+    	$get_shop_settings = DB::table('shop_settings')->get();
+        return view('Admin.Others.others_list', compact('get_shop_settings'));
     }
 
-    public function add_others(){
-    	return view('Admin.Others.add_others');
+    public function others_update(Request $request)
+    {
+    	$this->validate($request, [
+            'shop_name'=> 'required',
+            'shop_description'=> 'required',
+            'facebook'=> 'required',
+            'twitter'=> 'required',
+            'pinterest'=> 'required',
+            'instagram'=> 'required',
+            'googlePlus'=> 'required',
+         ]);
+
+        DB::table('shop_settings')->where('shop_id', $request->input('shop_id'))
+                ->update(
+                    [
+                        'shop_name' => $request->input('shop_name'),
+                        'shop_description' => $request->input('shop_description'),
+                        'facebook' => $request->input('facebook'),
+                        'twitter' => $request->input('twitter'),
+                        'pinterest' => $request->input('pinterest'),
+                        'instagram' => $request->input('instagram'),
+                        'googlePlus' => $request->input('googlePlus'),
+                        'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+                    ]);
+        return redirect('/admin/others')->with('status', 'Data updated!');
     }
 
     public function product_ap_rj(){

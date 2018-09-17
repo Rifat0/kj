@@ -26,3 +26,16 @@
     </div>
         
 @endif
+
+
+@if (session('error_message'))
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="alert alert-danger">
+                <strong>{{ session('error_message') }}</strong>
+            </div>
+        </div>
+    </div>
+        
+@endif

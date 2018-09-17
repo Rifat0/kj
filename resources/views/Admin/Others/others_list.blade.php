@@ -76,10 +76,10 @@
                         <li class="active"><a data-toggle="tab" href="#tab-1"> Store</a></li>
                         <li class=""><a data-toggle="tab" href="#tab-2"> Social</a></li>
                     </ul>
-                    <form method="POST" action="{{ url('/vendor/general_settings/update_general_settings_request') }}" class="form-horizontal" id="form-generalSettings" enctype="multipart/form-data">
+                    <form method="POST" action="{{ url('/admin/others_update') }}" class="form-horizontal" id="form-generalSettings" enctype="multipart/form-data">
                     {{ csrf_field() }}
 
-                    <input type="hidden" id="id" name="id" value="{{ $get_general_settings[0]->id }}" class="form-control">
+                    <input type="hidden" name="shop_id" value="{{ $get_shop_settings[0]->shop_id }}" class="form-control">
 
                     <div class="tab-content">
                         <div id="tab-1" class="tab-pane active">
@@ -87,16 +87,16 @@
 
                                 <fieldset class="form-horizontal">
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">Company Name: <font color="red">*</font></label>
+                                        <label class="col-sm-2 control-label">Shop Name: <font color="red">*</font></label>
                                         <div class="col-sm-10">
-                                            <input name="name" class="form-control" type="text" value="{{ $get_general_settings[0]->name }}" placeholder="Enter Company Name">
+                                            <input name="shop_name" class="form-control" type="text" value="{{ $get_shop_settings[0]->shop_name }}" placeholder="Enter Company Name">
                                             <span class="help-block m-b-none"></span>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">Fax</label>
+                                        <label class="col-sm-2 control-label">Shop Descripction <font color="red">*</font></label>
                                         <div class="col-sm-10">
-                                            <input name="fax" class="form-control" type="text" value="{{ $get_general_settings[0]->fax }}" placeholder="Enter Fax">
+                                            <textarea name="shop_description" class="form-control">{{ $get_shop_settings[0]->shop_description }}</textarea>
                                             <span class="help-block m-b-none"></span>
                                         </div>
                                     </div>
@@ -111,136 +111,36 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Facebook:</label>
                                         <div class="col-sm-10">
-                                            <input name="facebook" class="form-control" type="text" value="{{ $get_general_settings[0]->facebook }}" placeholder="Enter Facebook">
+                                            <input name="facebook" class="form-control" type="text" value="{{ $get_shop_settings[0]->facebook }}" placeholder="Enter Facebook">
                                             <span class="help-block m-b-none"></span>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Twitter:</label>
                                         <div class="col-sm-10">
-                                            <input name="twitter" class="form-control" type="text" value="{{ $get_general_settings[0]->twitter }}" placeholder="Enter Twitter">
-                                            <span class="help-block m-b-none"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Linkdin:</label>
-                                        <div class="col-sm-10">
-                                            <input name="linkdin"class="form-control" type="text" value="{{ $get_general_settings[0]->linkdin }}" placeholder="Enter Linkdin">
-                                            <span class="help-block m-b-none"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Google+:</label>
-                                        <div class="col-sm-10">
-                                            <input name="googlePlus" class="form-control" type="text" value="{{ $get_general_settings[0]->googlePlus }}" placeholder="Enter Google+">
-                                            <span class="help-block m-b-none"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Instagram:</label>
-                                        <div class="col-sm-10">
-                                            <input name="instagram" class="form-control" type="text" value="{{ $get_general_settings[0]->instagram }}" placeholder="Enter Instagram">
+                                            <input name="twitter" class="form-control" type="text" value="{{ $get_shop_settings[0]->twitter }}" placeholder="Enter Twitter">
                                             <span class="help-block m-b-none"></span>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Pinterest:</label>
                                         <div class="col-sm-10">
-                                            <input name="pinterest" class="form-control" type="text" value="{{ $get_general_settings[0]->pinterest }}" placeholder="Enter Pinterest">
-                                            <span class="help-block m-b-none"></span>
-                                        </div>
-                                    </div>
-                                </fieldset>
-
-                            </div>
-                        </div>
-                        <div id="tab-4" class="tab-pane">
-                            <div class="panel-body">
-
-                                <fieldset class="form-horizontal">
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Country:</label>
-                                        <div class="col-sm-10">
-                                            <select name="country" class="form-control">
-                                                <option>-- Select Country --</option>
-                                                <option></option>
-                                            </select>
+                                            <input name="pinterest" class="form-control" type="text" value="{{ $get_shop_settings[0]->pinterest }}" placeholder="Enter Pinterest">
                                             <span class="help-block m-b-none"></span>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">Language:</label>
+                                        <label class="col-sm-2 control-label">Instagram:</label>
                                         <div class="col-sm-10">
-                                            <select name="language" class="form-control">
-                                                <option>-- Select Language --</option>
-                                                <option></option>
-                                            </select>
+                                            <input name="instagram" class="form-control" type="text" value="{{ $get_shop_settings[0]->instagram }}" placeholder="Enter Instagram">
                                             <span class="help-block m-b-none"></span>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">Region/State:</label>
+                                        <label class="col-sm-2 control-label">Google+:</label>
                                         <div class="col-sm-10">
-                                            <select name="state" class="form-control">
-                                                <option>-- Select Region/State --</option>
-                                                <option></option>
-                                            </select>
+                                            <input name="googlePlus" class="form-control" type="text" value="{{ $get_shop_settings[0]->googlePlus }}" placeholder="Enter Google+">
                                             <span class="help-block m-b-none"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Administration Language:</label>
-                                        <div class="col-sm-10">
-                                            <select name="administrationLanguage" class="form-control">
-                                                <option>-- Select Administration Language --</option>
-                                                <option></option>
-                                            </select>
-                                            <span class="help-block m-b-none"></span>
-                                        </div>
-                                    </div>
-                                </fieldset>
-
-                            </div>
-                        </div>
-                        <div id="tab-5" class="tab-pane">
-                            <div class="panel-body">
-                                            
-                                <input type="hidden" name="previousLogo" value="{{ $get_general_settings[0]->storeLogo }}" class="form-control">
-                                <input type="hidden" name="previousIcon" value="{{ $get_general_settings[0]->storeIcon }}" class="form-control">
-                                            
-                                <fieldset class="form-horizontal">
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Store Logo: <font color="red">*</font></label>
-                                        <div class="col-sm-10">
-                                            <img src="{{ asset('public/backend/img/vendor/system/' . $get_general_settings[0]->storeLogo) }}" class="img-lg">
-                                            <span class="help-block m-b-none"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label"></label>
-                                        <div class="col-sm-10">
-                                            <label class="btn btn-primary btn-sm" for="storeLogo">
-                                                <input name="storeLogo" id="storeLogo" type="file" style="display:none;">
-                                                Upload
-                                            </label>
-                                            <a href="{{ url('/vendor/products') }}"class="btn btn-primary btn-sm"><i class="fa fa-trash"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Store Icon: <font color="red">*</font></label>
-                                        <div class="col-sm-10">
-                                            <img src="{{ asset('public/backend/img/vendor/system/' . $get_general_settings[0]->storeIcon) }}" class="img-lg">
-                                            <span class="help-block m-b-none"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label"></label>
-                                        <div class="col-sm-10">
-                                            <label class="btn btn-primary btn-sm" for="storeIcon">
-                                                <input name="storeIcon" id="storeIcon" type="file" style="display:none;">
-                                                Upload
-                                            </label>
-                                            <a href="{{ url('/vendor/products') }}"class="btn btn-primary btn-sm"><i class="fa fa-trash"></i></a>
                                         </div>
                                     </div>
                                 </fieldset>
