@@ -186,7 +186,7 @@
                                         <label class="col-sm-2 control-label">Product Category: <font color="red">*</font></label>
                                         <div class="col-sm-10">
                                             <select name="productCategory" class="form-control">
-                                                <option value="">option 1</option>
+                                                <option value="{{ $get_product_detail[0]->productCategory }}">{{ $get_product_detail[0]->productCategory }}</option>
                                                 <option>option 2</option>
                                             </select>
                                         </div>
@@ -205,7 +205,7 @@
                                         <label class="col-sm-2 control-label">Product Sub-Category: <font color="red">*</font></label>
                                         <div class="col-sm-10">
                                             <select name="productSubCategory" class="form-control" >
-                                                <option value="">option 1</option>
+                                                <option value="{{ $get_product_detail[0]->productSubCategory }}">{{ $get_product_detail[0]->productSubCategory }}</option>
                                                 <option>option 2</option>
                                             </select>
                                         </div>
@@ -301,7 +301,7 @@
                                         <label class="col-sm-2 control-label">Supply Type:</label>
                                         <div class="col-sm-10">
                                             <select name="supplyType" class="form-control">
-                                                <option value="">OEM / Manufacturer</option>
+                                                <option value="{{ $get_product_detail[0]->supplyType }}">{{ $get_product_detail[0]->supplyType }}</option>
                                                 <option>OEM / Manufacturer</option>
                                                 <option>Distributor</option>
                                                 <option>Wholesaler</option>
@@ -367,7 +367,7 @@
                                         <label class="col-sm-2 control-label">Unit of Measure:</label>
                                         <div class="col-sm-10">
                                             <select name="unitOfMeasure" class="form-control">
-                                                <option value="">option 1</option>
+                                                <option value="{{ $get_payment_delivery[0]->unitOfMeasure }}">{{ $get_payment_delivery[0]->unitOfMeasure }}</option>
                                                 <option>option 2</option>
                                             </select>
                                         </div>
@@ -543,7 +543,7 @@
                                         <label class="col-sm-2 control-label">Payment Method: <font color="red">*</font></label>
                                         <div class="col-sm-10">
                                             <select name="paymentMethod" class="form-control" id="paymentTerm" class="inputTxt"> 
-                                                <option value="">--Select One--</option>
+                                                <option value="{{ $get_payment_delivery[0]->paymentMethod }}">{{ $get_payment_delivery[0]->paymentMethod }}</option>
                                                 <option value="CIA">Cash in Advance (CIA)</option>
                                                 <option value="COD">Cash on Delivery (COD)</option>
                                             </select>

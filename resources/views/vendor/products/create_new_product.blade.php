@@ -646,7 +646,16 @@
                                         </tbody>
                                     </table>
                                 </div>
-
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label"></label>
+                                    <div class="col-sm-10">
+                                        @if ($errors->has('productImage'))
+                                            <span class="invalid-feedback" role="alert">
+                                            <strong><font color="red">{{ $errors->first('productImage') }}</font></strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-stripped">
                                         <thead>

@@ -41,25 +41,27 @@ class Products extends Controller
             'accessories'=> 'nullable|max:100',
             'vendor'=> 'nullable|max:100',
             'color'=> 'nullable|alpha|max:100',
-            'pd_price'=> 'required|digits:10',
-            'minimumOrderQuantity'=> 'nullable|digits:10',
-            'pd_priceForOptional'=> 'nullable|digits:10',
-            'instantPrice'=> 'nullable|digits:10',
-            'fifteenDaysPrice'=> 'nullable|digits:10',
-            'thirteenDaysPrice'=> 'nullable|digits:10',
-            'p_d_p_u_length'=> 'nullable|digits:10',
-            'p_d_p_u_height'=> 'nullable|digits:10',
-            'weightPerPack'=> 'nullable|digits:10',
-            'exportCartonDimension'=> 'nullable|digits:10',
-            'exportCartonWeight'=> 'nullable|digits:10',
-            'DeliveryWithinState'=> 'nullable|digits:10',
-            'DeliveryWithinGR'=> 'nullable|digits:10',
-            'DeliveryOutsideGR'=> 'nullable|digits:10',
-            'DurationDeliveryWithinState'=> 'nullable|digits:10',
-            'DurationDeliveryWithinGR'=> 'nullable|digits:10',
-            'DurationDeliveryOutsideGR'=> 'nullable|digits:10',
+            'pd_price'=> 'required|max:10',
+            'minimumOrderQuantity'=> 'nullable|max:10',
+            'pd_priceForOptional'=> 'nullable|max:10',
+            'instantPrice'=> 'nullable|max:10',
+            'fifteenDaysPrice'=> 'nullable|max:10',
+            'thirteenDaysPrice'=> 'nullable|max:10',
+            'p_d_p_u_length'=> 'nullable|max:10',
+            'p_d_p_u_height'=> 'nullable|max:10',
+            'weightPerPack'=> 'nullable|max:10',
+            'exportCartonDimension'=> 'nullable|max:10',
+            'exportCartonWeight'=> 'nullable|max:10',
+            'DeliveryWithinState'=> 'nullable|max:10',
+            'DeliveryWithinGR'=> 'nullable|max:10',
+            'DeliveryOutsideGR'=> 'nullable|max:10',
+            'DurationDeliveryWithinState'=> 'nullable|max:10',
+            'DurationDeliveryWithinGR'=> 'nullable|max:10',
+            'DurationDeliveryOutsideGR'=> 'nullable|max:10',
             'paymentMethod'=> 'required'
          ]);
+
+        // dd($request->all()); exit();
 
         $updateImg = "";
         if ($request->hasFile('productImage')) {
@@ -159,32 +161,39 @@ class Products extends Controller
             'productCategory'=> 'required',
             'productSubCategory'=> 'required',
             'keySpecification'=> 'required|max:3000',
-            'productImage'=> 'required|image|mimes:jpg,jpeg|max:5000',
+            'productImage'=> 'image|mimes:jpg,jpeg|max:5000',
             'partNumber'=> 'nullable|max:100',
             'menufacturer'=> 'nullable|max:100',
             'modelNumber'=> 'nullable|max:100',
             'accessories'=> 'nullable|max:100',
             'vendor'=> 'nullable|max:100',
+            'dpu_w_p_length'=> 'nullable|max:10',
+            'dpu_w_p_width'=> 'nullable|max:10',
+            'dpu_w_p_height'=> 'nullable|max:10',
+            'dpu_w_p_weight'=> 'nullable|max:10',
+            'dpu_w_p_volume'=> 'nullable|max:10',
             'color'=> 'nullable|alpha|max:100',
-            'pd_price'=> 'required|digits:10',
-            'minimumOrderQuantity'=> 'nullable|digits:10',
-            'pd_priceForOptional'=> 'nullable|digits:10',
-            'instantPrice'=> 'nullable|digits:10',
-            'fifteenDaysPrice'=> 'nullable|digits:10',
-            'thirteenDaysPrice'=> 'nullable|digits:10',
-            'p_d_p_u_length'=> 'nullable|digits:10',
-            'p_d_p_u_height'=> 'nullable|digits:10',
-            'weightPerPack'=> 'nullable|digits:10',
-            'exportCartonDimension'=> 'nullable|digits:10',
-            'exportCartonWeight'=> 'nullable|digits:10',
-            'DeliveryWithinState'=> 'nullable|digits:10',
-            'DeliveryWithinGR'=> 'nullable|digits:10',
-            'DeliveryOutsideGR'=> 'nullable|digits:10',
-            'DurationDeliveryWithinState'=> 'nullable|digits:10',
-            'DurationDeliveryWithinGR'=> 'nullable|digits:10',
-            'DurationDeliveryOutsideGR'=> 'nullable|digits:10',
+            'pd_price'=> 'required|max:10',
+            'minimumOrderQuantity'=> 'nullable|max:10',
+            'pd_priceForOptional'=> 'nullable|max:10',
+            'instantPrice'=> 'nullable|max:10',
+            'fifteenDaysPrice'=> 'nullable|max:10',
+            'thirteenDaysPrice'=> 'nullable|max:10',
+            'p_d_p_u_length'=> 'nullable|max:10',
+            'p_d_p_u_height'=> 'nullable|max:10',
+            'weightPerPack'=> 'nullable|max:10',
+            'exportCartonDimension'=> 'nullable|max:10',
+            'exportCartonWeight'=> 'nullable|max:10',
+            'DeliveryWithinState'=> 'nullable|max:10',
+            'DeliveryWithinGR'=> 'nullable|max:10',
+            'DeliveryOutsideGR'=> 'nullable|max:10',
+            'DurationDeliveryWithinState'=> 'nullable|max:10',
+            'DurationDeliveryWithinGR'=> 'nullable|max:10',
+            'DurationDeliveryOutsideGR'=> 'nullable|max:10',
             'paymentMethod'=> 'required'
          ]);
+
+        // dd($request->all()); exit();
 
         $id = $request->input('id');
 
@@ -235,7 +244,7 @@ class Products extends Controller
                     ]);
 
             }else {
-                $pathToYourFile = 'public/backend/img/vendor/products/'.$previousProductImg ;
+                $id = $request->input('id');
 
                 DB::table('vendor_products')->where('id', $id)
                 ->update(
@@ -288,6 +297,8 @@ class Products extends Controller
                             ]);
             }
         }else{
+            $id = $request->input('id');
+            $pathToYourFile = 'public/backend/img/vendor/products/'.$previousProductImg ;
 
             DB::table('vendor_products')->where('id', $id)
                 ->update(
