@@ -82,19 +82,6 @@
                 @endif
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-            </div>
-        </div>
 
         <div class="row">
             <div class="col-lg-12">
@@ -119,56 +106,88 @@
                                         <label class="col-sm-2 control-label">Company Name: <font color="red">*</font></label>
                                         <div class="col-sm-10">
                                             <input name="name" class="form-control" type="text" value="{{ $get_general_settings[0]->name }}" placeholder="Enter Company Name">
-                                            <span class="help-block m-b-none"></span>
+                                            @if ($errors->has('name'))
+                                                <span class="invalid-feedback" role="alert">
+                                                <strong><font color="red">{{ $errors->first('name') }}</font></strong>
+                                                </span>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Fax</label>
                                         <div class="col-sm-10">
                                             <input name="fax" class="form-control" type="text" value="{{ $get_general_settings[0]->fax }}" placeholder="Enter Fax">
-                                            <span class="help-block m-b-none"></span>
+                                            @if ($errors->has('fax'))
+                                                <span class="invalid-feedback" role="alert">
+                                                <strong><font color="red">{{ $errors->first('fax') }}</font></strong>
+                                                </span>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Company Owner: <font color="red">*</font></label>
                                         <div class="col-sm-10">
                                             <input name="owner" class="form-control" type="text" value="{{ $get_general_settings[0]->owner }}" placeholder="Enter Company Owner">
-                                            <span class="help-block m-b-none"></span>
+                                            @if ($errors->has('owner'))
+                                                <span class="invalid-feedback" role="alert">
+                                                <strong><font color="red">{{ $errors->first('owner') }}</font></strong>
+                                                </span>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Address: <font color="red">*</font></label>
                                         <div class="col-sm-10">
                                             <input name="address" class="form-control" type="text" value="{{ $get_general_settings[0]->address }}" placeholder="Enter Address">
-                                            <span class="help-block m-b-none"></span>
+                                            @if ($errors->has('address'))
+                                                <span class="invalid-feedback" role="alert">
+                                                <strong><font color="red">{{ $errors->first('address') }}</font></strong>
+                                                </span>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Geocode</label>
                                         <div class="col-sm-10">
                                             <input name="geocode" class="form-control" type="text" value="{{ $get_general_settings[0]->geocode }}" placeholder="Enter Geocode">
-                                            <span class="help-block m-b-none"></span>
+                                            @if ($errors->has('geocode'))
+                                                <span class="invalid-feedback" role="alert">
+                                                <strong><font color="red">{{ $errors->first('geocode') }}</font></strong>
+                                                </span>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Email: <font color="red">*</font></label>
                                         <div class="col-sm-10">
                                             <input name="email" class="form-control" type="text" value="{{ $get_general_settings[0]->email }}" placeholder="Enter Email">
-                                            <span class="help-block m-b-none"></span>
+                                            @if ($errors->has('email'))
+                                                <span class="invalid-feedback" role="alert">
+                                                <strong><font color="red">{{ $errors->first('email') }}</font></strong>
+                                                </span>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Telephone: <font color="red">*</font></label>
                                         <div class="col-sm-10">
                                             <input name="telephone" class="form-control" type="text" value="{{ $get_general_settings[0]->telephone }}" placeholder="Enter Telephone">
-                                            <span class="help-block m-b-none"></span>
+                                            @if ($errors->has('telephone'))
+                                                <span class="invalid-feedback" role="alert">
+                                                <strong><font color="red">{{ $errors->first('telephone') }}</font></strong>
+                                                </span>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Copyright: <font color="red">*</font></label>
                                         <div class="col-sm-10">
                                             <input name="copyright" class="form-control" type="text" value="{{ $get_general_settings[0]->copyright }}" placeholder="Enter Copyright">
-                                            <span class="help-block m-b-none"></span>
+                                            @if ($errors->has('copyright'))
+                                                <span class="invalid-feedback" role="alert">
+                                                <strong><font color="red">{{ $errors->first('copyright') }}</font></strong>
+                                                </span>
+                                            @endif
                                         </div> 
                                     </div>
                                 </fieldset>

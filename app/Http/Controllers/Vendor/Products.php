@@ -26,21 +26,40 @@ class Products extends Controller
     public function store_new_product(Request $request)
     {
         // Product Validation
-        // $this->validate($request, [
-        //     'productName'=> 'required',
-        //     'productGenericName'=> 'required',
-        //     'productDescription'=> 'required',
-        //     'productCategory'=> 'required',
-        //     'productSubCategory'=> 'required',
-        //     'keySpecification'=> 'required',
-        //     'productImage'=> 'required'
-        //  ]);
-
-        // Payment & Delivery Information Validation
-        // $this->validate($request, [
-        //     'pd_price'=> 'required',
-        //     'paymentMethod'=> 'required'
-        //  ]);
+        $this->validate($request, [
+            'productName'=> 'required|max:100',
+            'productGenericName'=> 'required|max:100',
+            'productDescription'=> 'required|max:100',
+            'productKeyword'=> 'nullable|max:100',
+            'productCategory'=> 'required',
+            'productSubCategory'=> 'required',
+            'keySpecification'=> 'required|max:3000',
+            'productImage'=> 'required|image|mimes:jpg,jpeg|max:5000',
+            'partNumber'=> 'nullable|max:100',
+            'menufacturer'=> 'nullable|max:100',
+            'modelNumber'=> 'nullable|max:100',
+            'accessories'=> 'nullable|max:100',
+            'vendor'=> 'nullable|max:100',
+            'color'=> 'nullable|alpha|max:100',
+            'pd_price'=> 'required|digits:10',
+            'minimumOrderQuantity'=> 'nullable|digits:10',
+            'pd_priceForOptional'=> 'nullable|digits:10',
+            'instantPrice'=> 'nullable|digits:10',
+            'fifteenDaysPrice'=> 'nullable|digits:10',
+            'thirteenDaysPrice'=> 'nullable|digits:10',
+            'p_d_p_u_length'=> 'nullable|digits:10',
+            'p_d_p_u_height'=> 'nullable|digits:10',
+            'weightPerPack'=> 'nullable|digits:10',
+            'exportCartonDimension'=> 'nullable|digits:10',
+            'exportCartonWeight'=> 'nullable|digits:10',
+            'DeliveryWithinState'=> 'nullable|digits:10',
+            'DeliveryWithinGR'=> 'nullable|digits:10',
+            'DeliveryOutsideGR'=> 'nullable|digits:10',
+            'DurationDeliveryWithinState'=> 'nullable|digits:10',
+            'DurationDeliveryWithinGR'=> 'nullable|digits:10',
+            'DurationDeliveryOutsideGR'=> 'nullable|digits:10',
+            'paymentMethod'=> 'required'
+         ]);
 
         $updateImg = "";
         if ($request->hasFile('productImage')) {
@@ -132,22 +151,40 @@ class Products extends Controller
 
     public function update_product_request(Request $request)
     {
-        // Product Validation
-        // $this->validate($request, [
-        //     'productName'=> 'required',
-        //     'productGenericName'=> 'required',
-        //     'productDescription'=> 'required',
-        //     'productCategory'=> 'required',
-        //     'productSubCategory'=> 'required',
-        //     'keySpecification'=> 'required',
-        //     'productImage'=> 'required'
-        //  ]);
-
-        // Payment & Delivery Information Validation
-        // $this->validate($request, [
-        //     'pd_price'=> 'required',
-        //     'paymentMethod'=> 'required'
-        //  ]);
+        $this->validate($request, [
+            'productName'=> 'required|max:100',
+            'productGenericName'=> 'required|max:100',
+            'productDescription'=> 'required|max:100',
+            'productKeyword'=> 'nullable|max:100',
+            'productCategory'=> 'required',
+            'productSubCategory'=> 'required',
+            'keySpecification'=> 'required|max:3000',
+            'productImage'=> 'required|image|mimes:jpg,jpeg|max:5000',
+            'partNumber'=> 'nullable|max:100',
+            'menufacturer'=> 'nullable|max:100',
+            'modelNumber'=> 'nullable|max:100',
+            'accessories'=> 'nullable|max:100',
+            'vendor'=> 'nullable|max:100',
+            'color'=> 'nullable|alpha|max:100',
+            'pd_price'=> 'required|digits:10',
+            'minimumOrderQuantity'=> 'nullable|digits:10',
+            'pd_priceForOptional'=> 'nullable|digits:10',
+            'instantPrice'=> 'nullable|digits:10',
+            'fifteenDaysPrice'=> 'nullable|digits:10',
+            'thirteenDaysPrice'=> 'nullable|digits:10',
+            'p_d_p_u_length'=> 'nullable|digits:10',
+            'p_d_p_u_height'=> 'nullable|digits:10',
+            'weightPerPack'=> 'nullable|digits:10',
+            'exportCartonDimension'=> 'nullable|digits:10',
+            'exportCartonWeight'=> 'nullable|digits:10',
+            'DeliveryWithinState'=> 'nullable|digits:10',
+            'DeliveryWithinGR'=> 'nullable|digits:10',
+            'DeliveryOutsideGR'=> 'nullable|digits:10',
+            'DurationDeliveryWithinState'=> 'nullable|digits:10',
+            'DurationDeliveryWithinGR'=> 'nullable|digits:10',
+            'DurationDeliveryOutsideGR'=> 'nullable|digits:10',
+            'paymentMethod'=> 'required'
+         ]);
 
         $id = $request->input('id');
 

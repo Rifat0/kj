@@ -22,14 +22,14 @@ class Settings extends Controller
     {
         // Settings Validation
         $this->validate($request, [
-            'name'=> 'required',
-            'owner'=> 'required',
-            'address'=> 'required',
-            'email'=> 'required',
-            'telephone'=> 'required',
-            'copyright'=> 'required',
-            'storeLogo'=> '',
-            'storeIcon'=> ''
+            'name'=> 'required|max:100',
+            'owner'=> 'required|max:100',
+            'address'=> 'required|max:100',
+            'email'=> 'required|max:100',
+            'telephone'=> 'nullable|digits:11',
+            'copyright'=> 'required|max:100',
+            'storeLogo'=> 'required|image|mimes:jpg,jpeg|max:5000',
+            'storeIcon'=> 'required|image|mimes:jpg,jpeg|max:5000'
          ]);
 
     	$id = $request->input('id');
