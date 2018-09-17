@@ -36,7 +36,7 @@ Route::post('/vendor/general_settings/update_general_settings_request', 'Vendor\
 // ==========================================================================================================
 
 
-Auth::routes();
+// Auth::routes();
 Route::get('/', 'Content\Home@index')->name('home');
 Route::get('/home', 'Content\Home@index')->name('home');
 Route::get('/category', 'Content\Home@category')->name('category');
@@ -50,6 +50,9 @@ Route::get('/legal ', 'Content\Home@legal')->name('legal');
 Route::get('/favorite ', 'Content\Home@favorite')->name('favorite');
 Route::get('/compare ', 'Content\Home@compare')->name('compare');
 Route::get('/sing_up ', 'Content\Home@sing_up')->name('sing_up');
+Route::post('/sing_up ', 'Content\Home@sing_up_submit');
+Route::post('/login ', 'Content\Home@login_submit');
+Route::post('/logout ', 'Content\Home@logout');
 
 // ==========================================================================================================
 // Admin

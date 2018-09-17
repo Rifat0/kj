@@ -25,35 +25,23 @@
             <h3 class="widget-title">Member Login</h3>
             <p>Welcome back, friend. Login to get started</p>
             <hr />
-            <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
+            <form method="POST" action="{{ url('/login') }}" aria-label="{{ __('Login') }}">
                         @csrf
                 <div class="form-group">
                     <label>Email</label>
-                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
-
-                    @if ($errors->has('email'))
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('email') }}</strong>
-                        </span>
-                    @endif
+                    <input type="email" class="form-control" name="email" value="{{ old('email') }}" >
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                    @if ($errors->has('password'))
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('password') }}</strong>
-                        </span>
-                    @endif
+                    <input type="password" class="form-control" name="password">
                 </div>
-                <div class="checkbox">
+                <!-- <div class="checkbox">
                     <label>
                         <input class="form-check-input i-check" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                         <label class="form-check-label" for="remember">
                             {{ __('Remember Me') }}
                         </label>
-                </div>
+                </div> -->
                 <input class="btn btn-primary" type="submit" value="Sign In" />
             </form>
             <div class="gap gap-small"></div>
@@ -80,7 +68,7 @@
                 <div class="navbar-header">
                     <!-- <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-nav-collapse" area_expanded="false"><span class="sr-only">Main Menu</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
                     </button> -->
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="{{ url('/') }}">
                         Kajandi
                     </a>
                 </div>
@@ -689,31 +677,29 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right navbar-right-no-mar navbar-nav-lg">
                         
-                        @if (Route::has('login'))
-                            @auth
-                                <li class="dropdown"><a href="#" class="popup-text"><span>User</span>Your Account</a>
+                        @if (Session::get('web_user_data')[0] ['web_user_id'])
+                        <li class="dropdown"><a href="#" class="popup-text"><span>User</span>Your Account</a>
 
-                                <ul class="dropdown-menu dropdown-menu-shipping-cart">
-                                    <li>
-                                        <a>Wellcome, <strong>{{ Auth::user()->name }}</strong></a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                        </a>
+                            <ul class="dropdown-menu dropdown-menu-shipping-cart">
+                                <li>
+                                    <a>Wellcome, <strong>{{ Session::get('web_user_data')[0] ['company_name'] }}</strong></a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ url('/logout') }}"
+                                   onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                    </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            @csrf
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                            @else
-                                <li><a href="#nav-login-dialog" data-effect="mfp-move-from-top" class="popup-text"><span>Existing</span>Sign In</a></li>
-                                <li><a href="{{ url('/sing_up') }}"><span>New User</span>Create Account</a></li>
-                            @endauth
+                                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                        @else
+                            <li><a href="#nav-login-dialog" data-effect="mfp-move-from-top" class="popup-text"><span>Existing</span>Sign In</a></li>
+                            <li><a href="{{ url('/sing_up') }}"><span>New User</span>Create Account</a></li>
                         @endif
                         <li class="dropdown"><a href="shopping-cart.html"><span ></span><i class="fa fa-shopping-cart"></i></a>
                             <ul class="dropdown-menu dropdown-menu-shipping-cart">
@@ -741,6 +727,7 @@
         <div class="container">
             <div class="gap gap-small"></div>
             <div class="row row-sm-gap" data-gutter="10">
+                @include('Admin.Layouts.message')
                 <div class="col-md-3">
                     <div class="clearfix">
                         <ul class="dropdown-menu dropdown-menu-category dropdown-menu-category-hold dropdown-menu-category-sm">
