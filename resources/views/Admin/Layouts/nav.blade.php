@@ -54,11 +54,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Coustomer/Buyer</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a href="{{ url('/admin/coustomer_buyer_list') }}">Coustomer/Buyer List</a></li>
-                            <li><a href="{{ url('/admin/add_coustomer_buyer') }}">Add Coustomer/Buyer</a></li>
-                        </ul>
+                        <a href="{{ url('/admin/coustomer_buyer_list') }}"><i class="fa fa-laptop"></i> <span class="nav-label">Coustomer/Buyer</span></a>
                     </li>
                     <li>
                         <a href="{{ url('/admin/orders_list') }}"><i class="fa fa-laptop"></i> <span class="nav-label">Orders</span></a>

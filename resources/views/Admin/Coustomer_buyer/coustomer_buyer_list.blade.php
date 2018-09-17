@@ -21,17 +21,9 @@
         </div>
     </div>
     <div class="wrapper wrapper-content animated fadeInRight">
-        <div class="row">
-            <div class="col-lg-12">
-                @if (session('status'))
+        
+        @include('Admin.Layouts.message')
 
-                    <div class="alert alert-success">
-                        <strong>{{ session('status') }}</strong>
-                    </div>
-
-                @endif
-            </div>
-        </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
@@ -50,33 +42,45 @@
                     <thead>
                     <tr>
                         <th>SL.</th>
-                        <th>Product Name</th>
-                        <th>Price</th>
-                        <th>Number In Stock</th>
-                        <th>Sold Quantity</th>
+                        <th>Company Name</th>
+                        <th>Login Email</th>
+                        <th>Email of MD/Chairman</th>
+                        <th>Email of Contact</th>
+                        <th>Phone of Contact</th>
+                        <th>Date of Join</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>fhfgh</td>
-                        <td>fhfgh</td>
-                        <td>Price</td>
-                        <td>Win 95+</td>
-                        <td>4</td>
-                        <td class="center">
-                            <a href="" class="btn btn-primary btn-xs">View</a>
-                            <a href="" class="btn btn-primary btn-xs">Update</a>
-                        </td>
-                    </tr>
+                        @foreach($coustomer_buyer_list as $coustomer_buyer)
+                        <tr>
+                            <td>{{ $coustomer_buyer->web_user_id }}</td>
+                            <td>{{ $coustomer_buyer->company_name }}</td>
+                            <td>{{ $coustomer_buyer->login_email }}</td>
+                            <td>{{ $coustomer_buyer->email_of_MD_Chairman }} 95+</td>
+                            <td>{{ $coustomer_buyer->email_of_contact_person }}</td>
+                            <td>{{ $coustomer_buyer->phone_of_contact_person }}</td>
+                            <td>{{ Carbon::parse($coustomer_buyer->created_at)->format('d-m-Y') }}</td>
+                            <td class="center">
+                                    <a href="{{ url('/admin/coustomer_buyer/view').'/'.$coustomer_buyer->web_user_id }}" class="btn btn-info btn-xs">View</a>
+                                @if( $coustomer_buyer->web_user_status==0 )
+                                    <a href="{{ url('/admin/coustomer_buyer/status_change').'/'.$coustomer_buyer->web_user_id }}" class="btn btn-primary btn-xs">Activate</a>
+                                @elseif( $coustomer_buyer->web_user_status==1 )
+                                    <a href="{{ url('/admin/coustomer_buyer/status_change').'/'.$coustomer_buyer->web_user_id }}" class="btn btn-danger btn-xs">Deactivate</a>
+                                @endif
+                            </td>
+                        </tr>
+                        @endforeach
                     </tbody>
                     <tfoot>
                     <tr>
                         <th>SL.</th>
-                        <th>Product Name</th>
-                        <th>Price</th>
-                        <th>Number In Stock</th>
-                        <th>Sold Quantity</th>
+                        <th>Company Name</th>
+                        <th>Login Email</th>
+                        <th>Email of MD/Chairman</th>
+                        <th>Email of Contact</th>
+                        <th>Phone of Contact</th>
+                        <th>Date of Join</th>
                         <th>Action</th>
                     </tr>
                     </tfoot>

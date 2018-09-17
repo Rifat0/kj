@@ -311,15 +311,37 @@ class Home extends Controller
     }
 
     public function coustomer_buyer(){
-    	return view('Admin.Coustomer_buyer.coustomer_buyer_list');
+
+    	$coustomer_buyer_list = DB::table('web_user')->get();
+        return view('Admin.Coustomer_buyer.coustomer_buyer_list', compact('coustomer_buyer_list'));
     }
 
-    public function add_coustomer_buyer(){
-    	return view('Admin.Coustomer_buyer.add_coustomer_buyer');
+    public function coustomer_buyer_view($id){
+
+        $user_data = DB::table('web_user')->where('web_user_id', $id)->first();
+        var_dump($user_data);
+        // return view('Admin.Coustomer_buyer.coustomer_buyer_list', compact('user_data'));
     }
 
-    public function orders_list(){
-    	return view('Admin.Orders.orders_list');
+    public function coustomer_buyer_status_change($id){
+    	$user_data = DB::table('web_user')->where('web_user_id', $id)->first();
+        if($user_data->web_user_status==0){
+            DB::table('web_user')->where('web_user_id', $id)
+                    ->update(
+                        [
+                            'web_user_status' => "1",
+                            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+                        ]);
+            return redirect('/admin/coustomer_buyer_list')->with('status', 'User status changed!');
+        }elseif($user_data->web_user_status==1){
+            DB::table('web_user')->where('web_user_id', $id)
+                    ->update(
+                        [
+                            'web_user_status' => "0",
+                            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+                        ]);
+            return redirect('/admin/coustomer_buyer_list')->with('status', 'User status changed!');
+        }
     }
 
     public function requisitions_list(){

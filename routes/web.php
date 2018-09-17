@@ -95,8 +95,11 @@ Route::get('/admin/update_product_ap_rj', 'Admin\Home@update_product_ap_rj')->na
 Route::get('/admin/product_data', 'Admin\Home@product_data')->name('admin_product_data');
 Route::get('/admin/vendor_ap_rj', 'Admin\Home@vendor_ap_rj')->name('admin_vendor_ap_rj');
 Route::get('/admin/add_vendor', 'Admin\Home@add_vendor')->name('admin_add_vendor');
-Route::get('/admin/coustomer_buyer_list', 'Admin\Home@coustomer_buyer')->name('admin_coustomer_buyer');
-Route::get('/admin/add_coustomer_buyer', 'Admin\Home@add_coustomer_buyer')->name('admin_add_coustomer_buyer');
+
+Route::get('/admin/coustomer_buyer_list', 'Admin\Home@coustomer_buyer');
+Route::get('/admin/coustomer_buyer/view/{id}', 'Admin\Home@coustomer_buyer_view');
+Route::get('/admin/coustomer_buyer/status_change/{id}', 'Admin\Home@coustomer_buyer_status_change');
+
 Route::get('/admin/orders_list', 'Admin\Home@orders_list')->name('admin_orders_list');
 Route::get('/admin/requisitions_list', 'Admin\Home@requisitions_list')->name('admin_requisitions_list');
 Route::get('/admin/user_list', 'Admin\Home@user_list')->name('admin_user_list');
