@@ -4,9 +4,9 @@
 // Vendor
 // ==========================================================================================================
 Route::get('/vendore', 'Vendor\Home@login');
-Route::get('/vendore/sing_up', 'Vendor\Home@sing_up');
+Route::get('/vendore/signUp', 'Vendor\Home@signUp');
 Route::post('/vendore/login', 'Vendor\Home@login_submit');
-Route::post('/vendore/sing_up', 'Vendor\Home@sing_up_submit');
+Route::post('/vendore/signUp', 'Vendor\Home@signUp_submit');
 	
 Route::group(['middleware' => 'vendore_user'], function () {
 

@@ -8,6 +8,9 @@ use App\Http\Controllers\Controller;
 use DB;
 use App\Vendor_product_images;
 
+use Auth;
+use Session;
+
 class Products extends Controller
 {
     public function products()
@@ -20,7 +23,9 @@ class Products extends Controller
 
     public function create_new_product()
     {
-        return view('vendor.products.create_new_product');
+        $get_vendor = DB::table('vendore_user')->get();
+
+        return view('vendor.products.create_new_product', compact('get_vendor'));
     }
 
     public function store_new_product(Request $request)
@@ -40,7 +45,7 @@ class Products extends Controller
             'modelNumber'=> 'nullable|max:100',
             'accessories'=> 'nullable|max:100',
             'vendor'=> 'nullable|max:100',
-            'color'=> 'nullable|alpha|max:100',
+            'color'=> 'nullable|max:100',
             'pd_price'=> 'required|max:10',
             'minimumOrderQuantity'=> 'nullable|max:10',
             'pd_priceForOptional'=> 'nullable|max:10',
@@ -60,8 +65,9 @@ class Products extends Controller
             'DurationDeliveryOutsideGR'=> 'nullable|max:10',
             'paymentMethod'=> 'required'
          ]);
-
-        // dd($request->all()); exit();
+        
+        $id = $request->input('vendore_user_id');
+        $store_id = $id;
 
         $updateImg = "";
         if ($request->hasFile('productImage')) {
@@ -77,6 +83,7 @@ class Products extends Controller
         DB::table('vendor_products')
                 ->insert(
                     [
+                        'vendore_user_id' => $store_id,
                         'productName' => $request->input('productName'),
                         'productGenericName' => $request->input('productGenericName'),
                         'productDescription' => $request->input('productDescription'),
@@ -95,6 +102,7 @@ class Products extends Controller
 
         DB::table('vendor_product_images')
                 ->insert( [
+                        'vendore_user_id' => $store_id,
                         'productImage'=>$updateImg
                         //you can put other insertion here
         ]);
@@ -102,6 +110,7 @@ class Products extends Controller
         DB::table('vendor_payment_delivery')
                 ->insert(
                     [
+                        'vendore_user_id' => $store_id,
                         'smallOrdersAccepted' => $request->input('smallOrdersAccepted'),
                         'minimumOrderQuantity' => $request->input('minimumOrderQuantity'),
                         'unitOfMeasure' => $request->input('unitOfMeasure'),
@@ -131,15 +140,6 @@ class Products extends Controller
                     ]);
 
         return redirect('/vendor/products')->with('status', 'Product Created Successfully!');
-    }
-
-    public function product_detail($id)
-    {
-        $get_product_detail = DB::table('vendor_products')->where('id', $id)->get();
-        $get_payment_delivery = DB::table('vendor_payment_delivery')->where('id', $id)->get();
-        $get_product_images = DB::table('vendor_product_images')->where('id', $id)->get();
-
-        return view('vendor.products.product_detail', compact('get_product_detail', 'get_product_images', 'get_payment_delivery'));
     }
 
     public function update_product($id)
@@ -172,7 +172,7 @@ class Products extends Controller
             'dpu_w_p_height'=> 'nullable|max:10',
             'dpu_w_p_weight'=> 'nullable|max:10',
             'dpu_w_p_volume'=> 'nullable|max:10',
-            'color'=> 'nullable|alpha|max:100',
+            'color'=> 'nullable|max:100',
             'pd_price'=> 'required|max:10',
             'minimumOrderQuantity'=> 'nullable|max:10',
             'pd_priceForOptional'=> 'nullable|max:10',
@@ -193,15 +193,13 @@ class Products extends Controller
             'paymentMethod'=> 'required'
          ]);
 
-        // dd($request->all()); exit();
-
         $id = $request->input('id');
 
         // Store Logo Logic
-        $logo_id = $request->input('id');
+        $prooductImg_id = $request->input('id');
         $previousProductImg = $request->input('previousProductImg');
 
-        $files = Vendor_product_images::find($logo_id);
+        $files = Vendor_product_images::find($prooductImg_id);
         $filedelete = $files['productImage'];
 
         $pathToYourFile = 'public/backend/img/vendor/products/'.$filedelete ;
@@ -222,6 +220,8 @@ class Products extends Controller
                     ]);
 
         }elseif( !empty($previousProductImg) )  {
+            
+            $id = $request->input('id');
 
             if ($request->hasFile('productImage')) {
                 if(file_exists($pathToYourFile)) // make sure it exits inside the folder
@@ -245,6 +245,8 @@ class Products extends Controller
 
             }else {
                 $id = $request->input('id');
+                $id = $request->input('id');
+                $pathToYourFile = 'public/backend/img/vendor/products/'.$previousProductImg ;
 
                 DB::table('vendor_products')->where('id', $id)
                 ->update(
@@ -298,7 +300,8 @@ class Products extends Controller
             }
         }else{
             $id = $request->input('id');
-            $pathToYourFile = 'public/backend/img/vendor/products/'.$previousProductImg ;
+            $id = $request->input('id');
+            $id = $request->input('id');
 
             DB::table('vendor_products')->where('id', $id)
                 ->update(

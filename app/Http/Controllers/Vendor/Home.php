@@ -36,9 +36,14 @@ class Home extends Controller
                 if ( $vendore_user[0]->vendore_user_status==1 ) {
 
                     $session_data = [
-		                'vendore_user_id' => $vendore_user[0]->vendore_user_id,
-		                'vendore_name' => $vendore_user[0]->name,
-		                'email' => $vendore_user[0]->email
+                        'vendore_user_id' => $vendore_user[0]->vendore_user_id,
+                        'vendore_name' => $vendore_user[0]->name,
+                        'email' => $vendore_user[0]->email,
+                        'companyName' => $vendore_user[0]->companyName,
+                        'vendor_type' => $vendore_user[0]->vendor_type,
+                        'address' => $vendore_user[0]->address,
+                        'fax' => $vendore_user[0]->fax,
+                        'mobile' => $vendore_user[0]->mobile
 		            ];
 
 		        	Session::push('vendore_user_data', $session_data);
@@ -57,12 +62,12 @@ class Home extends Controller
         }
     }
 
-    public function sing_up()
+    public function signUp()
     {
-        return view('vendor.sing_up');
+        return view('vendor.signUp');
     }
 
-    public function sing_up_submit(Request $request)
+    public function signUp_submit(Request $request)
     {
         $this->validate($request, [
             'name'=> 'required',
@@ -87,7 +92,12 @@ class Home extends Controller
         $session_data = [
                 'vendore_user_id' => $vendore_user_data[0]->vendore_user_id,
                 'vendore_name' => $vendore_user_data[0]->name,
-                'email' => $vendore_user_data[0]->email
+                'email' => $vendore_user_data[0]->email,
+                'companyName' => $vendore_user_data[0]->companyName,
+                'vendor_type' => $vendore_user_data[0]->vendor_type,
+                'address' => $vendore_user_data[0]->address,
+                'fax' => $vendore_user_data[0]->fax,
+                'mobile' => $vendore_user_data[0]->mobile
             ];
 
         Session::push('vendore_user_data', $session_data);

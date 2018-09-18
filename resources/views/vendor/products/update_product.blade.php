@@ -346,7 +346,7 @@
                                                 <label for="inlineRadio1"> Yes </label>
                                             </div>
                                             <div class="radio radio-inline">
-                                                <input type="radio" id="inlineRadio2" value="no" name="smallOrdersAccepted" checked="">
+                                                <input type="radio" id="inlineRadio2" value="no" name="smallOrdersAccepte">
                                                 <label for="inlineRadio2"> No </label>
                                             </div>
                                             <span class="help-block m-b-none"></span>
@@ -582,42 +582,19 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        @foreach($get_product_images as $image)
                                         <tr>
-                                            <td><img src=""></td>
+                                            <td>
+                                                <img src="{{ asset('public/backend/img/vendor/products/'. $image->productImage) }}" class="img-lg">
+                                            </td>
                                             <td>
                                                 <input type="file" name="productImage" class="form-control">
                                             </td>
                                             <td>
-                                                <button class="btn btn-primary"><i class="fa fa-trash"></i></button>
+                                                <a href="{{ url('/vendor/products/delete_product_request/'.$image->id) }}" class="btn btn-primary"><i class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-stripped">
-                                        <thead>
-                                        <tr>
-                                            <th>
-                                                Additional Image
-                                            </th>
-                                            <th>
-                                                Sort order
-                                            </th>
-                                            <th>
-                                                Actions
-                                            </th>
-                                        </tr>
-                                        </thead>
-                                        <tbody id="addImage">
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td>
-                                                <button onclick="myFunction()" class="btn btn-primary"><i class="fa fa-plus"></i></button>
-                                            </td>
-                                        </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -1013,19 +990,6 @@
             });
 
         });
-    </script>
-
-    <script>
-        function myFunction() {
-            var table = document.getElementById("addImage");
-            var row = table.insertRow(0);
-            var cell1 = row.insertCell(0);
-            var cell2 = row.insertCell(1);
-            var cell3 = row.insertCell(2);
-            cell1.innerHTML = '<div class="imgPopup"><img src="{{ asset('public/backend/img/gallery/1s.jpg') }}" alt="Snow" style="width:100%"><button class="btn"><i class="fa fa-pencil"></i></button></div>';
-            cell2.innerHTML = '<td><input type="text" class="form-control" name="name" /></td>';
-            cell3.innerHTML = '<button class="btn btn-white"><i class="fa fa-trash"></i> </button>';
-        }
     </script>
     
 @endsection

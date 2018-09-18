@@ -85,6 +85,9 @@
                     </ul>
                     <form method="POST" action="{{ url('/vendor/products/store_new_product') }}" class="form-horizontal" id="form-product" enctype="multipart/form-data">
                     {{ csrf_field() }}
+
+                    <input type="hidden" id="vendore_user_id" name="vendore_user_id" value="{{ Session::get('vendore_user_data')[0] ['vendore_user_id'] }}" class="form-control">
+
                     <div class="tab-content">
                         <div id="tab-1" class="tab-pane active">
                             <div class="panel-body">
