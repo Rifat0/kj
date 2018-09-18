@@ -391,11 +391,10 @@ class Home extends Controller
         return view('Admin.Coustomer_buyer.coustomer_buyer_list', compact('coustomer_buyer_list'));
     }
 
-    public function coustomer_buyer_view($id){
+    public function coustomer_buyer_view(Request $request){
 
-        $user_data = DB::table('web_user')->where('web_user_id', $id)->first();
-        var_dump($user_data);
-        // return view('Admin.Coustomer_buyer.coustomer_buyer_list', compact('user_data'));
+        $coustomer_buyer_data = DB::table('web_user')->where('web_user_id', $request->input('coustomer_buyer_id'))->first();
+        return view('Admin.Coustomer_buyer.coustomer_buyer_view', compact('coustomer_buyer_data'));
     }
 
     public function coustomer_buyer_status_change($id){

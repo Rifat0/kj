@@ -64,14 +64,13 @@
                             <td>{{ $vendore_data->vendor_type }}</td>
                             <td>{{ $vendore_data->email }}</td>
                             <td class="center">
-                                    <a href="{{ url('/admin/vendore/view') }}" onclick="event.preventDefault();
-                                                                 document.getElementById('vendore-view-form').submit();" class="btn btn-info btn-xs">{{ __('View') }}
-                                    </a>
+                                <a href="{{ url('/admin/vendore/view') }}" onclick="event.preventDefault(); document.getElementById('vendore-view-form').submit();" class="btn btn-info btn-xs">{{ __('View') }}
+                                </a>
 
-                                    <form id="vendore-view-form" action="{{ url('/admin/vendore/view') }}" method="POST" style="display: none;">
-                                        <input type="hidden" name="vendore_user_id" value="{{ $vendore_data->vendore_user_id }}">
-                                        @csrf
-                                    </form>
+                                <form id="vendore-view-form" action="{{ url('/admin/vendore/view') }}" method="POST" style="display: none;">
+                                    <input type="hidden" name="vendore_user_id" value="{{ $vendore_data->vendore_user_id }}">
+                                    @csrf
+                                </form>
                                 @if( $vendore_data->vendore_user_status==0 )
                                     <a href="{{ url('/admin/vendore/status_change').'/'.$vendore_data->vendore_user_id }}" class="btn btn-primary btn-xs">Activate</a>
                                 @elseif( $vendore_data->vendore_user_status==1 )

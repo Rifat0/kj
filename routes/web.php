@@ -113,7 +113,7 @@ Route::group(['middleware' => 'admin_user'], function () {
 	Route::post('/admin/vendore/view', 'Admin\Home@vendore_view');
 
 	Route::get('/admin/coustomer_buyer_list', 'Admin\Home@coustomer_buyer');
-	Route::get('/admin/coustomer_buyer/view/{id}', 'Admin\Home@coustomer_buyer_view');
+	Route::post('/admin/coustomer_buyer/view', 'Admin\Home@coustomer_buyer_view');
 	Route::get('/admin/coustomer_buyer/status_change/{id}', 'Admin\Home@coustomer_buyer_status_change');
 
 	Route::get('/admin/orders_list', 'Admin\Home@orders_list')->name('admin_orders_list');
