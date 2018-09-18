@@ -341,14 +341,27 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Small Orders Accepted:</label>
                                         <div class="col-sm-10">
+                                            @if( $get_payment_delivery[0]->smallOrdersAccepted =="yes")
                                             <div class="radio radio-info radio-inline">
-                                                <input type="radio" id="inlineRadio1" value="yes" name="smallOrdersAccepted">
+                                                <input type="radio" id="inlineRadio1" value="yes" name="smallOrdersAccepted" checked>
+                                                
                                                 <label for="inlineRadio1"> Yes </label>
                                             </div>
                                             <div class="radio radio-inline">
-                                                <input type="radio" id="inlineRadio2" value="no" name="smallOrdersAccepte">
+                                                <input type="radio" id="inlineRadio1" value="no" name="smallOrdersAccepted">
                                                 <label for="inlineRadio2"> No </label>
                                             </div>
+                                            @else
+                                            <div class="radio radio-info radio-inline">
+                                                <input type="radio" id="inlineRadio1" value="yes" name="smallOrdersAccepted">
+                                                
+                                                <label for="inlineRadio1"> Yes </label>
+                                            </div>
+                                            <div class="radio radio-inline">
+                                                <input type="radio" id="inlineRadio1" value="no" name="smallOrdersAccepted" checked>
+                                                <label for="inlineRadio2"> No </label>
+                                            </div>
+                                            @endif
                                             <span class="help-block m-b-none"></span>
                                         </div>
                                     </div>

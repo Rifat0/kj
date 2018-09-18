@@ -181,10 +181,11 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Product Category: <font color="red">*</font></label>
                                         <div class="col-sm-10">
-                                            <select name="productCategory" class="form-control">
+                                            <select name="productCategory" id="category" class="form-control">
                                                 <option value="">-- Select Product Category --</option>
-                                                <option>option 1</option>
-                                                <option>option 2</option>
+                                                @foreach($product_category as $category)
+                                                <option value="{{ $category->category_id }}">{{ $category->category_name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -201,10 +202,8 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Product Sub-Category: <font color="red">*</font></label>
                                         <div class="col-sm-10">
-                                            <select name="productSubCategory" class="form-control" >
+                                            <select name="productSubCategory" id="sub_category" class="form-control" >
                                                 <option value="">-- Select --</option>
-                                                <option>option 1</option>
-                                                <option>option 2</option>
                                             </select>
                                         </div>
                                     </div>
@@ -1080,16 +1079,30 @@
     </script>
 
     <script>
-        function myFunction() {
-            var table = document.getElementById("addImage");
-            var row = table.insertRow(0);
-            var cell1 = row.insertCell(0);
-            var cell2 = row.insertCell(1);
-            var cell3 = row.insertCell(2);
-            cell1.innerHTML = '<div class="imgPopup"><img src="{{ asset('public/backend/img/gallery/1s.jpg') }}" alt="Snow" style="width:100%"><button class="btn"><i class="fa fa-pencil"></i></button></div>';
-            cell2.innerHTML = '<td><input type="text" class="form-control" name="name" /></td>';
-            cell3.innerHTML = '<button class="btn btn-white"><i class="fa fa-trash"></i> </button>';
-        }
+        $(document).ready(function(){
+  
+          $('#category').change(function(){
+              var value = $(this).val();
+
+              // AJAX request
+              $.ajax({
+                  url:baseURL+'/sub_category',
+                  method: 'get',
+                  data: {key: value},
+                  dataType: 'json',
+                  success: function(response){
+
+                      // Remove options
+                      $('#sub_category').find('option').not(':first').remove();
+
+                      // Add options
+                      $.each(response,function(index,data){
+                          $('#sub_category').append('<option value="'+data['sub_category_id']+'">'+data['sub_category_name']+'</option>');
+                      });
+                  }
+              });
+          });
+        });
     </script>
     
 @endsection

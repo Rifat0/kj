@@ -48,8 +48,8 @@
 @section('content')
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-4">
-            <?php $segment1 = Request::segment(2); ?>
-            <?php $segment2 = Request::segment(3); ?>
+            <?php $segment1 = Request::segment(1); ?>
+            <?php $segment2 = Request::segment(2); ?>
             <h2><?php echo str_replace('_', ' ', ucfirst($segment2)); ?></h2>
             <ol class="breadcrumb">
                 <li>
@@ -92,7 +92,7 @@
                     <form method="POST" action="{{ url('/vendor/general_settings/update_general_settings_request') }}" class="form-horizontal" id="form-generalSettings" enctype="multipart/form-data">
                     {{ csrf_field() }}
 
-                    <input type="hidden" id="id" name="id" value="{{ $get_general_settings[0]->id }}" class="form-control">
+                    <input type="hidden" id="vendore_user_id" name="vendore_user_id" value="{{ Session::get('vendore_user_data')[0] ['vendore_user_id'] }}" class="form-control">
 
                     <div class="tab-content">
                         <div id="tab-1" class="tab-pane active">

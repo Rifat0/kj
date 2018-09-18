@@ -66,37 +66,40 @@
 
                         <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover dataTables-example" >
-                    <thead>
-                    <tr>
-                        <th>Product Name</th>
-                        <th>Price</th>
-                        <th>Number In Stock</th>
-                        <th>Sold Quantity</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Trident</td>
-                        <td>Internet
-                            Explorer 4.0
-                        </td>
-                        <td>Win 95+</td>
-                        <td>4</td>
-                        <td class="center">
-                            <button type="button" class="btn btn-primary btn-xs">Edit</button>
-                        </td>
-                    </tr>
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <th>Product Name</th>
-                        <th>Price</th>
-                        <th>Number In Stock</th>
-                        <th>Sold Quantity</th>
-                        <th>Action</th>
-                    </tr>
-                    </tfoot>
+                        <thead>
+                            <tr>
+                                <th>SL.</th>
+                                <th>Product Name</th>
+                                <th>Price</th>
+                                <th>Number In Stock</th>
+                                <th>Sold Quantity</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($get_products as $products)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $products->productName }}</td>
+                                <td>Price</td>
+                                <td>Win 95+</td>
+                                <td>4</td>
+                                <td class="center">
+                                    <a href="{{ url('/vendor/products/update_product', $products->id) }}" class="btn btn-primary btn-xs">Update</a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>SL.</th>
+                                <th>Product Name</th>
+                                <th>Price</th>
+                                <th>Number In Stock</th>
+                                <th>Sold Quantity</th>
+                                <th>Action</th>
+                            </tr>
+                        </tfoot>
                     </table>
                         </div>
 

@@ -23,9 +23,21 @@ class Products extends Controller
 
     public function create_new_product()
     {
-        $get_vendor = DB::table('vendore_user')->get();
+        $product_category = DB::table('product_category')->get();
 
-        return view('vendor.products.create_new_product', compact('get_vendor'));
+        return view('vendor.products.create_new_product', compact('product_category'));
+    }
+
+    public function sub_category()
+    {
+        if (isset($_GET['key'])) {
+            $category_id = $_GET['key'];
+
+            $sub_category = DB::table('product_sub_category')->where('category_id', '=', $category_id)->get();
+
+            return json_encode($sub_category);
+        
+        }
     }
 
     public function store_new_product(Request $request)
