@@ -57,7 +57,7 @@
                             <td>{{ $coustomer_buyer->web_user_id }}</td>
                             <td>{{ $coustomer_buyer->company_name }}</td>
                             <td>{{ $coustomer_buyer->login_email }}</td>
-                            <td>{{ $coustomer_buyer->email_of_MD_Chairman }} 95+</td>
+                            <td>{{ $coustomer_buyer->email_of_MD_Chairman }}</td>
                             <td>{{ $coustomer_buyer->email_of_contact_person }}</td>
                             <td>{{ $coustomer_buyer->phone_of_contact_person }}</td>
                             <td>{{ Carbon::parse($coustomer_buyer->created_at)->format('d-m-Y') }}</td>
