@@ -5,11 +5,11 @@
 // ==========================================================================================================
 Route::get('/vendore', 'Vendor\Home@login');
 Route::get('/vendore/sing_up', 'Vendor\Home@sing_up');
-
+Route::post('/vendore/login', 'Vendor\Home@login_submit');
+Route::post('/vendore/sing_up', 'Vendor\Home@sing_up_submit');
+	
 Route::group(['middleware' => 'vendore_user'], function () {
 
-	Route::post('/vendore/login', 'Vendor\Home@login_submit');
-	Route::post('/vendore/sing_up', 'Vendor\Home@sing_up_submit');
 	Route::post('/vendore/logout', 'Vendor\Home@logout');
 	// Dashboard
 	Route::get('/vendor/dashboard', 'Vendor\Dashboard@index');
