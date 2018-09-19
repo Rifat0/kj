@@ -8,6 +8,9 @@ use App\Http\Controllers\Controller;
 use DB;
 use App\Vendor_general_settings;
 
+use Hash;
+use Auth;
+
 class Settings extends Controller
 {
     // General Settings
@@ -20,8 +23,11 @@ class Settings extends Controller
     {
         // Settings Validation
         $this->validate($request, [
-            'name'=> 'required|max:100',
-            'email'=> 'required|max:100'
+            'mobile'=> 'max:14',
+            // 'password' => Auth::user()->password,
+            // 'oldPassword' => 'confirmed|max:8|different:password',
+            'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
+            'password_confirmation' => 'min:6'
          ]);
 
         $id = $request->input('vendore_user_id');
@@ -29,16 +35,15 @@ class Settings extends Controller
         DB::table('vendore_user')->where('vendore_user_id', $id)
             ->update(
                 [
-                    'name' => $request->input('name'),
                     'companyName' => $request->input('companyName'),
-                    'email' => $request->input('email'),
                     'vendor_type' => $request->input('vendor_type'),
                     'address' => $request->input('address'),
                     'fax' => $request->input('fax'),
-                    'mobile' => $request->input('mobile')
+                    'mobile' => $request->input('mobile'),
+                    'password' => Hash::make($request->input('password'))
                 ]);
 
-        return redirect('/vendor/general_settings')->with('status', 'Product Updated Successfully!');
+        return redirect('/vendor/general_settings')->with('status', 'Information Updated Successfully!');
     }
 
 }

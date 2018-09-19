@@ -100,9 +100,9 @@
 
                                 <fieldset class="form-horizontal">
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">Vendor Name: <font color="red">*</font></label>
+                                        <label class="col-sm-2 control-label">Vendor Name:</label>
                                         <div class="col-sm-10">
-                                            <input name="name" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['vendore_name'] }}" placeholder="Enter Company Name">
+                                            <input class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['vendore_name'] }}" disabled>
                                             @if ($errors->has('name'))
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong><font color="red">{{ $errors->first('name') }}</font></strong>
@@ -122,9 +122,9 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">Email: <font color="red">*</font></label>
+                                        <label class="col-sm-2 control-label">Email:</label>
                                         <div class="col-sm-10">
-                                            <input name="email" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['email'] }}" placeholder="Enter Email">
+                                            <input class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['email'] }}" disabled>
                                             @if ($errors->has('email'))
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong><font color="red">{{ $errors->first('email') }}</font></strong>
@@ -172,6 +172,41 @@
                                             @if ($errors->has('mobile'))
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong><font color="red">{{ $errors->first('mobile') }}</font></strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="form-group">
+                                        <label class="col-sm-2 control-label">Old Password:</label>
+                                        <div class="col-sm-10">
+                                            <input type="password" class="form-control" name="oldPassword" placeholder="Password">
+                                            @if ($errors->has('oldPassword'))
+                                                <span class="invalid-feedback" role="alert">
+                                                <strong><font color="red">{{ $errors->first('oldPassword') }}</font></strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div> -->
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">New Password:</label>
+                                        <div class="col-sm-10">
+                                            <input type="password" class="form-control" name="password" placeholder="Password">
+                                            @if ($errors->has('password'))
+                                                <span class="invalid-feedback" role="alert">
+                                                <strong><font color="red">{{ $errors->first('password') }}</font></strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Confirm Password:</label>
+                                        <div class="col-sm-10">
+                                            <input type="password" class="form-control" name="password_confirmation" placeholder="Confirmed Password">
+                                            @if ($errors->has('password'))
+                                                <span class="invalid-feedback" role="alert">
+                                                <strong><font color="red">{{ $errors->first('password') }}</font></strong>
                                                 </span>
                                             @endif
                                         </div>
