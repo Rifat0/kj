@@ -352,11 +352,37 @@ class Home extends Controller
     }
 
     public function vendor_ap_rj(){
-    	return view('Admin.Vendors_sellers.vendor_ap_rj_lsit');
+
+        $vendore_data = DB::table('vendore_user')->get();
+        return view('Admin.Vendors_sellers.vendor_ap_rj_lsit', compact('vendore_data'));
     }
-    
-    public function add_vendor(){
-    	return view('Admin.Vendors_sellers.add_vendor');
+
+    public function vendore_status_change($id){
+
+        $user_data = DB::table('vendore_user')->where('vendore_user_id', $id)->first();
+        if($user_data->vendore_user_status==0){
+            DB::table('vendore_user')->where('vendore_user_id', $id)
+                    ->update(
+                        [
+                            'vendore_user_status' => "1",
+                            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+                        ]);
+            return redirect('/admin/vendor_ap_rj')->with('status', 'Vendor status changed!');
+        }elseif($user_data->vendore_user_status==1){
+            DB::table('vendore_user')->where('vendore_user_id', $id)
+                    ->update(
+                        [
+                            'vendore_user_status' => "0",
+                            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+                        ]);
+            return redirect('/admin/vendor_ap_rj')->with('status', 'Vendor status changed!');
+        }
+    }
+
+    public function vendore_view(Request $request)
+    {
+        $vendore_data = DB::table('vendore_user')->where('vendore_user_id', $request->input('vendore_user_id'))->first();
+        return view('Admin.Vendors_sellers.vendore_view', compact('vendore_data'));
     }
 
     public function coustomer_buyer(){
@@ -365,11 +391,10 @@ class Home extends Controller
         return view('Admin.Coustomer_buyer.coustomer_buyer_list', compact('coustomer_buyer_list'));
     }
 
-    public function coustomer_buyer_view($id){
+    public function coustomer_buyer_view(Request $request){
 
-        $user_data = DB::table('web_user')->where('web_user_id', $id)->first();
-        var_dump($user_data);
-        // return view('Admin.Coustomer_buyer.coustomer_buyer_list', compact('user_data'));
+        $coustomer_buyer_data = DB::table('web_user')->where('web_user_id', $request->input('coustomer_buyer_id'))->first();
+        return view('Admin.Coustomer_buyer.coustomer_buyer_view', compact('coustomer_buyer_data'));
     }
 
     public function coustomer_buyer_status_change($id){

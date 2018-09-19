@@ -18,6 +18,11 @@
 
     <div class="middle-box text-center loginscreen animated fadeInDown">
         <div>
+            <div>
+
+                <h1 class="logo-name">V</h1>
+
+            </div>
             <h2>Login in. To see it in action.</h2>
             @include('Admin.Layouts.message')
             <form method="POST" action="{{ url('vendore/login') }}" aria-label="{{ __('Login') }}">

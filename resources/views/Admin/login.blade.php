@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Vendor <?php if($segment = Request::segment(0)) { echo "| ";  echo str_replace('_', ' ', ucfirst($segment)); } if($segment = Request::segment(2)) { echo "| ";  echo str_replace('_', ' ', ucfirst($segment)); } if($segment = Request::segment(3)) { echo " | ";  echo str_replace('_', ' ', ucfirst($segment)); } ?></title>
+    <title>Admin <?php if($segment = Request::segment(0)) { echo "| ";  echo str_replace('_', ' ', ucfirst($segment)); } if($segment = Request::segment(2)) { echo "| ";  echo str_replace('_', ' ', ucfirst($segment)); } if($segment = Request::segment(3)) { echo " | ";  echo str_replace('_', ' ', ucfirst($segment)); } ?></title>
 
     <link href="{{ asset('public/backend/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('public/backend/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
@@ -20,7 +20,7 @@
         <div>
             <div>
 
-                <h1 class="logo-name">K</h1>
+                <h1 class="logo-name">A</h1>
 
             </div>
             <h2>Login in. To see it in action.</h2>
