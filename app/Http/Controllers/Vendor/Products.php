@@ -7,8 +7,7 @@ use App\Http\Controllers\Controller;
 
 use DB;
 use App\Vendor_product_images;
-
-use Auth;
+use Carbon;
 use Session;
 
 class Products extends Controller
@@ -28,15 +27,16 @@ class Products extends Controller
         return view('vendor.products.create_new_product', compact('product_category'));
     }
 
-    public function sub_category()
+    public function get_sub_category($id)
     {
-        if (isset($_GET['key'])) {
-            $category_id = $_GET['key'];
+        $sub_category = DB::table("product_sub_category")->where("category_id",$id)->pluck("sub_category_name","sub_category_id");
+        $coun=count($sub_category);
 
-            $sub_category = DB::table('product_sub_category')->where('category_id', '=', $category_id)->get();
-
+        if($coun>0){
             return json_encode($sub_category);
-        
+        }else{
+            $sub_category = array('0' => "No Sub Category Found");
+            return json_encode($sub_category);
         }
     }
 
@@ -51,7 +51,11 @@ class Products extends Controller
             'productCategory'=> 'required',
             'productSubCategory'=> 'required',
             'keySpecification'=> 'required|max:3000',
-            'productImage'=> 'required|image|mimes:jpg,jpeg|max:5000',
+            'productImage1'=> 'required|image|mimes:jpg,jpeg|max:5000',
+            'productImage2'=> 'required|image|mimes:jpg,jpeg|max:5000',
+            'productImage3'=> 'required|image|mimes:jpg,jpeg|max:5000',
+            'productImage4'=> 'required|image|mimes:jpg,jpeg|max:5000',
+            'productImage5'=> 'required|image|mimes:jpg,jpeg|max:5000',
             'partNumber'=> 'nullable|max:100',
             'menufacturer'=> 'nullable|max:100',
             'modelNumber'=> 'nullable|max:100',
@@ -77,25 +81,63 @@ class Products extends Controller
             'DurationDeliveryOutsideGR'=> 'nullable|max:10',
             'paymentMethod'=> 'required'
          ]);
-        
-        $id = $request->input('vendore_user_id');
-        $store_id = $id;
 
-        $updateImg = "";
-        if ($request->hasFile('productImage')) {
-            $destinationPath = 'public/backend/img/vendor/products';
-            $file = $request->productImage;
-            $extension = $file->getClientOriginalExtension();
-            $fileName = rand(1111,9999).".".$extension;
-            $file->move($destinationPath,$fileName);
-            $updateImg = $fileName;
+        $vendore_user_id = $request->input('vendore_user_id');
+
+        $vendore_product_number = DB::table('vendor_products')->where('vendore_user_id', $vendore_user_id)->orderBy('vendore_user_id', 'desc')->first();
+        if ($vendore_product_number!=null) {
+            $product_number = $vendore_product_number->product_number+1;
+        } else {
+            $product_number = "1";
         }
+
+        if ($request->hasFile('productImage1')) {
+            $destinationPath = 'public/backend/img/vendor/products';
+            $productImage1 = $request->productImage1;
+            $extension = $productImage1->getClientOriginalExtension();
+            $ciustom_productImage1 = $vendore_user_id.$product_number."1".".".$extension;
+            $productImage1->move($destinationPath,$ciustom_productImage1);
+        }
+
+        if ($request->hasFile('productImage2')) {
+            $destinationPath = 'public/backend/img/vendor/products';
+            $productImage2 = $request->productImage2;
+            $extension = $productImage2->getClientOriginalExtension();
+            $ciustom_productImage2 = $vendore_user_id.$product_number."2".".".$extension;
+            $productImage2->move($destinationPath,$ciustom_productImage2);
+        }
+
+        if ($request->hasFile('productImage3')) {
+            $destinationPath = 'public/backend/img/vendor/products';
+            $productImage3 = $request->productImage3;
+            $extension = $productImage3->getClientOriginalExtension();
+            $ciustom_productImage3 = $vendore_user_id.$product_number."3".".".$extension;
+            $productImage3->move($destinationPath,$ciustom_productImage3);
+        }
+
+        if ($request->hasFile('productImage4')) {
+            $destinationPath = 'public/backend/img/vendor/products';
+            $productImage4 = $request->productImage4;
+            $extension = $productImage4->getClientOriginalExtension();
+            $ciustom_productImage4 = $vendore_user_id.$product_number."4".".".$extension;
+            $productImage4->move($destinationPath,$ciustom_productImage4);
+        }
+
+        if ($request->hasFile('productImage5')) {
+            $destinationPath = 'public/backend/img/vendor/products';
+            $productImage5 = $request->productImage5;
+            $extension = $productImage5->getClientOriginalExtension();
+            $ciustom_productImage5 = $vendore_user_id.$product_number."5".".".$extension;
+            $productImage5->move($destinationPath,$ciustom_productImage5);
+        }
+
         /*Insert your data*/
 
         DB::table('vendor_products')
                 ->insert(
                     [
-                        'vendore_user_id' => $store_id,
+                        'vendore_user_id' => $vendore_user_id,
+                        'product_number' => $product_number,
                         'productName' => $request->input('productName'),
                         'productGenericName' => $request->input('productGenericName'),
                         'productDescription' => $request->input('productDescription'),
@@ -109,20 +151,27 @@ class Products extends Controller
                         'color' => $request->input('color'),
                         'accessories' => $request->input('accessories'),
                         'keySpecification' => $request->input('keySpecification'),
-                        'vendor' => $request->input('vendor')
+                        'vendor' => $request->input('vendor'),
+                        'created_at' => Carbon::now()->format('Y-m-d H:i:s')
                     ]);
 
         DB::table('vendor_product_images')
                 ->insert( [
-                        'vendore_user_id' => $store_id,
-                        'productImage'=>$updateImg
-                        //you can put other insertion here
+                        'vendore_user_id' => $vendore_user_id,
+                        'product_number' => $product_number,
+                        'productImage1'=>$ciustom_productImage1,
+                        'productImage2'=>$ciustom_productImage2,
+                        'productImage3'=>$ciustom_productImage3,
+                        'productImage4'=>$ciustom_productImage4,
+                        'productImage5'=>$ciustom_productImage5,
+                        'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
         DB::table('vendor_payment_delivery')
                 ->insert(
                     [
-                        'vendore_user_id' => $store_id,
+                        'vendore_user_id' => $vendore_user_id,
+                        'product_number' => $product_number,
                         'smallOrdersAccepted' => $request->input('smallOrdersAccepted'),
                         'minimumOrderQuantity' => $request->input('minimumOrderQuantity'),
                         'unitOfMeasure' => $request->input('unitOfMeasure'),
@@ -148,10 +197,11 @@ class Products extends Controller
                         'DurationDeliveryWithinState' => $request->input('DurationDeliveryWithinState'),
                         'DurationDeliveryWithinGR' => $request->input('DurationDeliveryWithinGR'),
                         'DurationDeliveryOutsideGR' => $request->input('DurationDeliveryOutsideGR'),
-                        'paymentMethod' => $request->input('paymentMethod')
+                        'paymentMethod' => $request->input('paymentMethod'),
+                        'created_at' => Carbon::now()->format('Y-m-d H:i:s')
                     ]);
 
-        return redirect('/vendor/products')->with('status', 'Product Created Successfully!');
+        return redirect('/vendor/products/pending_review')->with('status', 'Product Created Successfully and wait for admin review!');
     }
 
     public function update_product($id)

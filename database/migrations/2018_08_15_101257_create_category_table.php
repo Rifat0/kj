@@ -16,7 +16,7 @@ class CreateCategoryTable extends Migration
         Schema::create('product_category', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
-            $table->increments('categoty_id');
+            $table->increments('category_id');
             $table->string('category_image',70);
             $table->string('category_name',100);
             $table->string('category_description',250);

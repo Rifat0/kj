@@ -16,6 +16,8 @@ class CreateVendorProducts extends Migration
         Schema::create('vendor_products', function (Blueprint $table) {
             $table->increments('id');
             $table->string('vendore_user_id',255);
+            $table->string('product_number',255);
+            $table->string('product_status',10)->default('0');
             $table->string('productName',255);
             $table->string('productGenericName',255);
             $table->string('productDescription',255);

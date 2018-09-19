@@ -8,7 +8,7 @@ Route::get('/vendore/signUp', 'Vendor\Home@signUp');
 Route::post('/vendore/login', 'Vendor\Home@login_submit');
 Route::post('/vendore/signUp', 'Vendor\Home@signUp_submit');
 	
-Route::get('/sub_category', 'Vendor\Products@sub_category');
+Route::get('sub_category/{id}', 'Vendor\Products@get_sub_category');
 
 Route::group(['middleware' => 'vendore_user'], function () {
 

@@ -181,8 +181,8 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Product Category: <font color="red">*</font></label>
                                         <div class="col-sm-10">
-                                            <select name="productCategory" id="category" class="form-control">
-                                                <option value="">-- Select Product Category --</option>
+                                            <select name="productCategory" class="form-control">
+                                                <option disabled>-- Select Product Category --</option>
                                                 @foreach($product_category as $category)
                                                 <option value="{{ $category->category_id }}">{{ $category->category_name }}</option>
                                                 @endforeach
@@ -202,8 +202,8 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Product Sub-Category: <font color="red">*</font></label>
                                         <div class="col-sm-10">
-                                            <select name="productSubCategory" id="sub_category" class="form-control" >
-                                                <option value="">-- Select --</option>
+                                            <select name="productSubCategory" class="form-control" >
+                                                <option disabled>-- Select Sub Category --</option>
                                             </select>
                                         </div>
                                     </div>
@@ -639,7 +639,43 @@
                                         <tr>
                                             <td><img src=""></td>
                                             <td>
-                                                <input type="file" name="productImage" class="form-control">
+                                                <input type="file" name="productImage1" class="form-control">
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-primary"><i class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src=""></td>
+                                            <td>
+                                                <input type="file" name="productImage2" class="form-control">
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-primary"><i class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src=""></td>
+                                            <td>
+                                                <input type="file" name="productImage3" class="form-control">
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-primary"><i class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src=""></td>
+                                            <td>
+                                                <input type="file" name="productImage4" class="form-control">
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-primary"><i class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src=""></td>
+                                            <td>
+                                                <input type="file" name="productImage5" class="form-control">
                                             </td>
                                             <td>
                                                 <button class="btn btn-primary"><i class="fa fa-trash"></i></button>
@@ -658,32 +694,6 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-stripped">
-                                        <thead>
-                                        <tr>
-                                            <th>
-                                                Additional Image
-                                            </th>
-                                            <th>
-                                                Sort order
-                                            </th>
-                                            <th>
-                                                Actions
-                                            </th>
-                                        </tr>
-                                        </thead>
-                                        <tbody id="addImage">
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td>
-                                                <button onclick="myFunction()" class="btn btn-primary"><i class="fa fa-plus"></i></button>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
 
                             </div>
                         </div>
@@ -697,6 +707,10 @@
 @endsection
 
 @section('js')
+    <script src="{{ asset('public/backend/js/dropdown.js') }}"></script>
+
+    <script src="{{ asset('public/backend/js/get_sub_category.js') }}"></script>
+
     <script src="{{ asset('public/backend/js/plugins/dataTables/datatables.min.js') }}"></script>
 
     <!-- Page-Level Scripts -->
@@ -1077,32 +1091,4 @@
 
         });
     </script>
-
-    <script>
-        $(document).ready(function(){
-  
-          $('#category').change(function(){
-              var value = $(this).val();
-
-              // AJAX request
-              $.ajax({
-                  url:baseURL+'/sub_category',
-                  method: 'get',
-                  data: {key: value},
-                  dataType: 'json',
-                  success: function(response){
-
-                      // Remove options
-                      $('#sub_category').find('option').not(':first').remove();
-
-                      // Add options
-                      $.each(response,function(index,data){
-                          $('#sub_category').append('<option value="'+data['sub_category_id']+'">'+data['sub_category_name']+'</option>');
-                      });
-                  }
-              });
-          });
-        });
-    </script>
-    
 @endsection
