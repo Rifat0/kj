@@ -17,9 +17,13 @@ class CreateVendoreUser extends Migration
             $table->increments('vendore_user_id');
             $table->string('vendore_user_status',10)->default('1');
             $table->string('name',60);
+            $table->string('companyName',255);
             $table->string('vendor_type',60);
             $table->string('email',100)->unique();
             $table->string('password',100);
+            $table->string('address',255);
+            $table->string('fax',100);
+            $table->string('mobile',14);
             $table->timestamps();
         });
     }

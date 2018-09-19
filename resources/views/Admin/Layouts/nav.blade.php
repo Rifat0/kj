@@ -45,7 +45,11 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="{{ url('/admin/vendor_ap_rj') }}"><i class="fa fa-laptop"></i> <span class="nav-label">Vendors/Sellers</span></a>
+                        <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Vendors/Sellers</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="{{ url('/admin/vendor_ap_rj') }}">Approve/Reject</a></li>
+                            <li><a href="{{ url('/admin/add_vendor') }}">Add Vendor/Seller</a></li>
+                        </ul>
                     </li>
                     <li>
                         <a href="{{ url('/admin/coustomer_buyer_list') }}"><i class="fa fa-laptop"></i> <span class="nav-label">Coustomer/Buyer</span></a>

@@ -48,8 +48,8 @@
 @section('content')
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-4">
-            <?php $segment1 = Request::segment(2); ?>
-            <?php $segment2 = Request::segment(3); ?>
+            <?php $segment1 = Request::segment(1); ?>
+            <?php $segment2 = Request::segment(2); ?>
             <h2><?php echo str_replace('_', ' ', ucfirst($segment2)); ?></h2>
             <ol class="breadcrumb">
                 <li>
@@ -87,25 +87,22 @@
             <div class="col-lg-12">
                 <div class="tabs-container">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#tab-2"> Store</a></li>
-                        <li class=""><a data-toggle="tab" href="#tab-3"> Social</a></li>
-                        <li class=""><a data-toggle="tab" href="#tab-4"> Local</a></li>
-                        <li class=""><a data-toggle="tab" href="#tab-5"> Images</a></li>
+                        <li class="active"><a data-toggle="tab" href="#tab-1"> Vendor Information</a></li>
                     </ul>
                     <form method="POST" action="{{ url('/vendor/general_settings/update_general_settings_request') }}" class="form-horizontal" id="form-generalSettings" enctype="multipart/form-data">
                     {{ csrf_field() }}
 
-                    <input type="hidden" id="id" name="id" value="{{ $get_general_settings[0]->id }}" class="form-control">
+                    <input type="hidden" id="vendore_user_id" name="vendore_user_id" value="{{ Session::get('vendore_user_data')[0] ['vendore_user_id'] }}" class="form-control">
 
                     <div class="tab-content">
-                        <div id="tab-2" class="tab-pane active">
+                        <div id="tab-1" class="tab-pane active">
                             <div class="panel-body">
 
                                 <fieldset class="form-horizontal">
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">Company Name: <font color="red">*</font></label>
+                                        <label class="col-sm-2 control-label">Vendor Name: <font color="red">*</font></label>
                                         <div class="col-sm-10">
-                                            <input name="name" class="form-control" type="text" value="{{ $get_general_settings[0]->name }}" placeholder="Enter Company Name">
+                                            <input name="name" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['vendore_name'] }}" placeholder="Enter Company Name">
                                             @if ($errors->has('name'))
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong><font color="red">{{ $errors->first('name') }}</font></strong>
@@ -114,45 +111,12 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">Fax</label>
+                                        <label class="col-sm-2 control-label">Company Name:</label>
                                         <div class="col-sm-10">
-                                            <input name="fax" class="form-control" type="text" value="{{ $get_general_settings[0]->fax }}" placeholder="Enter Fax">
-                                            @if ($errors->has('fax'))
+                                            <input name="companyName" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['companyName'] }}" placeholder="Enter Company Name">
+                                            @if ($errors->has('companyName'))
                                                 <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('fax') }}</font></strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Company Owner: <font color="red">*</font></label>
-                                        <div class="col-sm-10">
-                                            <input name="owner" class="form-control" type="text" value="{{ $get_general_settings[0]->owner }}" placeholder="Enter Company Owner">
-                                            @if ($errors->has('owner'))
-                                                <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('owner') }}</font></strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Address: <font color="red">*</font></label>
-                                        <div class="col-sm-10">
-                                            <input name="address" class="form-control" type="text" value="{{ $get_general_settings[0]->address }}" placeholder="Enter Address">
-                                            @if ($errors->has('address'))
-                                                <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('address') }}</font></strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Geocode</label>
-                                        <div class="col-sm-10">
-                                            <input name="geocode" class="form-control" type="text" value="{{ $get_general_settings[0]->geocode }}" placeholder="Enter Geocode">
-                                            @if ($errors->has('geocode'))
-                                                <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('geocode') }}</font></strong>
+                                                <strong><font color="red">{{ $errors->first('companyName') }}</font></strong>
                                                 </span>
                                             @endif
                                         </div>
@@ -160,7 +124,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Email: <font color="red">*</font></label>
                                         <div class="col-sm-10">
-                                            <input name="email" class="form-control" type="text" value="{{ $get_general_settings[0]->email }}" placeholder="Enter Email">
+                                            <input name="email" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['email'] }}" placeholder="Enter Email">
                                             @if ($errors->has('email'))
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong><font color="red">{{ $errors->first('email') }}</font></strong>
@@ -169,168 +133,47 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">Telephone: <font color="red">*</font></label>
+                                        <label class="col-sm-2 control-label">Vendor Type:</label>
                                         <div class="col-sm-10">
-                                            <input name="telephone" class="form-control" type="text" value="{{ $get_general_settings[0]->telephone }}" placeholder="Enter Telephone">
-                                            @if ($errors->has('telephone'))
+                                            <input name="vendor_type" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['vendor_type'] }}" placeholder="Enter Company Owner">
+                                            @if ($errors->has('vendor_type'))
                                                 <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('telephone') }}</font></strong>
+                                                <strong><font color="red">{{ $errors->first('vendor_type') }}</font></strong>
                                                 </span>
                                             @endif
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">Copyright: <font color="red">*</font></label>
+                                        <label class="col-sm-2 control-label">Fax</label>
                                         <div class="col-sm-10">
-                                            <input name="copyright" class="form-control" type="text" value="{{ $get_general_settings[0]->copyright }}" placeholder="Enter Copyright">
-                                            @if ($errors->has('copyright'))
+                                            <input name="fax" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['fax'] }}" placeholder="Enter Fax">
+                                            @if ($errors->has('fax'))
                                                 <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('copyright') }}</font></strong>
+                                                <strong><font color="red">{{ $errors->first('fax') }}</font></strong>
                                                 </span>
                                             @endif
-                                        </div> 
-                                    </div>
-                                </fieldset>
-
-                            </div>
-                        </div>
-                        <div id="tab-3" class="tab-pane">
-                            <div class="panel-body">
-
-                                <fieldset class="form-horizontal">
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Facebook:</label>
-                                        <div class="col-sm-10">
-                                            <input name="facebook" class="form-control" type="text" value="{{ $get_general_settings[0]->facebook }}" placeholder="Enter Facebook">
-                                            <span class="help-block m-b-none"></span>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">Twitter:</label>
+                                        <label class="col-sm-2 control-label">Address:</label>
                                         <div class="col-sm-10">
-                                            <input name="twitter" class="form-control" type="text" value="{{ $get_general_settings[0]->twitter }}" placeholder="Enter Twitter">
-                                            <span class="help-block m-b-none"></span>
+                                            <input name="address" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['address'] }}" placeholder="Enter Address">
+                                            @if ($errors->has('address'))
+                                                <span class="invalid-feedback" role="alert">
+                                                <strong><font color="red">{{ $errors->first('address') }}</font></strong>
+                                                </span>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">Linkdin:</label>
+                                        <label class="col-sm-2 control-label">Mobile:</label>
                                         <div class="col-sm-10">
-                                            <input name="linkdin"class="form-control" type="text" value="{{ $get_general_settings[0]->linkdin }}" placeholder="Enter Linkdin">
-                                            <span class="help-block m-b-none"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Google+:</label>
-                                        <div class="col-sm-10">
-                                            <input name="googlePlus" class="form-control" type="text" value="{{ $get_general_settings[0]->googlePlus }}" placeholder="Enter Google+">
-                                            <span class="help-block m-b-none"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Instagram:</label>
-                                        <div class="col-sm-10">
-                                            <input name="instagram" class="form-control" type="text" value="{{ $get_general_settings[0]->instagram }}" placeholder="Enter Instagram">
-                                            <span class="help-block m-b-none"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Pinterest:</label>
-                                        <div class="col-sm-10">
-                                            <input name="pinterest" class="form-control" type="text" value="{{ $get_general_settings[0]->pinterest }}" placeholder="Enter Pinterest">
-                                            <span class="help-block m-b-none"></span>
-                                        </div>
-                                    </div>
-                                </fieldset>
-
-                            </div>
-                        </div>
-                        <div id="tab-4" class="tab-pane">
-                            <div class="panel-body">
-
-                                <fieldset class="form-horizontal">
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Country:</label>
-                                        <div class="col-sm-10">
-                                            <select name="country" class="form-control">
-                                                <option>-- Select Country --</option>
-                                                <option></option>
-                                            </select>
-                                            <span class="help-block m-b-none"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Language:</label>
-                                        <div class="col-sm-10">
-                                            <select name="language" class="form-control">
-                                                <option>-- Select Language --</option>
-                                                <option></option>
-                                            </select>
-                                            <span class="help-block m-b-none"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Region/State:</label>
-                                        <div class="col-sm-10">
-                                            <select name="state" class="form-control">
-                                                <option>-- Select Region/State --</option>
-                                                <option></option>
-                                            </select>
-                                            <span class="help-block m-b-none"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Administration Language:</label>
-                                        <div class="col-sm-10">
-                                            <select name="administrationLanguage" class="form-control">
-                                                <option>-- Select Administration Language --</option>
-                                                <option></option>
-                                            </select>
-                                            <span class="help-block m-b-none"></span>
-                                        </div>
-                                    </div>
-                                </fieldset>
-
-                            </div>
-                        </div>
-                        <div id="tab-5" class="tab-pane">
-                            <div class="panel-body">
-                                            
-                                <input type="hidden" name="previousLogo" value="{{ $get_general_settings[0]->storeLogo }}" class="form-control">
-                                <input type="hidden" name="previousIcon" value="{{ $get_general_settings[0]->storeIcon }}" class="form-control">
-                                            
-                                <fieldset class="form-horizontal">
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Store Logo: <font color="red">*</font></label>
-                                        <div class="col-sm-10">
-                                            <img src="{{ asset('public/backend/img/vendor/system/' . $get_general_settings[0]->storeLogo) }}" class="img-lg">
-                                            <span class="help-block m-b-none"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label"></label>
-                                        <div class="col-sm-10">
-                                            <label class="btn btn-primary btn-sm" for="storeLogo">
-                                                <input name="storeLogo" id="storeLogo" type="file" style="display:none;">
-                                                Upload
-                                            </label>
-                                            <a href="{{ url('/vendor/products') }}"class="btn btn-primary btn-sm"><i class="fa fa-trash"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Store Icon: <font color="red">*</font></label>
-                                        <div class="col-sm-10">
-                                            <img src="{{ asset('public/backend/img/vendor/system/' . $get_general_settings[0]->storeIcon) }}" class="img-lg">
-                                            <span class="help-block m-b-none"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label"></label>
-                                        <div class="col-sm-10">
-                                            <label class="btn btn-primary btn-sm" for="storeIcon">
-                                                <input name="storeIcon" id="storeIcon" type="file" style="display:none;">
-                                                Upload
-                                            </label>
-                                            <a href="{{ url('/vendor/products') }}"class="btn btn-primary btn-sm"><i class="fa fa-trash"></i></a>
+                                            <input name="mobile" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['mobile'] }}" placeholder="Enter Telephone">
+                                            @if ($errors->has('mobile'))
+                                                <span class="invalid-feedback" role="alert">
+                                                <strong><font color="red">{{ $errors->first('mobile') }}</font></strong>
+                                                </span>
+                                            @endif
                                         </div>
                                     </div>
                                 </fieldset>

@@ -57,18 +57,12 @@
                             <td>{{ $coustomer_buyer->web_user_id }}</td>
                             <td>{{ $coustomer_buyer->company_name }}</td>
                             <td>{{ $coustomer_buyer->login_email }}</td>
-                            <td>{{ $coustomer_buyer->email_of_MD_Chairman }}</td>
+                            <td>{{ $coustomer_buyer->email_of_MD_Chairman }} 95+</td>
                             <td>{{ $coustomer_buyer->email_of_contact_person }}</td>
                             <td>{{ $coustomer_buyer->phone_of_contact_person }}</td>
                             <td>{{ Carbon::parse($coustomer_buyer->created_at)->format('d-m-Y') }}</td>
                             <td class="center">
-                                <a href="{{ url('/admin/coustomer_buyer/view') }}" onclick="event.preventDefault(); document.getElementById('vendore-view-form').submit();" class="btn btn-info btn-xs">{{ __('View') }}
-                                </a>
-
-                                <form id="vendore-view-form" action="{{ url('/admin/coustomer_buyer/view') }}" method="POST" style="display: none;">
-                                    <input type="hidden" name="coustomer_buyer_id" value="{{ $coustomer_buyer->web_user_id }}">
-                                    @csrf
-                                </form>
+                                    <a href="{{ url('/admin/coustomer_buyer/view').'/'.$coustomer_buyer->web_user_id }}" class="btn btn-info btn-xs">View</a>
                                 @if( $coustomer_buyer->web_user_status==0 )
                                     <a href="{{ url('/admin/coustomer_buyer/status_change').'/'.$coustomer_buyer->web_user_id }}" class="btn btn-primary btn-xs">Activate</a>
                                 @elseif( $coustomer_buyer->web_user_status==1 )

@@ -50,42 +50,33 @@
                     <thead>
                     <tr>
                         <th>SL.</th>
-                        <th>Vendor Name</th>
-                        <th>Vendor Type</th>
-                        <th>Login Email</th>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Number In Stock</th>
+                        <th>Sold Quantity</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach($vendore_data as $vendore_data)
-                        <tr>
-                            <td>{{ $vendore_data->vendore_user_id }}</td>
-                            <td>{{ $vendore_data->name }}</td>
-                            <td>{{ $vendore_data->vendor_type }}</td>
-                            <td>{{ $vendore_data->email }}</td>
-                            <td class="center">
-                                <a href="{{ url('/admin/vendore/view') }}" onclick="event.preventDefault(); document.getElementById('vendore-view-form').submit();" class="btn btn-info btn-xs">{{ __('View') }}
-                                </a>
-
-                                <form id="vendore-view-form" action="{{ url('/admin/vendore/view') }}" method="POST" style="display: none;">
-                                    <input type="hidden" name="vendore_user_id" value="{{ $vendore_data->vendore_user_id }}">
-                                    @csrf
-                                </form>
-                                @if( $vendore_data->vendore_user_status==0 )
-                                    <a href="{{ url('/admin/vendore/status_change').'/'.$vendore_data->vendore_user_id }}" class="btn btn-primary btn-xs">Activate</a>
-                                @elseif( $vendore_data->vendore_user_status==1 )
-                                    <a href="{{ url('/admin/vendore/status_change').'/'.$vendore_data->vendore_user_id }}" class="btn btn-danger btn-xs">Deactivate</a>
-                                @endif
-                            </td>
-                        </tr>
-                        @endforeach
+                    <tr>
+                        <td>fhfgh</td>
+                        <td>fhfgh</td>
+                        <td>Price</td>
+                        <td>Win 95+</td>
+                        <td>4</td>
+                        <td class="center">
+                            <a href="" class="btn btn-primary btn-xs">View</a>
+                            <a href="" class="btn btn-primary btn-xs">Update</a>
+                        </td>
+                    </tr>
                     </tbody>
                     <tfoot>
                     <tr>
                         <th>SL.</th>
-                        <th>Vendor Name</th>
-                        <th>Vendor Type</th>
-                        <th>Login Email</th>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Number In Stock</th>
+                        <th>Sold Quantity</th>
                         <th>Action</th>
                     </tr>
                     </tfoot>

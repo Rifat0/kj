@@ -4,10 +4,12 @@
 // Vendor
 // ==========================================================================================================
 Route::get('/vendore', 'Vendor\Home@login');
-Route::get('/vendore/sing_up', 'Vendor\Home@sing_up');
+Route::get('/vendore/signUp', 'Vendor\Home@signUp');
 Route::post('/vendore/login', 'Vendor\Home@login_submit');
-Route::post('/vendore/sing_up', 'Vendor\Home@sing_up_submit');
+Route::post('/vendore/signUp', 'Vendor\Home@signUp_submit');
 	
+Route::get('/sub_category', 'Vendor\Products@sub_category');
+
 Route::group(['middleware' => 'vendore_user'], function () {
 
 	Route::post('/vendore/logout', 'Vendor\Home@logout');
@@ -107,13 +109,11 @@ Route::group(['middleware' => 'admin_user'], function () {
 	Route::get('/admin/product_ap_rj', 'Admin\Home@product_ap_rj')->name('admin_product_ap_rj');
 	Route::get('/admin/update_product_ap_rj', 'Admin\Home@update_product_ap_rj')->name('admin_update_product_ap_rj');
 	Route::get('/admin/product_data', 'Admin\Home@product_data')->name('admin_product_data');
-	
 	Route::get('/admin/vendor_ap_rj', 'Admin\Home@vendor_ap_rj')->name('admin_vendor_ap_rj');
-	Route::get('/admin/vendore/status_change/{id}', 'Admin\Home@vendore_status_change');
-	Route::post('/admin/vendore/view', 'Admin\Home@vendore_view');
+	Route::get('/admin/add_vendor', 'Admin\Home@add_vendor')->name('admin_add_vendor');
 
 	Route::get('/admin/coustomer_buyer_list', 'Admin\Home@coustomer_buyer');
-	Route::post('/admin/coustomer_buyer/view', 'Admin\Home@coustomer_buyer_view');
+	Route::get('/admin/coustomer_buyer/view/{id}', 'Admin\Home@coustomer_buyer_view');
 	Route::get('/admin/coustomer_buyer/status_change/{id}', 'Admin\Home@coustomer_buyer_status_change');
 
 	Route::get('/admin/orders_list', 'Admin\Home@orders_list')->name('admin_orders_list');
