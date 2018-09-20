@@ -46,21 +46,20 @@ class Products extends Controller
         $this->validate($request, [
             'productName'=> 'required|max:100',
             'productGenericName'=> 'required|max:100',
-            'productDescription'=> 'required|max:100',
+            'productDescription'=> 'required|max:500',
             'productKeyword'=> 'nullable|max:100',
             'productCategory'=> 'required',
             'productSubCategory'=> 'required',
             'keySpecification'=> 'required|max:3000',
             'productImage1'=> 'required|image|mimes:jpg,jpeg|max:5000',
-            'productImage2'=> 'required|image|mimes:jpg,jpeg|max:5000',
-            'productImage3'=> 'required|image|mimes:jpg,jpeg|max:5000',
-            'productImage4'=> 'required|image|mimes:jpg,jpeg|max:5000',
-            'productImage5'=> 'required|image|mimes:jpg,jpeg|max:5000',
+            'productImage2'=> 'image|mimes:jpg,jpeg|max:5000',
+            'productImage3'=> 'image|mimes:jpg,jpeg|max:5000',
+            'productImage4'=> 'image|mimes:jpg,jpeg|max:5000',
+            'productImage5'=> 'image|mimes:jpg,jpeg|max:5000',
             'partNumber'=> 'nullable|max:100',
             'menufacturer'=> 'nullable|max:100',
             'modelNumber'=> 'nullable|max:100',
             'accessories'=> 'nullable|max:100',
-            'vendor'=> 'nullable|max:100',
             'color'=> 'nullable|max:100',
             'pd_price'=> 'required|max:10',
             'minimumOrderQuantity'=> 'nullable|max:10',
@@ -97,6 +96,8 @@ class Products extends Controller
             $extension = $productImage1->getClientOriginalExtension();
             $ciustom_productImage1 = $vendore_user_id.$product_number."1".".".$extension;
             $productImage1->move($destinationPath,$ciustom_productImage1);
+        }else{
+            $ciustom_productImage1="null";
         }
 
         if ($request->hasFile('productImage2')) {
@@ -105,7 +106,10 @@ class Products extends Controller
             $extension = $productImage2->getClientOriginalExtension();
             $ciustom_productImage2 = $vendore_user_id.$product_number."2".".".$extension;
             $productImage2->move($destinationPath,$ciustom_productImage2);
+        }else{
+            $ciustom_productImage2="null";
         }
+
 
         if ($request->hasFile('productImage3')) {
             $destinationPath = 'public/backend/img/vendor/products';
@@ -113,7 +117,10 @@ class Products extends Controller
             $extension = $productImage3->getClientOriginalExtension();
             $ciustom_productImage3 = $vendore_user_id.$product_number."3".".".$extension;
             $productImage3->move($destinationPath,$ciustom_productImage3);
+        }else{
+            $ciustom_productImage3="null";
         }
+
 
         if ($request->hasFile('productImage4')) {
             $destinationPath = 'public/backend/img/vendor/products';
@@ -121,7 +128,10 @@ class Products extends Controller
             $extension = $productImage4->getClientOriginalExtension();
             $ciustom_productImage4 = $vendore_user_id.$product_number."4".".".$extension;
             $productImage4->move($destinationPath,$ciustom_productImage4);
+        }else{
+            $ciustom_productImage4="null";
         }
+
 
         if ($request->hasFile('productImage5')) {
             $destinationPath = 'public/backend/img/vendor/products';
@@ -129,7 +139,10 @@ class Products extends Controller
             $extension = $productImage5->getClientOriginalExtension();
             $ciustom_productImage5 = $vendore_user_id.$product_number."5".".".$extension;
             $productImage5->move($destinationPath,$ciustom_productImage5);
+        }else{
+            $ciustom_productImage5="null";
         }
+
 
         /*Insert your data*/
 
@@ -151,7 +164,6 @@ class Products extends Controller
                         'color' => $request->input('color'),
                         'accessories' => $request->input('accessories'),
                         'keySpecification' => $request->input('keySpecification'),
-                        'vendor' => $request->input('vendor'),
                         'created_at' => Carbon::now()->format('Y-m-d H:i:s')
                     ]);
 
@@ -361,8 +373,6 @@ class Products extends Controller
                             ]);
             }
         }else{
-            $id = $request->input('id');
-            $id = $request->input('id');
             $id = $request->input('id');
 
             DB::table('vendor_products')->where('id', $id)

@@ -21,17 +21,7 @@
         </div>
     </div>
     <div class="wrapper wrapper-content animated fadeInRight">
-        <div class="row">
-            <div class="col-lg-12">
-                @if (session('status'))
-
-                    <div class="alert alert-success">
-                        <strong>{{ session('status') }}</strong>
-                    </div>
-
-                @endif
-            </div>
-        </div>
+        @include('Admin.Layouts.message')
         <div class="row">
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
@@ -49,34 +39,37 @@
                     <table class="table table-striped table-bordered table-hover dataTables-example" >
                     <thead>
                     <tr>
-                        <th>SL.</th>
-                        <th>Product Name</th>
-                        <th>Price</th>
-                        <th>Number In Stock</th>
-                        <th>Sold Quantity</th>
+                        <th>Product ID</th>
+                        <th>Vendor</th>
+                        <th>Product</th>
+                        <th>Category</th>
+                        <th>Sub Category</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
+                    @foreach($vendor_products as $product_data)
                     <tr>
-                        <td>fhfgh</td>
-                        <td>fhfgh</td>
-                        <td>Price</td>
-                        <td>Win 95+</td>
-                        <td>4</td>
+                        <td>{{$product_data->product_number}}</td>
+                        <td>{{$product_data->name}}</td>
+                        <td>{{$product_data->productName}}</td>
+                        <td>{{$product_data->category_name}}</td>
+                        <td>{{$product_data->sub_category_name}}</td>
                         <td class="center">
-                            <a href="" class="btn btn-primary btn-xs">View</a>
-                            <a href="" class="btn btn-primary btn-xs">Update</a>
+                            <a href="{{ url('/admin/product/view').'/'.$product_data->product_number }}" class="btn btn-info btn-xs">{{ __('View') }}</a>
+                            <a href="{{ url('/admin/product/status_approve').'/'.$product_data->product_number }}" class="btn btn-primary btn-xs">{{ __('Approve') }}</a>
+                            <a href="{{ url('/admin/product/status_disapprove').'/'.$product_data->product_number }}" class="btn btn-danger btn-xs">{{ __('Disapprove') }}</a>
                         </td>
                     </tr>
+                    @endforeach
                     </tbody>
                     <tfoot>
                     <tr>
-                        <th>SL.</th>
-                        <th>Product Name</th>
-                        <th>Price</th>
-                        <th>Number In Stock</th>
-                        <th>Sold Quantity</th>
+                        <th>Product ID</th>
+                        <th>Vendor</th>
+                        <th>Product</th>
+                        <th>Category</th>
+                        <th>Sub Category</th>
                         <th>Action</th>
                     </tr>
                     </tfoot>

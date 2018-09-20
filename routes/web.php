@@ -107,7 +107,9 @@ Route::group(['middleware' => 'admin_user'], function () {
 	Route::post('/admin/others_update', 'Admin\Home@others_update');
 
 	Route::get('/admin/product_ap_rj', 'Admin\Home@product_ap_rj')->name('admin_product_ap_rj');
-	Route::get('/admin/update_product_ap_rj', 'Admin\Home@update_product_ap_rj')->name('admin_update_product_ap_rj');
+	Route::get('/admin/product/view/{id}', 'Admin\Home@product_view');
+	Route::get('/admin/product/status_approve/{id}', 'Admin\Home@product_status_approve');
+	Route::get('/admin/product/status_disapprove/{id}', 'Admin\Home@product_status_disapprove');
 	Route::get('/admin/product_data', 'Admin\Home@product_data')->name('admin_product_data');
 
 	Route::get('/admin/vendor_ap_rj', 'Admin\Home@vendor_ap_rj');

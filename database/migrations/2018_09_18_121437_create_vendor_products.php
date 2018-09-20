@@ -25,7 +25,6 @@ class CreateVendorProducts extends Migration
             $table->string('partNumber',255)->nullable();
             $table->string('menufacturer',255)->nullable();
             $table->string('modelNumber',255)->nullable();
-            $table->string('vendor',255)->nullable();
             $table->string('supplyType',255)->nullable();
             $table->string('productCategory',255);
             $table->string('productSubCategory',255);

@@ -82,7 +82,7 @@ class Home extends Controller
     public function add_category_submit(Request $request)
     {
         $this->validate($request, [
-            'category_image'=> 'required|image|dimensions:min_width=2200,min_height=900,max_width=2200,max_height=900',
+            'category_image'=> 'required|image|mimes:jpg,jpeg,png,ico,svg|dimensions:min_width=50,min_height=50,max_width=200,max_height=200',
             'category_name'=> 'required',
             'category_description'=> 'required',
             'category_abbreviation'=> 'required'
@@ -340,11 +340,45 @@ class Home extends Controller
     }
 
     public function product_ap_rj(){
-    	return view('Admin.Product_ap_rj.product_ap_rj_list');
+        $vendor_products = DB::table('vendor_products')->where('product_status', "0")
+                                                    ->join('vendore_user', 'vendor_products.vendore_user_id', '=', 'vendore_user.vendore_user_id')
+                                                    ->join('product_category', 'vendor_products.productCategory', '=', 'product_category.category_id')
+                                                    ->join('product_sub_category', 'vendor_products.productSubCategory', '=', 'product_sub_category.sub_category_id')
+                                                    ->get();
+    	return view('Admin.Product_ap_rj.product_ap_rj_list', compact('vendor_products'));
     }
 
-    public function update_product_ap_rj(){
-    	return view('Admin.Update_product_ap_rj.update_product_ap_rj_list');
+    public function product_view($id)
+    {
+        $product_data = DB::table('vendor_products')->where('product_number', $id)
+                                                    ->join('product_category', 'vendor_products.productCategory', '=', 'product_category.category_id')
+                                                    ->join('product_sub_category', 'vendor_products.productSubCategory', '=', 'product_sub_category.sub_category_id')
+                                                    ->first();
+        $product_payment_delivery_data = DB::table('vendor_payment_delivery')->where('product_number', $id)->first();
+        $product_images_data = DB::table('vendor_product_images')->where('product_number', $id)->first();
+        return view('Admin.Product_ap_rj.product_view', compact('product_data','product_payment_delivery_data','product_images_data'));
+    }
+
+    public function product_status_approve($id){
+
+        DB::table('vendor_products')->where('product_number', $id)
+                ->update(
+                    [
+                        'product_status' => "1",
+                        'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+                    ]);
+        return redirect('/admin/product_ap_rj')->with('status', 'Product Status Updated Successfully!');
+    }
+
+    public function product_status_disapprove($id){
+
+        DB::table('vendor_products')->where('product_number', $id)
+                ->update(
+                    [
+                        'product_status' => "2",
+                        'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+                    ]);
+        return redirect('/admin/product_ap_rj')->with('status', 'Product Status Updated Successfully!');
     }
 
     public function product_data(){

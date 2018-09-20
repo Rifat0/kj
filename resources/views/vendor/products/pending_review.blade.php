@@ -31,6 +31,7 @@
         </div>
     </div>
     <div class="wrapper wrapper-content animated fadeInRight">
+        @include('Admin.Layouts.message')
         <div class="row">
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
