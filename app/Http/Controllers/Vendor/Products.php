@@ -14,22 +14,36 @@ class Products extends Controller
 {
     public function products()
     {
-        $get_products = DB::table('vendor_products')->get();
-        $get_payment_delivery = DB::table('vendor_payment_delivery')->get();
+        $products_data = DB::table('vendor_products')
+                                ->where('vendore_user_id', Session::get('vendore_user_data')[0] ['vendore_user_id'])
+                                ->where('product_status', '=', '1')
+                                ->get();
 
-        return view('vendor.products.products', compact('get_products', 'get_payment_delivery'));
+        return view('vendor.products.products', compact('products_data'));
+    }
+
+    public function product_detail($id)
+    {
+        $product_data = DB::table('vendor_products')->where('product_number', $id)
+                                                    ->first();
+
+        $category = DB::table("category_sub_category")->where("category_id",$product_data->productCategory)->first();                                           
+        $sub_category = DB::table("category_sub_category")->where("sub_category_id",$product_data->productSubCategory)->first();                                           
+        $product_payment_delivery_data = DB::table('vendor_payment_delivery')->where('product_number', $id)->first();
+        $product_images_data = DB::table('vendor_product_images')->where('product_number', $id)->first();
+        return view('vendor.products.product_detail', compact('product_data','product_payment_delivery_data','product_images_data','category','sub_category'));
     }
 
     public function create_new_product()
     {
-        $product_category = DB::table('product_category')->get();
+        $product_category = DB::table('category_sub_category')->where('category_id', '!=', '0')->get();
 
         return view('vendor.products.create_new_product', compact('product_category'));
     }
 
     public function get_sub_category($id)
     {
-        $sub_category = DB::table("product_sub_category")->where("category_id",$id)->pluck("sub_category_name","sub_category_id");
+        $sub_category = DB::table("category_sub_category")->where('sub_category_id', '!=', '0')->where("parent_category_id",$id)->pluck("sub_category_name","sub_category_id");
         $coun=count($sub_category);
 
         if($coun>0){
@@ -50,6 +64,7 @@ class Products extends Controller
             'productKeyword'=> 'nullable|max:100',
             'productCategory'=> 'required',
             'productSubCategory'=> 'required',
+            'stock_count'=> 'required',
             'keySpecification'=> 'required|max:3000',
             'productImage1'=> 'required|image|mimes:jpg,jpeg|max:5000',
             'productImage2'=> 'image|mimes:jpg,jpeg|max:5000',
@@ -87,7 +102,7 @@ class Products extends Controller
         if ($vendore_product_number!=null) {
             $product_number = $vendore_product_number->product_number+1;
         } else {
-            $product_number = "1";
+            $product_number = $vendore_user_id;
         }
 
         if ($request->hasFile('productImage1')) {
@@ -152,6 +167,8 @@ class Products extends Controller
                         'vendore_user_id' => $vendore_user_id,
                         'product_number' => $product_number,
                         'productName' => $request->input('productName'),
+                        'stock_count' => $request->input('stock_count'),
+                        'pd_price' => $request->input('pd_price'),
                         'productGenericName' => $request->input('productGenericName'),
                         'productDescription' => $request->input('productDescription'),
                         'productKeyword' => $request->input('productKeyword'),
@@ -187,7 +204,6 @@ class Products extends Controller
                         'smallOrdersAccepted' => $request->input('smallOrdersAccepted'),
                         'minimumOrderQuantity' => $request->input('minimumOrderQuantity'),
                         'unitOfMeasure' => $request->input('unitOfMeasure'),
-                        'pd_price' => $request->input('pd_price'),
                         'pd_priceForOptional' => $request->input('pd_priceForOptional'),
                         'instantPrice' => $request->input('instantPrice'),
                         'fifteenDaysPrice' => $request->input('fifteenDaysPrice'),
@@ -437,12 +453,31 @@ class Products extends Controller
 
     public function inventory_products()
     {
-        return view('vendor.products.inventory_products');
+        $inventory_products = DB::table('vendor_products')
+                                ->where('vendore_user_id', Session::get('vendore_user_data')[0] ['vendore_user_id'])
+                                ->where('product_status', '=', '1')
+                                ->get();
+        return view('vendor.products.inventory_products',compact('inventory_products'));
+    }
+
+    public function stock_updaet(Request $request)
+    {
+        DB::table('vendor_products')->where('id', $request->input('product_number'))
+                ->update(
+                    [
+                        'stock_count' => $request->input('stock_count'),
+                        'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+                    ]);
+        return redirect('/vendor/products/inventory_products')->with('status', 'Product Stock Updated Successfully!');
     }
 
     public function pending_review()
     {
-        return view('vendor.products.pending_review');
+        $products_pending_review = DB::table('vendor_products')
+                                ->where('vendore_user_id', Session::get('vendore_user_data')[0] ['vendore_user_id'])
+                                ->where('product_status', '!=', '1')
+                                ->get();
+        return view('vendor.products.pending_review',compact('products_pending_review'));
     }
 
     // Orders

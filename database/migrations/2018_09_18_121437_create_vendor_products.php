@@ -20,6 +20,9 @@ class CreateVendorProducts extends Migration
             $table->string('product_status',10)->default('0');
             $table->string('productName',255);
             $table->string('productGenericName',255);
+            $table->string('stock_count',20)->default('0');
+            $table->string('sold_count',20)->default('0');
+            $table->string('pd_price',20)->default('0');
             $table->string('productDescription',255);
             $table->string('productKeyword',255)->nullable();
             $table->string('partNumber',255)->nullable();

@@ -18,8 +18,16 @@ class Home extends Controller
 
     public function index()
     {
+        $category_sub_category = DB::table('category_sub_category')->get();
         $banar_data = DB::table('banar')->get();
-        return view('content.home',compact('banar_data'));
+        $adv_sec_1 = DB::table('adv_sec_1')->get();
+        $adv_sec_2 = DB::table('adv_sec_2')->get();
+        $today_feture = DB::table('vendor_products')
+                        ->join('vendor_product_images', 'vendor_products.product_number', '=', 'vendor_product_images.product_number')
+                        ->get();
+
+        $shop_settings = DB::table('shop_settings')->first();
+        return view('content.home',compact('banar_data','category_sub_category','adv_sec_1','adv_sec_2','today_feture','shop_settings'));
     }
 
     public function category()
@@ -70,6 +78,21 @@ class Home extends Controller
     public function compare()
     {
         return view('content.compare');
+    }
+
+    public function newsletter_submit(Request $newsletter)
+    {
+        $this->validate($newsletter, [
+            'newsletter'=> 'required|email',
+         ]);
+        
+        DB::table('newsletter')
+                ->insert(
+                    [
+                        'newsletter' => $newsletter->input('newsletter'),
+                        'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+                    ]);
+        return redirect('/')->with('status', 'You have successfully subscribed for newsletter!');
     }
 
     public function sing_up()

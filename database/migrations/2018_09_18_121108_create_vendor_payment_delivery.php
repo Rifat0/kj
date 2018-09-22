@@ -20,7 +20,6 @@ class CreateVendorPaymentDelivery extends Migration
             $table->string('smallOrdersAccepted',3);
             $table->string('minimumOrderQuantity',255)->nullable();
             $table->string('unitOfMeasure',255)->nullable();
-            $table->string('pd_price',255);
             $table->string('pd_priceForOptional',255)->nullable();
             $table->string('instantPrice',255)->nullable();
             $table->string('fifteenDaysPrice',255)->nullable();

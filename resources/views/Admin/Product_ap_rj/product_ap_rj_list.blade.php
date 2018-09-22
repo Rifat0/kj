@@ -42,8 +42,6 @@
                         <th>Product ID</th>
                         <th>Vendor</th>
                         <th>Product</th>
-                        <th>Category</th>
-                        <th>Sub Category</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -53,8 +51,6 @@
                         <td>{{$product_data->product_number}}</td>
                         <td>{{$product_data->name}}</td>
                         <td>{{$product_data->productName}}</td>
-                        <td>{{$product_data->category_name}}</td>
-                        <td>{{$product_data->sub_category_name}}</td>
                         <td class="center">
                             <a href="{{ url('/admin/product/view').'/'.$product_data->product_number }}" class="btn btn-info btn-xs">{{ __('View') }}</a>
                             <a href="{{ url('/admin/product/status_approve').'/'.$product_data->product_number }}" class="btn btn-primary btn-xs">{{ __('Approve') }}</a>
@@ -68,8 +64,6 @@
                         <th>Product ID</th>
                         <th>Vendor</th>
                         <th>Product</th>
-                        <th>Category</th>
-                        <th>Sub Category</th>
                         <th>Action</th>
                     </tr>
                     </tfoot>

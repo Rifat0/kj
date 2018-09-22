@@ -33,7 +33,7 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Category Table </h5>
+                        <h5>Sub-Category Table </h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -57,7 +57,7 @@
                             @foreach($product_sub_category as $sub_category)
                             <tr>
                                 <td>{{ $sub_category->sub_category_id }}</td>
-                                <td>{{ $sub_category->category_name }}</td>
+                                <td>{{ $sub_category->parent_category_name }}</td>
                                 <td>{{ $sub_category->sub_category_name }}</td>
                                 <td>{{ $sub_category->sub_category_description }}</td>
                                 <td>{{ $sub_category->sub_category_abbreviation }}</td>

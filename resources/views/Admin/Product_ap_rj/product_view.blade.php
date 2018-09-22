@@ -35,7 +35,7 @@
 
                                     <div class="product-images">
 
-                                    	<div class="item">
+                                        <div class="item">
                                             <div class="image">
                                                 <img class="img-responsive" src="{{ asset('public/backend/img/vendor/products'.'/'.$product_images_data->productImage1) }}" height="400" width="400">
                                             </div>
@@ -75,9 +75,10 @@
                                     </h2>
                                     <small>{{ $product_data->productGenericName }}</small>
                                     <br><small>Created :{{ $product_data->created_at }} || Updated :{{ $product_data->updated_at }}</small>
+                                    <br><small><strong>Category :{{ $category->category_name }} || Sub-category :{{ $sub_category->sub_category_name }}</strong></small>
                                     <hr>
                                     <div>
-                                        <h1 class="product-main-price">${{ $product_payment_delivery_data->pd_price }}</h1>
+                                        <h1 class="product-main-price">${{ $product_data->pd_price }}</h1>
                                         <p>instant Price : ${{ $product_payment_delivery_data->instantPrice }}
                                         || 15 Day Price : ${{ $product_payment_delivery_data->fifteenDaysPrice }}
                                         || 30 day Price : ${{ $product_payment_delivery_data->thirteenDaysPrice }}</p>
@@ -92,10 +93,10 @@
 
                                     <div class="small text-muted">
                                         <?php
-                                    	$productcolor = explode(',',$product_data->color);
-                                    	foreach ($productcolor as $productcolor) { ?>
-                                    	<button class="btn btn-info btn-xs">{{ $productcolor }}</button>
-                                    	<?php } ?>
+                                        $productcolor = explode(',',$product_data->color);
+                                        foreach ($productcolor as $productcolor) { ?>
+                                        <button class="btn btn-info btn-xs">{{ $productcolor }}</button>
+                                        <?php } ?>
                                     </div>
                                     <h4>Key Specification</h4>
 
@@ -105,20 +106,16 @@
                                     <dl class="dl-horizontal m-t-md small">
                                         <dt>Key words :</dt>
                                         <dd><p>
-                                        	<?php
-                                        	$productKeyword = explode(',',$product_data->productKeyword);
-                                        	foreach ($productKeyword as $value) { ?>
-                                        	<button class="btn btn-info btn-xs">{{ $value }}</button>
-                                        	<?php } ?>
+                                            <?php
+                                            $productKeyword = explode(',',$product_data->productKeyword);
+                                            foreach ($productKeyword as $value) { ?>
+                                            <button class="btn btn-info btn-xs">{{ $value }}</button>
+                                            <?php } ?>
                                         </p></dd>
                                         <dt><p>Part Number :</p></dt>
                                         <dd>{{ $product_data->partNumber }}</dd>
                                         <dt><p>Menufacturer :</p></dt>
                                         <dd>{{ $product_data->menufacturer }}</dd>
-                                        <dt><p>Product Category :</p></dt>
-                                        <dd>{{ $product_data->category_name }}</dd>
-                                        <dt><p>Product Sub-Category :</p></dt>
-                                        <dd>{{ $product_data->sub_category_name }}</dd>
                                         <dt><p>Accessories Accessories :</p></dt>
                                         <dd>{{ $product_data->accessories }}</dd>
                                         <dt><p>Dimensions Per Length :</p></dt>
@@ -180,7 +177,7 @@
                                             <a href="{{ url('/admin/product/status_approve').'/'.$product_data->product_number }}" class="btn btn-primary btn-sm">{{ __('Approve') }}</a>
                                         </div>
                                         <div class="btn-group">
-                            				<a href="{{ url('/admin/product/status_disapprove').'/'.$product_data->product_number }}" class="btn btn-danger btn-sm">{{ __('Disapprove') }}</a>
+                                            <a href="{{ url('/admin/product/status_disapprove').'/'.$product_data->product_number }}" class="btn btn-danger btn-sm">{{ __('Disapprove') }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -197,15 +194,15 @@
 @section('js')
     <script src="{{ asset('public/backend/js/plugins/slick/slick.min.js') }}"></script>
 
-	<script>
-	    $(document).ready(function(){
+    <script>
+        $(document).ready(function(){
 
 
-	        $('.product-images').slick({
-	            dots: true
-	        });
+            $('.product-images').slick({
+                dots: true
+            });
 
-	    });
+        });
 
-	</script>
+    </script>
 @endsection

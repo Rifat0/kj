@@ -21,39 +21,21 @@
         </div>
     </div>
     <div class="wrapper wrapper-content animated fadeInRight">
-        <div class="row">
-            <div class="col-lg-12">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-            </div>
-        </div>
+        @include('Admin.Layouts.message')
         <div class="row">
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Category Info</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                        </div>
-                    </div>
                     <div class="ibox-content">
-                            <form method="POST" action="{{ url('/vendor/products/store_new_product') }}" class="form-horizontal" enctype="multipart/form-data">
+                            <form method="POST" action="{{ url('/admin/add_adv_sec_2') }}" class="form-horizontal" enctype="multipart/form-data">
                                 {{ csrf_field() }}
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Select Vendor<font color="red">*</font></label>
-                                <div class="col-sm-10">
-                                    <select name="productName" class="form-control" >
-                                        <option>Category</option>
-                                        <option>Category</option>
+                                <div class="col-sm-4">
+                                    <select name="vendor_id" class="form-control" >
+                                        <option>--Select Vendor--</option>
+                                        @foreach($vendore_data as $vendore)
+                                        <option value="{{ $vendore->vendore_user_id }}">{{ $vendore->name }}</option>
+                                        @endforeach
                                     </select>
                                     <span class="help-block m-b-none"></span>
                                 </div>
@@ -62,10 +44,9 @@
                             <div class="hr-line-dashed"></div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Vendor Category<font color="red">*</font></label>
-                                <div class="col-sm-10">
-                                    <select name="productName" class="form-control" >
-                                        <option>Category</option>
-                                        <option>Category</option>
+                                <div class="col-sm-4">
+                                    <select name="vendor_category" class="form-control" >
+
                                     </select>
                                     <span class="help-block m-b-none"></span>
                                 </div>
@@ -73,9 +54,9 @@
 
                             <div class="hr-line-dashed"></div>
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Banar image <font color="red">*</font></label>
+                                <label class="col-sm-2 control-label">image <font color="red">*</font></label>
                                 <div class="col-sm-10">
-                                    <input type="file" name="productName" class="form-control" placeholder="Enter Product Name">
+                                    <input type="file" name="image" class="form-control" placeholder="Enter Product Name">
                                     <span class="help-block m-b-none"></span>
                                 </div>
                             </div>
@@ -83,7 +64,7 @@
                             <div class="hr-line-dashed"></div>
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-2">
-                                    <a href="{{ url('/admin/today_fetured') }}" class="btn btn-white" type="submit">Cancel</a>
+                                    <a href="{{ url('/admin/adv_sec_1') }}" class="btn btn-white" type="submit">Cancel</a>
                                     <button class="btn btn-primary" type="submit">Submit</button>
                                 </div>
                             </div>
@@ -93,9 +74,8 @@
             </div>
         </div>
     </div>
-    </div>
 @endsection
 
 @section('js')
-    
+    <script src="{{ asset('public/backend/js/get_vendor_category.js') }}"></script>
 @endsection

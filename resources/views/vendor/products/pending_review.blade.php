@@ -49,6 +49,7 @@
                     <table class="table table-striped table-bordered table-hover dataTables-example" >
                     <thead>
                     <tr>
+                        <th>Product ID</th>
                         <th>Product Name</th>
                         <th>Price</th>
                         <th>Number In Stock</th>
@@ -57,31 +58,28 @@
                     </tr>
                     </thead>
                     <tbody>
+                    @foreach($products_pending_review as $products)
                     <tr>
-                        <td>Trident</td>
-                        <td>Internet
-                            Explorer 4.0
-                        </td>
-                        <td>Win 95+</td>
-                        <td>4</td>
+                        <td>{{ $products->product_number }}</td>
+                        <td>{{ $products->productName }}</td>
+                        <td>{{ $products->pd_price }}</td>
+                        <td>{{ $products->stock_count }}</td>
+                        <td>{{ $products->sold_count }}</td>
+                        @if($products->product_status==0)
                         <td class="center">
                             <span class="text-info">Pending Approval</span>
                         </td>
-                    </tr>
-                    <tr>
-                        <td>Trident</td>
-                        <td>Internet
-                            Explorer 4.0
-                        </td>
-                        <td>Win 95+</td>
-                        <td>4</td>
+                        @elseif($products->product_status==2)
                         <td class="center">
                             <span class="text-danger">Rejected</span>
                         </td>
+                        @endif
                     </tr>
+                    @endforeach
                     </tbody>
                     <tfoot>
                     <tr>
+                        <th>Product ID</th>
                         <th>Product Name</th>
                         <th>Price</th>
                         <th>Number In Stock</th>

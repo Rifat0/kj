@@ -1,6 +1,28 @@
 <?php
 
 // ==========================================================================================================
+// Content
+// ==========================================================================================================
+
+Route::get('/', 'Content\Home@index')->name('home');
+Route::get('/home', 'Content\Home@index')->name('home');
+Route::get('/category', 'Content\Home@category')->name('category');
+Route::get('/product', 'Content\Home@product')->name('product');
+Route::get('/cart_empty', 'Content\Home@cart_empty')->name('cart_empty');
+Route::get('/cart_item', 'Content\Home@cart_item')->name('cart_item');
+Route::get('/checkout ', 'Content\Home@checkout')->name('checkout');
+Route::get('/summery ', 'Content\Home@summery')->name('summery');
+Route::get('/about_us ', 'Content\Home@about_us')->name('about_us');
+Route::get('/legal ', 'Content\Home@legal')->name('legal');
+Route::get('/favorite ', 'Content\Home@favorite')->name('favorite');
+Route::get('/compare ', 'Content\Home@compare')->name('compare');
+Route::get('/sing_up ', 'Content\Home@sing_up')->name('sing_up');
+Route::post('/sing_up ', 'Content\Home@sing_up_submit');
+Route::post('/login ', 'Content\Home@login_submit');
+Route::post('/logout ', 'Content\Home@logout');
+Route::post('/newsletter_submit ', 'Content\Home@newsletter_submit');
+
+// ==========================================================================================================
 // Vendor
 // ==========================================================================================================
 Route::get('/vendore', 'Vendor\Home@login');
@@ -17,13 +39,14 @@ Route::group(['middleware' => 'vendore_user'], function () {
 	Route::get('/vendor/dashboard', 'Vendor\Dashboard@index');
 	// Products
 	Route::get('/vendor/products', 'Vendor\Products@products');
+	Route::get('/vendor/product/view/{id}', 'Vendor\Products@product_detail');
 	Route::get('/vendor/products/create_new_product', 'Vendor\Products@create_new_product');
 	Route::post('/vendor/products/store_new_product', 'Vendor\Products@store_new_product');
-	// Route::get('/vendor/products/product_detail/{id}', 'Vendor\Products@product_detail');
 	Route::get('/vendor/products/update_product/{id}', 'Vendor\Products@update_product');
 	Route::post('/vendor/products/update_product_request', 'Vendor\Products@update_product_request');
 	// Inventory Products
 	Route::get('/vendor/products/inventory_products', 'Vendor\Products@inventory_products');
+	Route::post('/vendor/products/stock_updaet', 'Vendor\Products@stock_updaet');
 	// Products Review
 	Route::get('/vendor/products/pending_review', 'Vendor\Products@pending_review');
 	// Orders
@@ -42,28 +65,7 @@ Route::group(['middleware' => 'vendore_user'], function () {
 
 });
 
-// ==========================================================================================================
-// Content
-// ==========================================================================================================
 
-
-// Auth::routes();
-Route::get('/', 'Content\Home@index')->name('home');
-Route::get('/home', 'Content\Home@index')->name('home');
-Route::get('/category', 'Content\Home@category')->name('category');
-Route::get('/product', 'Content\Home@product')->name('product');
-Route::get('/cart_empty', 'Content\Home@cart_empty')->name('cart_empty');
-Route::get('/cart_item', 'Content\Home@cart_item')->name('cart_item');
-Route::get('/checkout ', 'Content\Home@checkout')->name('checkout');
-Route::get('/summery ', 'Content\Home@summery')->name('summery');
-Route::get('/about_us ', 'Content\Home@about_us')->name('about_us');
-Route::get('/legal ', 'Content\Home@legal')->name('legal');
-Route::get('/favorite ', 'Content\Home@favorite')->name('favorite');
-Route::get('/compare ', 'Content\Home@compare')->name('compare');
-Route::get('/sing_up ', 'Content\Home@sing_up')->name('sing_up');
-Route::post('/sing_up ', 'Content\Home@sing_up_submit');
-Route::post('/login ', 'Content\Home@login_submit');
-Route::post('/logout ', 'Content\Home@logout');
 
 // ==========================================================================================================
 // Admin
@@ -98,15 +100,20 @@ Route::group(['middleware' => 'admin_user'], function () {
 	Route::get('/admin/add_banar', 'Admin\Home@add_banar')->name('admin_add_banar');
 	Route::post('/admin/add_banar', 'Admin\Home@add_banar_submit');
 
-	Route::get('/admin/adv_sec_1', 'Admin\Home@adv_sec_1')->name('admin_adv_sec_1');
-	Route::get('/admin/add_adv_sec_1', 'Admin\Home@add_adv_sec_1')->name('admin_add_adv_sec_1');
-	Route::get('/admin/adv_sec_2', 'Admin\Home@adv_sec_2')->name('admin_adv_sec_2');
+	Route::get('/admin/adv_sec_1', 'Admin\Home@adv_sec_1');
+	Route::get('/admin/add_adv_sec_1', 'Admin\Home@add_adv_sec_1');
+	Route::post('/admin/add_adv_sec_1', 'Admin\Home@add_adv_sec_1_submit');
+
+	Route::get('/admin/vendor_category/{id}', 'Admin\Home@vendor_category');
+
+	Route::get('/admin/adv_sec_2', 'Admin\Home@adv_sec_2');
+	Route::post('/admin/add_adv_sec_2', 'Admin\Home@add_adv_sec_2_submit');
 	Route::get('/admin/add_adv_sec_2', 'Admin\Home@add_adv_sec_2')->name('admin_add_adv_sec_2');
 
-	Route::get('/admin/others', 'Admin\Home@others')->name('admin_others');
+	Route::get('/admin/others', 'Admin\Home@others');
 	Route::post('/admin/others_update', 'Admin\Home@others_update');
 
-	Route::get('/admin/product_ap_rj', 'Admin\Home@product_ap_rj')->name('admin_product_ap_rj');
+	Route::get('/admin/product_ap_rj', 'Admin\Home@product_ap_rj');
 	Route::get('/admin/product/view/{id}', 'Admin\Home@product_view');
 	Route::get('/admin/product/status_approve/{id}', 'Admin\Home@product_status_approve');
 	Route::get('/admin/product/status_disapprove/{id}', 'Admin\Home@product_status_disapprove');

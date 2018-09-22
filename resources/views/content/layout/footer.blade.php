@@ -4,23 +4,23 @@
     <div class="container">
         <div class="row row-col-gap" data-gutter="60">
             <div class="col-md-3">
-                <h4 class="widget-title-sm">TheBox Shop</h4>
-                <p>Nullam magnis magnis maecenas neque ut purus condimentum semper senectus feugiat et</p>
+                <h4 class="widget-title-sm">{{ $shop_settings->shop_name }}</h4>
+                <p>{{ $shop_settings->shop_description }}</p>
                 <ul class="main-footer-social-list">
                     <li>
-                        <a class="fa fa-facebook" href="#"></a>
+                        <a class="fa fa-facebook" href="{{ $shop_settings->facebook }}" target="_blank"></a>
                     </li>
                     <li>
-                        <a class="fa fa-twitter" href="#"></a>
+                        <a class="fa fa-twitter" href="{{ $shop_settings->twitter }}" target="_blank"></a>
                     </li>
                     <li>
-                        <a class="fa fa-pinterest" href="#"></a>
+                        <a class="fa fa-pinterest" href="{{ $shop_settings->pinterest }}" target="_blank"></a>
                     </li>
                     <li>
-                        <a class="fa fa-instagram" href="#"></a>
+                        <a class="fa fa-instagram" href="{{ $shop_settings->instagram }}" target="_blank"></a>
                     </li>
                     <li>
-                        <a class="fa fa-google-plus" href="#"></a>
+                        <a class="fa fa-google-plus" href="{{ $shop_settings->googlePlus }}" target="_blank"></a>
                     </li>
                 </ul>
             </div>
@@ -53,10 +53,11 @@
             </div>
             <div class="col-md-3">
                 <h4 class="widget-title-sm">Newsletter</h4>
-                <form>
+                <form method="post" action="{{ url('/newsletter_submit') }}">
+                    @csrf
                     <div class="form-group">
                         <label>Sign up to the newsletter</label>
-                        <input class="newsletter-input form-control" placeholder="Your e-mail address" type="text" />
+                        <input name="newsletter" class="newsletter-input form-control" placeholder="Your e-mail address" type="text" />
                     </div>
                     <input class="btn btn-primary" type="submit" value="Sign up" />
                 </form>

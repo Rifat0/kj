@@ -219,6 +219,17 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label class="col-sm-2 control-label">Stock Count:</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="stock_count" class="form-control" value="{{ old('stock_count') }}" placeholder="Enter Stock">
+                                            @if ($errors->has('stock_count'))
+                                                <span class="invalid-feedback" role="alert">
+                                                <strong><font color="red">{{ $errors->first('stock_count') }}</font></strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="col-sm-2 control-label">Accessories:</label>
                                         <div class="col-sm-10">
                                             <input type="text" name="accessories" class="form-control" value="{{ old('accessories') }}" placeholder="Enter Accessories">
