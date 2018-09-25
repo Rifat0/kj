@@ -720,7 +720,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <img id="blah" src="#" height="80" width="80"/>
+                                                
                                             </td>
                                             <td>
                                                 <div class="fileinput fileinput-new" data-provides="fileinput">

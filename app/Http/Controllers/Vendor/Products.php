@@ -234,11 +234,15 @@ class Products extends Controller
 
     public function update_product($id)
     {
-        $get_product_detail = DB::table('vendor_products')->where('id', $id)->get();
-        $get_payment_delivery = DB::table('vendor_payment_delivery')->where('id', $id)->get();
-        $get_product_images = DB::table('vendor_product_images')->where('id', $id)->get();
+        $product_data = DB::table('vendor_products')->where('product_number', $id)
+                                                    ->first();
 
-        return view('vendor.products.update_product', compact('get_product_detail', 'get_product_images', 'get_payment_delivery'));
+        $category = DB::table("category_sub_category")->where("category_id",$product_data->productCategory)->first();                                           
+        $sub_category = DB::table("category_sub_category")->where("sub_category_id",$product_data->productSubCategory)->first();                                           
+        $product_payment_delivery_data = DB::table('vendor_payment_delivery')->where('product_number', $id)->first();
+        $product_images_data = DB::table('vendor_product_images')->where('product_number', $id)->first();
+        $product_category = DB::table('category_sub_category')->where('category_id', '!=', '0')->get();
+        return view('vendor.Products.update_product', compact('product_data','product_payment_delivery_data','product_images_data','category','sub_category','product_category'));
     }
 
     public function update_product_request(Request $request)
@@ -246,22 +250,21 @@ class Products extends Controller
         $this->validate($request, [
             'productName'=> 'required|max:100',
             'productGenericName'=> 'required|max:100',
-            'productDescription'=> 'required|max:100',
+            'productDescription'=> 'required|max:500',
             'productKeyword'=> 'nullable|max:100',
             'productCategory'=> 'required',
             'productSubCategory'=> 'required',
+            'stock_count'=> 'required',
             'keySpecification'=> 'required|max:3000',
-            'productImage'=> 'image|mimes:jpg,jpeg|max:5000',
+            'productImage1'=> 'required|image|mimes:jpg,jpeg|max:5000',
+            'productImage2'=> 'image|mimes:jpg,jpeg|max:5000',
+            'productImage3'=> 'image|mimes:jpg,jpeg|max:5000',
+            'productImage4'=> 'image|mimes:jpg,jpeg|max:5000',
+            'productImage5'=> 'image|mimes:jpg,jpeg|max:5000',
             'partNumber'=> 'nullable|max:100',
             'menufacturer'=> 'nullable|max:100',
             'modelNumber'=> 'nullable|max:100',
             'accessories'=> 'nullable|max:100',
-            'vendor'=> 'nullable|max:100',
-            'dpu_w_p_length'=> 'nullable|max:10',
-            'dpu_w_p_width'=> 'nullable|max:10',
-            'dpu_w_p_height'=> 'nullable|max:10',
-            'dpu_w_p_weight'=> 'nullable|max:10',
-            'dpu_w_p_volume'=> 'nullable|max:10',
             'color'=> 'nullable|max:100',
             'pd_price'=> 'required|max:10',
             'minimumOrderQuantity'=> 'nullable|max:10',
@@ -283,62 +286,38 @@ class Products extends Controller
             'paymentMethod'=> 'required'
          ]);
 
-        $id = $request->input('id');
+        $product_number = $request->input('product_number');
 
-        // Store Logo Logic
-        $prooductImg_id = $request->input('id');
-        $previousProductImg = $request->input('previousProductImg');
+        $p_productImage1 = $request->input('p_productImage1');
+        $p_productImage2 = $request->input('p_productImage2');
+        $p_productImage3 = $request->input('p_productImage3');
+        $p_productImage4 = $request->input('p_productImage4');
+        $p_productImage5 = $request->input('p_productImage5');
 
-        $files = Vendor_product_images::find($prooductImg_id);
-        $filedelete = $files['productImage'];
+        $destinationPath = 'public/backend/img/vendor/products/';
 
-        $pathToYourFile = 'public/backend/img/vendor/products/'.$filedelete ;
-
-        if ($request->hasFile('productImage') && $previousProductImg=='') {
+        if ($request->hasFile('p_productImage1') && $p_productImage1=='') {
             // previous image null but input file has
-            $destinationPath = 'public/backend/img/vendor/products/';
-            $file = $request->productImage;
-            $extension = $file->getClientOriginalExtension();
-            $fileName = rand(1111,9999).".".$extension;
-            $file->move($destinationPath,$fileName);
-            $img = $fileName;
-            
-            DB::table('vendor_product_images')->where('id', $id)
-                ->update(
-                    [
-                        'productImage' => $img
-                    ]);
+            $productImage1 = $request->productImage1;
+            $extension = $productImage1->getClientOriginalExtension();
+            $productImage1 = rand(1111,9999).".".$extension;
+            $productImage1->move($destinationPath,$productImage1);
 
-        }elseif( !empty($previousProductImg) )  {
+        }elseif( !empty($p_productImage1) && $request->hasFile('p_productImage1'))  {
             
-            $id = $request->input('id');
-
-            if ($request->hasFile('productImage')) {
-                if(file_exists($pathToYourFile)) // make sure it exits inside the folder
-            {
-              unlink($pathToYourFile); // delete file/image
-              // and delete the record from database
+            if(file_exists($destinationPath.$p_productImage1)){
+              unlink($destinationPath.$p_productImage1);
             }
 
-            $destinationPath = 'public/backend/img/vendor/products/';
-            $file = $request->productImage;
-            $extension = $file->getClientOriginalExtension();
-            $fileName = rand(1111,9999).".".$extension;
-            $file->move($destinationPath,$fileName);
-            $img = $fileName;
+            $productImage1 = $request->productImage1;
+            $extension = $productImage1->getClientOriginalExtension();
+            $productImage1 = rand(1111,9999).".".$extension;
+            $file->move($destinationPath,$productImage1);
 
-            DB::table('vendor_product_images')->where('id', $id)
-                ->update(
-                    [
-                        'productImage' => $img
-                    ]);
-
-            }else {
-                $id = $request->input('id');
-                $id = $request->input('id');
-                $pathToYourFile = 'public/backend/img/vendor/products/'.$previousProductImg ;
-
-                DB::table('vendor_products')->where('id', $id)
+        }elseif (!empty($p_productImage1)) {
+            $p_productImage1 = $request->p_productImage1;
+        }
+            DB::table('vendor_products')->where('id', $id)
                 ->update(
                     [
                         'productName' => $request->input('productName'),
@@ -357,7 +336,7 @@ class Products extends Controller
                         'vendor' => $request->input('vendor')
                     ]);
 
-                DB::table('vendor_payment_delivery')->where('id', $id)
+            DB::table('vendor_payment_delivery')->where('id', $id)
                         ->update(
                             [
                                 'smallOrdersAccepted' => $request->input('smallOrdersAccepted'),
@@ -387,10 +366,8 @@ class Products extends Controller
                                 'DurationDeliveryOutsideGR' => $request->input('DurationDeliveryOutsideGR'),
                                 'paymentMethod' => $request->input('paymentMethod')
                             ]);
-            }
-        }else{
-            $id = $request->input('id');
-
+            
+        
             DB::table('vendor_products')->where('id', $id)
                 ->update(
                     [
@@ -441,12 +418,6 @@ class Products extends Controller
                             'paymentMethod' => $request->input('paymentMethod')
                         ]);
 
-            DB::table('vendor_product_images')->where('id', $id)
-                ->update(
-                    [
-                        'productImage' => $previousProductImg
-                    ]);
-        }
 
         return redirect('/vendor/products')->with('status', 'Product Updated Successfully!');
     }

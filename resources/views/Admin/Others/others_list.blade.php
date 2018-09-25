@@ -67,7 +67,7 @@
     </div>
     <div class="wrapper wrapper-content animated fadeInRight ecommerce">
         
-        @include('Admin.Layouts.message')
+        @include('admin.layouts.message')
 
         <div class="row">
             <div class="col-lg-12">

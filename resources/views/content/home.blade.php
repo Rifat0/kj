@@ -693,13 +693,15 @@
         <div class="container">
             <div class="gap gap-small"></div>
             <div class="row row-sm-gap" data-gutter="10">
-                @include('Admin.Layouts.message')
+                @include('admin.layouts.message')
                 <div class="col-md-3">
                     <div class="clearfix">
                         <ul class="dropdown-menu dropdown-menu-category dropdown-menu-category-hold dropdown-menu-category-sm">
                             @foreach($category_sub_category as $product_category)
                                 @if($product_category->sub_category_id==0 )
-                            <li><a href="#"><i class="fa dropdown-menu-category-icon"><img src="{{ asset('public/content/category_icone').'/'.$product_category->category_image }}" /></i>
+                            <li><a href="{{ url('/category/'.$product_category->category_id) }}">
+                                <i class="fa dropdown-menu-category-icon">
+                                <img src="{{ asset('public/content/category_icone').'/'.$product_category->category_image }}" /></i>
                                 {{ $product_category->category_name }}</a>
                                 <div class="dropdown-menu-category-section">
                                     <div class="dropdown-menu-category-section-inner">
@@ -709,8 +711,12 @@
                                                     <ul class="dropdown-menu-category-list">
                                                         @foreach($category_sub_category as $product_sub_categor)
                                                         @if($product_category->category_id==$product_sub_categor->parent_category_id )
-                                                        <li><a href="#">{{ $product_sub_categor->sub_category_name }}</a>
-                                                        <p>{{ $product_sub_categor->sub_category_description }}</p></li>
+                                                        <li>
+                                                            <a href="{{ url('/category/sub-category/'.$product_sub_categor->parent_category_id.'/'.$product_sub_categor->sub_category_id) }}">
+                                                                {{ $product_sub_categor->sub_category_name }}
+                                                            </a>
+                                                            <p>{{ $product_sub_categor->sub_category_description }}</p>
+                                                        </li>
                                                         @endif
                                                         @endforeach
                                                     </ul>
@@ -760,7 +766,7 @@
                 <div class="owl-item">
                     <div class="product  owl-item-slide">
                         <div class="product-img-wrap">
-                            <img class="product-img" src="{{ asset('public/backend/img/vendor/products').'/'.$today_feture->productImage1 }}" />
+                            <img class="product-img" src="{{ asset('public/backend/img/vendor/products').'/'.$today_feture->productImage1 }}" height="150" width="100" />
                         </div>
                         <a class="product-link" href="#"></a>
                         <div class="product-caption">

@@ -1,4 +1,4 @@
-@extends('vendor.layouts.layout')
+@extends('admin.layouts.layout')
 
 @section('css')
     <link href="{{ asset('public/backend/css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">
@@ -66,11 +66,8 @@
         </div>
         <div class="col-lg-8">
             <div class="title-action">
-                <a href="{{ url('/vendor/products/create_new_product') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Create New Products </a>
-                <a href="{{ url('/vendor/products/inventory_products') }}" class="btn btn-primary btn-sm"><i class="fa fa-houzz"></i> Inventory Products </a>
-                <a href="{{ url('/vendor/products/pending_review') }}" class="btn btn-primary btn-sm"><i class="fa fa-clock-o"></i> Pending Review </a>
                 <button type="submit" form="form-product" data-toggle="tooltip" title="Save" class="btn btn-primary btn-sm"><i class="fa fa-save"></i></button>
-                <a href="{{ url('/vendor/products') }}" data-toggle="tooltip" title="" class="btn btn-default btn-sm" data-original-title="Cancel"><i class="fa fa-reply"></i></a>
+                <a href="{{ url('/admin') }}" data-toggle="tooltip" title="" class="btn btn-default btn-sm" data-original-title="Cancel"><i class="fa fa-reply"></i></a>
             </div>
         </div>
     </div>
@@ -84,10 +81,10 @@
                         <li class=""><a data-toggle="tab" href="#tab-3"> Payment & Deliver Information</a></li>
                         <li class=""><a data-toggle="tab" href="#tab-4"> Images</a></li>
                     </ul>
-                    <form method="POST" action="{{ url('/vendor/products/products_update') }}" class="form-horizontal" id="form-product" enctype="multipart/form-data">
+                    <form method="POST" action="{{ url('/admin/store_new_product') }}" class="form-horizontal" id="form-product" enctype="multipart/form-data">
                     {{ csrf_field() }}
 
-                    <input type="hidden" name="product_number" value="{{ $product_data->product_number }}" class="form-control">
+                    <input type="hidden" name="admin_user_id" value="{{ Session::get('admin_user_data')[0] ['admin_user_id'] }}" class="form-control">
 
                     <div class="tab-content">
                         <div id="tab-1" class="tab-pane active">
@@ -97,7 +94,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Product Name: <font color="red">*</font></label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="productName" class="form-control" value="{{ old('productName') }}{{ $product_data->productName }}">
+                                            <input type="text" name="productName" class="form-control" value="{{ old('productName') }}" placeholder="Enter product name">
                                             @if ($errors->has('productName'))
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong><font color="red">{{ $errors->first('productName') }}</font></strong>
@@ -108,7 +105,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Product Generic Name: <font color="red">*</font></label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="productGenericName" class="form-control" value="{{ old('productGenericName') }}{{ $product_data->productGenericName }}">
+                                            <input type="text" name="productGenericName" class="form-control" value="{{ old('productGenericName') }}" placeholder="Enter product generic name">
                                             @if ($errors->has('productGenericName'))
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong><font color="red">{{ $errors->first('productGenericName') }}</font></strong>
@@ -118,7 +115,7 @@
                                     </div>
                                     <div class="form-group"><label class="col-sm-2 control-label">Description: <font color="red"> *</font></label>
                                         <div class="col-sm-10">
-                                            <textarea class="summernote" name="productDescription" value="{{ old('productDescription') }}{{ $product_data->productDescription }}"></textarea>
+                                            <textarea class="summernote" name="productDescription" value="{{ old('productDescription') }}" placeholder="Enter description"></textarea>
                                             @if ($errors->has('productDescription'))
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong><font color="red">{{ $errors->first('productDescription') }}</font></strong>
@@ -129,7 +126,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Keywords:</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="productKeyword" class="tagsinput form-control">
+                                            <input type="text" name="productKeyword" class="tagsinput form-control" placeholder="Enter keywords">
                                             </br>
                                             @if ($errors->has('productKeyword'))
                                                 <span class="invalid-feedback" role="alert">
@@ -149,7 +146,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Part Number:</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="partNumber" class="form-control" value="{{ old('partNumber') }}{{ $product_data->partNumber }}">
+                                            <input type="text" name="partNumber" class="form-control" value="{{ old('partNumber') }}" placeholder="Enter part pumber">
                                             @if ($errors->has('partNumber'))
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong><font color="red">{{ $errors->first('partNumber') }}</font></strong>
@@ -160,7 +157,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Menufacturer:</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="menufacturer" class="form-control" value="{{ old('menufacturer') }}{{ $product_data->menufacturer }}">
+                                            <input type="text" name="menufacturer" class="form-control" value="{{ old('menufacturer') }}" placeholder="Enter menufacturer">
                                             @if ($errors->has('menufacturer'))
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong><font color="red">{{ $errors->first('menufacturer') }}</font></strong>
@@ -171,7 +168,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Model:</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="modelNumber" class="form-control" value="{{ old('modelNumber') }}{{ $product_data->modelNumber }}">
+                                            <input type="text" name="modelNumber" class="form-control" value="{{ old('modelNumber') }}" placeholder="Enter model number">
                                             @if ($errors->has('modelNumber'))
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong><font color="red">{{ $errors->first('modelNumber') }}</font></strong>
@@ -221,7 +218,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Stock Count:</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="stock_count" class="form-control" value="{{ old('stock_count') }}{{ $product_data->stock_count }}">
+                                            <input type="text" name="stock_count" class="form-control" value="{{ old('stock_count') }}" placeholder="Enter Stock">
                                             @if ($errors->has('stock_count'))
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong><font color="red">{{ $errors->first('stock_count') }}</font></strong>
@@ -232,7 +229,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Accessories:</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="accessories" class="form-control" value="{{ old('accessories') }}{{ $product_data->accessories }}">
+                                            <input type="text" name="accessories" class="form-control" value="{{ old('accessories') }}" placeholder="Enter Accessories">
                                             @if ($errors->has('accessories'))
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong><font color="red">{{ $errors->first('accessories') }}</font></strong>
@@ -242,7 +239,7 @@
                                     </div>
                                     <div class="form-group"><label class="col-sm-2 control-label">Key Specification: <font color="red">*</font></label>
                                         <div class="col-sm-10">
-                                            <textarea name="keySpecification" class="summernote" value="{{ old('keySpecification') }}{{ $product_data->keySpecification }}"></textarea>
+                                            <textarea name="keySpecification" class="summernote" value="{{ old('keySpecification') }}" placeholder="Enter key specification"></textarea>
                                             @if ($errors->has('keySpecification'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
@@ -255,7 +252,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Dimensions Per Unit:</label>
                                         <div class="col-sm-2">
-                                            <input type="text" name="dpu_w_p_length" class="form-control" value="{{ old('dpu_w_p_length') }}{{ $product_payment_delivery_data->dpu_w_p_length }}">
+                                            <input type="text" name="dpu_w_p_length" class="form-control" value="{{ old('dpu_w_p_length') }}" placeholder="Enter length (Centimeter/CM)">
                                             @if ($errors->has('dpu_w_p_length'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
@@ -265,7 +262,7 @@
                                             @endif
                                         </div>
                                         <div class="col-sm-2">
-                                            <input type="text" name="dpu_w_p_width" class="form-control" value="{{ old('dpu_w_p_width') }}{{ $product_payment_delivery_data->dpu_w_p_width }}" >
+                                            <input type="text" name="dpu_w_p_width" class="form-control" value="{{ old('dpu_w_p_width') }}" placeholder="Enter width (Centimeter/CM)">
                                             @if ($errors->has('dpu_w_p_width'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
@@ -275,7 +272,7 @@
                                             @endif
                                         </div>
                                         <div class="col-sm-2">
-                                            <input type="text" name="dpu_w_p_height" class="form-control" value="{{ old('dpu_w_p_height') }}{{ $product_payment_delivery_data->dpu_w_p_height }}">
+                                            <input type="text" name="dpu_w_p_height" class="form-control" value="{{ old('dpu_w_p_height') }}" placeholder="Enter height (Centimeter/CM)">
                                             @if ($errors->has('dpu_w_p_height'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
@@ -285,7 +282,7 @@
                                             @endif
                                         </div>
                                         <div class="col-sm-2">
-                                            <input type="text" name="dpu_w_p_weight" class="form-control" value="{{ old('dpu_w_p_weight') }}{{ $product_payment_delivery_data->dpu_w_p_weight }}">
+                                            <input type="text" name="dpu_w_p_weight" class="form-control" value="{{ old('dpu_w_p_weight') }}" placeholder="Enter weight (Killogram/KG)">
                                             @if ($errors->has('dpu_w_p_weight'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
@@ -295,7 +292,7 @@
                                             @endif
                                         </div>
                                         <div class="col-sm-2">
-                                            <input type="text" name="dpu_w_p_volume" class="form-control" value="{{ old('dpu_w_p_volume') }}{{ $product_payment_delivery_data->dpu_w_p_volume }}">
+                                            <input type="text" name="dpu_w_p_volume" class="form-control" value="{{ old('dpu_w_p_volume') }}" placeholder="Enter volume (Cube meter/CM3)">
                                             @if ($errors->has('dpu_w_p_volume'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
@@ -330,7 +327,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Color:</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="color" class="tagsinput form-control">
+                                            <input type="text" name="color" class="tagsinput form-control" placeholder="Enter Color">
                                             @if ($errors->has('color'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
@@ -371,7 +368,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Minimum Order Quantity:</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="minimumOrderQuantity" class="form-control" value="{{ old('minimumOrderQuantity') }}{{ $product_payment_delivery_data->minimumOrderQuantity }}">
+                                            <input type="text" name="minimumOrderQuantity" class="form-control" value="{{ old('minimumOrderQuantity') }}" placeholder="Enter minimum order quantity">
                                             @if ($errors->has('minimumOrderQuantity'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
@@ -404,7 +401,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Price: <font color="red">*</font></label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="pd_price" class="form-control" value="{{ old('pd_price') }}{{ $product_data->pd_price }}">
+                                            <input type="text" name="pd_price" class="form-control" value="{{ old('pd_price') }}" placeholder="Enter price">
                                             @if ($errors->has('pd_price'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
@@ -417,7 +414,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Price for Optional Units:</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="pd_priceForOptional" class="form-control" value="{{ old('pd_priceForOptional') }}{{ $product_payment_delivery_data->pd_priceForOptional }}">
+                                            <input type="text" name="pd_priceForOptional" class="form-control" value="{{ old('pd_priceForOptional') }}" placeholder="Enter price for optional units">
                                             @if ($errors->has('pd_priceForOptional'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
@@ -430,7 +427,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Price:</label>
                                         <div class="col-sm-3">
-                                            <input type="text" name="instantPrice" class="form-control" value="{{ old('instantPrice') }}{{ $product_payment_delivery_data->instantPrice }}">
+                                            <input type="text" name="instantPrice" class="form-control" value="{{ old('instantPrice') }}" placeholder="Enter instant price">
                                             @if ($errors->has('instantPrice'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
@@ -440,7 +437,7 @@
                                             @endif
                                         </div>
                                         <div class="col-sm-3">
-                                            <input type="text" name="fifteenDaysPrice" class="form-control" value="{{ old('fifteenDaysPrice') }}{{ $product_payment_delivery_data->fifteenDaysPrice }}">
+                                            <input type="text" name="fifteenDaysPrice" class="form-control" value="{{ old('fifteenDaysPrice') }}" placeholder="Enter 15 days price">
                                             @if ($errors->has('fifteenDaysPrice'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
@@ -450,7 +447,7 @@
                                             @endif
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" name="thirteenDaysPrice" class="form-control" value="{{ old('thirteenDaysPrice') }}{{ $product_payment_delivery_data->thirteenDaysPrice }}">
+                                            <input type="text" name="thirteenDaysPrice" class="form-control" value="{{ old('thirteenDaysPrice') }}" placeholder="Enter 30 days price">
                                             @if ($errors->has('thirteenDaysPrice'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
@@ -463,7 +460,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Packaging Dimensions Per Unit:</label>
                                         <div class="col-sm-3">
-                                            <input type="text" name="p_d_p_u_length" class="form-control" value="{{ old('p_d_p_u_length') }}{{ $product_payment_delivery_data->p_d_p_u_length }}">
+                                            <input type="text" name="p_d_p_u_length" class="form-control" value="{{ old('p_d_p_u_length') }}" placeholder="Enter length">
                                             @if ($errors->has('p_d_p_u_length'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
@@ -473,7 +470,7 @@
                                             @endif
                                         </div>
                                         <div class="col-sm-3">
-                                            <input type="text" name="p_d_p_u_width" class="form-control" value="{{ old('productName') }}{{ $product_payment_delivery_data->p_d_p_u_width }}">
+                                            <input type="text" name="p_d_p_u_width" class="form-control" value="{{ old('productName') }}" placeholder="Enter width">
                                             @if ($errors->has('p_d_p_u_width'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
@@ -483,7 +480,7 @@
                                             @endif
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" name="p_d_p_u_height" class="form-control" value="{{ old('p_d_p_u_height') }}{{ $product_payment_delivery_data->p_d_p_u_height }}">
+                                            <input type="text" name="p_d_p_u_height" class="form-control" value="{{ old('p_d_p_u_height') }}" placeholder="Enter height">
                                             @if ($errors->has('p_d_p_u_height'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
@@ -496,7 +493,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label"></label>
                                         <div class="col-sm-3">
-                                            <input type="text" name="weightPerPack" class="form-control" value="{{ old('weightPerPack') }}{{ $product_payment_delivery_data->weightPerPack }}">
+                                            <input type="text" name="weightPerPack" class="form-control" value="{{ old('weightPerPack') }}" placeholder="Enter weight per packaging">
                                             @if ($errors->has('weightPerPack'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
@@ -506,7 +503,7 @@
                                             @endif
                                         </div>
                                         <div class="col-sm-3">
-                                            <input type="text" name="exportCartonDimension" class="form-control" value="{{ old('exportCartonDimension') }}{{ $product_payment_delivery_data->exportCartonDimension }}">
+                                            <input type="text" name="exportCartonDimension" class="form-control" value="{{ old('exportCartonDimension') }}" placeholder="Enter export carton dimension">
                                             @if ($errors->has('exportCartonDimension'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
@@ -516,7 +513,7 @@
                                             @endif
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" name="exportCartonWeight" class="form-control" value="{{ old('exportCartonWeight') }}{{ $product_payment_delivery_data->exportCartonWeight }}">
+                                            <input type="text" name="exportCartonWeight" class="form-control" value="{{ old('exportCartonWeight') }}" placeholder="Enter export carton weigth">
                                             @if ($errors->has('exportCartonWeight'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
@@ -529,7 +526,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Delivery Rate:</label>
                                         <div class="col-sm-3">
-                                            <input type="text" name="DeliveryWithinState" class="form-control" value="{{ old('DeliveryWithinState') }}{{ $product_payment_delivery_data->DeliveryWithinState }}">
+                                            <input type="text" name="DeliveryWithinState" class="form-control" value="{{ old('DeliveryWithinState') }}" placeholder="Enter delivery within state">
                                             @if ($errors->has('DeliveryWithinState'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
@@ -539,7 +536,7 @@
                                             @endif
                                         </div>
                                         <div class="col-sm-3">
-                                            <input type="text" name="DeliveryWithinGR" class="form-control" value="{{ old('DeliveryWithinGR') }}{{ $product_payment_delivery_data->DeliveryWithinGR }}">
+                                            <input type="text" name="DeliveryWithinGR" class="form-control" value="{{ old('DeliveryWithinGR') }}" placeholder="Enter delivery within geographical range">
                                             @if ($errors->has('DeliveryWithinGR'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
@@ -549,7 +546,7 @@
                                             @endif
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" name="DeliveryOutsideGR" class="form-control" value="{{ old('DeliveryOutsideGR') }}{{ $product_payment_delivery_data->DeliveryOutsideGR }}">
+                                            <input type="text" name="DeliveryOutsideGR" class="form-control" value="{{ old('DeliveryOutsideGR') }}" placeholder="Enter delivery outside geographical range">
                                             @if ($errors->has('DeliveryOutsideGR'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
@@ -562,7 +559,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label"></label>
                                         <div class="col-sm-3">
-                                            <input type="text" name="DurationDeliveryWithinState" class="form-control" value="{{ old('DurationDeliveryWithinState') }}{{ $product_payment_delivery_data->DurationDeliveryWithinState }}">
+                                            <input type="text" name="DurationDeliveryWithinState" class="form-control" value="{{ old('DurationDeliveryWithinState') }}" placeholder="Enter duration delivery within state">
                                             @if ($errors->has('DurationDeliveryWithinState'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
@@ -572,7 +569,7 @@
                                             @endif
                                         </div>
                                         <div class="col-sm-3">
-                                            <input type="text" name="DurationDeliveryWithinGR" class="form-control" value="{{ old('DurationDeliveryWithinGR') }}{{ $product_payment_delivery_data->DurationDeliveryWithinGR }}">
+                                            <input type="text" name="DurationDeliveryWithinGR" class="form-control" value="{{ old('DurationDeliveryWithinGR') }}" placeholder="Enter duration delivery within geographical range">
                                             @if ($errors->has('DurationDeliveryWithinGR'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
@@ -582,7 +579,7 @@
                                             @endif
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" name="DurationDeliveryOutsideGR" class="form-control" value="{{ old('DurationDeliveryOutsideGR') }}{{ $product_payment_delivery_data->DurationDeliveryOutsideGR }}">
+                                            <input type="text" name="DurationDeliveryOutsideGR" class="form-control" value="{{ old('DurationDeliveryOutsideGR') }}" placeholder="Enter duration delivery outside geographical range">
                                             @if ($errors->has('DurationDeliveryOutsideGR'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
@@ -595,7 +592,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Payment Method: <font color="red">*</font></label>
                                         <div class="col-sm-4">
-                                            <select name="paymentMethod" class="form-control" class="inputTxt"> 
+                                            <select name="paymentMethod" class="form-control" id="paymentTerm" class="inputTxt"> 
                                                 <option value="">--Select One--</option>
                                                 <option value="CIA">Cash in Advance (CIA)</option>
                                                 <option value="COD">Cash on Delivery (COD)</option>
@@ -633,15 +630,14 @@
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td><img src="{{ asset('public/backend/img/vendor/products'.'/'.$product_images_data->productImage1) }}" height="100" width="100" ></td>
+                                            <td><img src=""></td>
                                             <td>
                                                 <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                    <span class="btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span>
-                                                    <input type="file" name="productImage1"></span>
-                                                    <span class="fileinput-filename"></span>
-                                                    <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
-                                                </div>
-                                                <input type="hidden" name="p_productImage1" value="{{ $product_images_data->productImage1 }}">
+                                                <span class="btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span>
+                                                <input type="file" name="productImage1"></span>
+                                                <span class="fileinput-filename"></span>
+                                                <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+                                            </div>
                                             </td>
                                             @if ($errors->has('productImage1'))
                                             <div class="form-group">
@@ -657,15 +653,14 @@
                                             @endif
                                         </tr>
                                         <tr>
-                                            <td><img src="{{ asset('public/backend/img/vendor/products'.'/'.$product_images_data->productImage2) }}" height="100" width="100" ></td>
+                                            <td><img src=""></td>
                                             <td>
                                                 <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                    <span class="btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span>
-                                                    <input type="file" name="productImage2"></span>
-                                                    <span class="fileinput-filename"></span>
-                                                    <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
-                                                </div>
-                                                <input type="hidden" name="p_productImage2" value="{{ $product_images_data->productImage2 }}">
+                                                <span class="btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span>
+                                                <input type="file" name="productImage2"></span>
+                                                <span class="fileinput-filename"></span>
+                                                <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+                                            </div>
                                             </td>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label"></label>
@@ -679,15 +674,14 @@
                                             </div>
                                         </tr>
                                         <tr>
-                                            <td><img src="{{ asset('public/backend/img/vendor/products'.'/'.$product_images_data->productImage3) }}" height="100" width="100" ></td>
+                                            <td><img src=""></td>
                                             <td>
                                                 <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                    <span class="btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span>
-                                                    <input type="file" name="productImage3"></span>
-                                                    <span class="fileinput-filename"></span>
-                                                    <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
-                                                </div>
-                                                <input type="hidden" name="p_productImage3" value="{{ $product_images_data->productImage3 }}">
+                                                <span class="btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span>
+                                                <input type="file" name="productImage3"></span>
+                                                <span class="fileinput-filename"></span>
+                                                <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+                                            </div>
                                             </td>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label"></label>
@@ -701,15 +695,14 @@
                                             </div>
                                         </tr>
                                         <tr>
-                                            <td><img src="{{ asset('public/backend/img/vendor/products'.'/'.$product_images_data->productImage4) }}" height="100" width="100" ></td>
+                                            <td><img src=""></td>
                                             <td>
                                                 <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                    <span class="btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span>
-                                                    <input type="file" name="productImage4" onchange="readURL(this);"></span>
-                                                    <span class="fileinput-filename"></span>
-                                                    <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
-                                                </div>
-                                                <input type="hidden" name="p_productImage4" value="{{ $product_images_data->productImage4 }}">
+                                                <span class="btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span>
+                                                <input type="file" name="productImage4" onchange="readURL(this);"></span>
+                                                <span class="fileinput-filename"></span>
+                                                <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+                                            </div>
                                             </td>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label"></label>
@@ -723,7 +716,9 @@
                                             </div>
                                         </tr>
                                         <tr>
-                                            <td><img src="{{ asset('public/backend/img/vendor/products'.'/'.$product_images_data->productImage5) }}" height="100" width="100" ></td>
+                                            <td>
+                                                
+                                            </td>
                                             <td>
                                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                                     <span class="btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span>
@@ -731,7 +726,6 @@
                                                     <span class="fileinput-filename"></span>
                                                     <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
                                                 </div>
-                                                <input type="hidden" name="p_productImage5" value="{{ $product_images_data->productImage5 }}">
                                             </td>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label"></label>

@@ -8,11 +8,12 @@
 
 <div class="container">
     <header class="page-header">
-        <h1 class="page-title">{{ $category->category_name }}</h1>
+        <h1 class="page-title">{{ $sub_category->sub_category_name }}</h1>
         <ol class="breadcrumb page-breadcrumb">
-            <li><a href="{{ url('/') }}">Home</a>
+            <li><a href="{{ url('/') }}">Home</a></li>
+            <li><a href="{{ url('/category/'.$sub_category->parent_category_id) }}">{{ $category->category_name }}</a>
             </li>
-            <li class="active">{{ $category->category_name }}</li>
+            <li class="active">{{ $sub_category->sub_category_name }}</li>
         </ol>
         <ul class="category-selections clearfix">
             <li>

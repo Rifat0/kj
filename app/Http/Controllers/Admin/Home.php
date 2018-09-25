@@ -16,7 +16,7 @@ class Home extends Controller
         if (Session::get('admin_user_data')[0] ['admin_user_id']){
             return redirect('/admin/home');
         }else{
-            return view('Admin.login');
+            return view('admin.login');
         }
     }
 
@@ -65,18 +65,18 @@ class Home extends Controller
 
     public function index()
     {
-        return view('Admin.home');
+        return view('admin.home');
     }
 
     public function category()
     {
         $product_category = DB::table('category_sub_category')->where('category_id', '!=', '0')->orderBy('category_id', 'asc')->get();
-        return view('Admin.Category.category_list',compact('product_category'));
+        return view('admin.Category.category_list',compact('product_category'));
     }
 
     public function add_category()
     {
-        return view('Admin.Category.add_category');
+        return view('admin.Category.add_category');
     }
 
     public function add_category_submit(Request $request)
@@ -129,7 +129,7 @@ class Home extends Controller
     public function update_category($id)
     {
         $category_data = DB::table('category_sub_category')->where('category_id', $id)->get();
-        return view('Admin.Category.add_category',compact('category_data'));
+        return view('admin.Category.add_category',compact('category_data'));
     }
 
     public function update_category_submit(Request $request)
@@ -189,13 +189,13 @@ class Home extends Controller
                                 ->where('sub_category_id', '!=', '0')
                                 ->orderBy('sub_category_id', 'asc')
                                 ->get();
-        return view('Admin.Sub-category.sub-category_list',compact('product_sub_category'));
+        return view('admin.Sub-category.sub-category_list',compact('product_sub_category'));
     }
 
     public function add_sub_category()
     {
         $product_category = DB::table('category_sub_category')->where('category_id', '!=', '0')->orderBy('category_id', 'asc')->get();
-        return view('Admin.Sub-category.add_sub_category',compact('product_category'));
+        return view('admin.Sub-category.add_sub_category',compact('product_category'));
     }
 
     public function add_sub_category_submit(Request $request)
@@ -241,7 +241,7 @@ class Home extends Controller
     {
         $product_category = DB::table('product_category')->get();
         $sub_category_data = DB::table('product_sub_category')->where('sub_category_id', $id)->get();
-        return view('Admin.Sub-category.add_sub_category',compact('sub_category_data','product_category'));
+        return view('admin.Sub-category.add_sub_category',compact('sub_category_data','product_category'));
     }
 
     public function update_sub_category_submit(Request $request)
@@ -266,21 +266,22 @@ class Home extends Controller
 
     public function today_fetured()
     {
-        return view('Admin.Today_fetured.today_fetured_list');
+        return view('admin.Today_fetured.today_fetured_list');
     }
 
     public function add_today_fetured()
     {
-        return view('Admin.Today_fetured.add_today_fetured');
+        $product_category = DB::table('category_sub_category')->where('category_id', '!=', '0')->orderBy('category_id', 'asc')->get();
+        return view('admin.Today_fetured.add_today_fetured',compact('product_category'));
     }
 
     public function banar(){
     	$banar_data = DB::table('banar')->get();
-        return view('Admin.Banar.banar_list',compact('banar_data'));
+        return view('admin.Banar.banar_list',compact('banar_data'));
     }
 
     public function add_banar(){
-    	return view('Admin.Banar.add_banar');
+    	return view('admin.Banar.add_banar');
     }
 
     public function add_banar_submit(Request $request)
@@ -313,12 +314,12 @@ class Home extends Controller
 
     public function adv_sec_1(){
         $adv_sec_1_data = DB::table('adv_sec_1')->get();
-        return view('Admin.Adv_sec_1.adv_sec_1_list',compact('adv_sec_1_data'));
+        return view('admin.Adv_sec_1.adv_sec_1_list',compact('adv_sec_1_data'));
     }
 
     public function add_adv_sec_1(){
         $vendore_data = DB::table('vendore_user')->get();
-    	return view('Admin.Adv_sec_1.add_adv_sec_1',compact('vendore_data'));
+    	return view('admin.Adv_sec_1.add_adv_sec_1',compact('vendore_data'));
     }
 
     public function vendor_category($id)
@@ -377,12 +378,12 @@ class Home extends Controller
 
     public function adv_sec_2(){
         $adv_sec_2_data = DB::table('adv_sec_2')->get();
-        return view('Admin.Adv_sec_2.adv_sec_2_list',compact('adv_sec_2_data'));
+        return view('admin.Adv_sec_2.adv_sec_2_list',compact('adv_sec_2_data'));
     }
 
     public function add_adv_sec_2(){
     	$vendore_data = DB::table('vendore_user')->get();
-        return view('Admin.Adv_sec_2.add_adv_sec_2',compact('vendore_data'));
+        return view('admin.Adv_sec_2.add_adv_sec_2',compact('vendore_data'));
     }
 
     public function add_adv_sec_2_submit(Request $request)
@@ -416,7 +417,7 @@ class Home extends Controller
     public function others(){
 
     	$get_shop_settings = DB::table('shop_settings')->get();
-        return view('Admin.Others.others_list', compact('get_shop_settings'));
+        return view('admin.Others.others_list', compact('get_shop_settings'));
     }
 
     public function others_update(Request $request)
@@ -450,7 +451,7 @@ class Home extends Controller
         $vendor_products = DB::table('vendor_products')->where('product_status', "0")
                                                     ->join('vendore_user', 'vendor_products.vendore_user_id', '=', 'vendore_user.vendore_user_id')
                                                     ->get();
-    	return view('Admin.Product_ap_rj.product_ap_rj_list', compact('vendor_products'));
+    	return view('admin.Product_ap_rj.product_ap_rj_list', compact('vendor_products'));
     }
 
     public function product_view($id)
@@ -462,7 +463,7 @@ class Home extends Controller
         $sub_category = DB::table("category_sub_category")->where("sub_category_id",$product_data->productSubCategory)->first();                                           
         $product_payment_delivery_data = DB::table('vendor_payment_delivery')->where('product_number', $id)->first();
         $product_images_data = DB::table('vendor_product_images')->where('product_number', $id)->first();
-        return view('Admin.Product_ap_rj.product_view', compact('product_data','product_payment_delivery_data','product_images_data','category','sub_category'));
+        return view('admin.Product_ap_rj.product_view', compact('product_data','product_payment_delivery_data','product_images_data','category','sub_category'));
     }
 
     public function product_status_approve($id){
@@ -488,13 +489,13 @@ class Home extends Controller
     }
 
     public function product_data(){
-    	return view('Admin.Product_data.product_data');
+    	return view('admin.Product_data.product_data');
     }
 
     public function vendor_ap_rj(){
 
         $vendore_data = DB::table('vendore_user')->get();
-        return view('Admin.Vendors_sellers.vendor_ap_rj_lsit', compact('vendore_data'));
+        return view('admin.Vendors_sellers.vendor_ap_rj_lsit', compact('vendore_data'));
     }
 
     public function vendore_status_change($id){
@@ -522,19 +523,19 @@ class Home extends Controller
     public function vendore_view(Request $request)
     {
         $vendore_data = DB::table('vendore_user')->where('vendore_user_id', $request->input('vendore_user_id'))->first();
-        return view('Admin.Vendors_sellers.vendore_view', compact('vendore_data'));
+        return view('admin.Vendors_sellers.vendore_view', compact('vendore_data'));
     }
 
     public function coustomer_buyer(){
 
     	$coustomer_buyer_list = DB::table('web_user')->get();
-        return view('Admin.Coustomer_buyer.coustomer_buyer_list', compact('coustomer_buyer_list'));
+        return view('admin.Coustomer_buyer.coustomer_buyer_list', compact('coustomer_buyer_list'));
     }
 
     public function coustomer_buyer_view(Request $request){
 
         $coustomer_buyer_data = DB::table('web_user')->where('web_user_id', $request->input('coustomer_buyer_id'))->first();
-        return view('Admin.Coustomer_buyer.coustomer_buyer_view', compact('coustomer_buyer_data'));
+        return view('admin.Coustomer_buyer.coustomer_buyer_view', compact('coustomer_buyer_data'));
     }
 
     public function coustomer_buyer_status_change($id){
@@ -559,14 +560,14 @@ class Home extends Controller
     }
 
     public function requisitions_list(){
-    	return view('Admin.Requisitions.requisitions_list');
+    	return view('admin.Requisitions.requisitions_list');
     }
 
     public function user_list(){
-    	return view('Admin.User.user_list');
+    	return view('admin.User.user_list');
     }
 
     public function add_new_user(){
-    	return view('Admin.User.add_new_user');
+    	return view('admin.User.add_new_user');
     }
 }

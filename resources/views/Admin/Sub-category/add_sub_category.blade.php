@@ -22,7 +22,7 @@
     </div>
     <div class="wrapper wrapper-content animated fadeInRight">
 
-        @include('Admin.Layouts.message')
+        @include('admin.layouts.message')
 
         <?php
             if(@$sub_category_data){

@@ -24,7 +24,7 @@
 
             </div>
             <h2>Login in. To see it in action.</h2>
-            @include('Admin.Layouts.message')
+            @include('admin.layouts.message')
             <form method="POST" action="{{ url('admin/login') }}" aria-label="{{ __('Login') }}">
                         @csrf
                 <div class="form-group">

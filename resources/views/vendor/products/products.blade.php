@@ -74,7 +74,7 @@
                         <td>{{ Carbon::parse($products->updated_at)->format('d-m-Y') }}</td>
                         <td class="center">
                             <a href="{{ url('/vendor/product/view').'/'.$products->product_number }}" class="btn btn-info btn-xs">{{ __('View') }}</a>
-                            <a href="{{ url('/vendor/product/update').'/'.$products->product_number }}" class="btn btn-primary btn-xs">{{ __('Update') }}</a>
+                            <a href="{{ url('/vendor/products/update_product').'/'.$products->product_number }}" class="btn btn-primary btn-xs">{{ __('Update') }}</a>
                         </td>
                     </tr>
                     @endforeach

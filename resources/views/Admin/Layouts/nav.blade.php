@@ -38,10 +38,8 @@
                         <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Product</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li><a href="{{ url('/admin/product_ap_rj') }}">Approve/Reject</a></li>
-                            <li><a href="#">Add Product</a></li>
+                            <li><a href="{{ url('/admin/products/create_new_product') }}">Add Product</a></li>
                             <li><a href="{{ url('/admin/update_product_ap_rj') }}">App/Rej Update</a></li>
-                            <li><a href="{{ url('/admin/product_data') }}">Product Data</a></li>
-                            <li><a href="#">Export Data</a></li>
                         </ul>
                     </li>
                     <li>

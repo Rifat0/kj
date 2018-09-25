@@ -5,49 +5,46 @@
 @endsection
 
 @section('container')
-	<div class="container">
+    <div class="container">
         <header class="page-header">
-            <h1 class="page-title">Sony XPERIA Z Ultra 16GB</h1>
+            <h1 class="page-title">{{ $product->productName }}</h1>
             <ol class="breadcrumb page-breadcrumb">
-                <li><a href="#">Home</a>
+                <li><a href="{{ url('/') }}">Home</a></li>
+                <li><a href="{{ url('/category/'.$category->category_id) }}">{{ $category->category_name }}</a>
                 </li>
-                <li><a href="#">Electronics</a>
+                <li><a href="{{ url('/category/sub-category/'.$category->category_id.'/'.$sub_category->sub_category_id) }}">{{ $sub_category->sub_category_name }}</a>
                 </li>
-                <li><a href="#">Cell Phones</a>
-                </li>
-                <li><a href="#">Sony</a>
-                </li>
-                <li class="active">XPERIA Z Ultra 16GB</li>
+                <li class="active">{{ $product->productName }}</li>
             </ol>
         </header>
         <div class="row">
             <div class="col-md-5">
                 <div class="product-page-product-wrap jqzoom-stage">
                     <div class="clearfix">
-                        <a href="{{ asset('public/img/800x800.png') }}" id="jqzoom" data-rel="gal-1">
-                            <img src="{{ asset('public/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
+                        <a href="{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}" id="jqzoom" data-rel="gal-1">
+                            <img src="{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}" alt="Image Alternative text" title="Image Title" />
                         </a>
                     </div>
                 </div>
                 <ul class="jqzoom-list">
                     <li>
-                        <a class="zoomThumbActive" href="javascript:void(0)" data-rel="{gallery:'gal-1', smallimage: '{{ asset('public/img/500x500.png') }}', largeimage: '{{ asset('public/img/800x800.png') }}'}">
-                            <img src="{{ asset('public/img/100x100.png') }}" alt="Image Alternative text" title="Image Title" />
+                        <a class="zoomThumbActive" href="javascript:void(0)" data-rel="{gallery:'gal-1', smallimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage2 }}', largeimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage2 }}'}">
+                            <img src="{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage2 }}" alt="Image Alternative text" title="Image Title" />
                         </a>
                     </li>
                     <li>
-                        <a class="zoomThumbActive" href="javascript:void(0)" data-rel="{gallery:'gal-1', smallimage: '{{ asset('public/img/500x500.png') }}', largeimage: '{{ asset('public/img/800x800.png') }}'}">
-                            <img src="{{ asset('public/img/100x100.png') }}" alt="Image Alternative text" title="Image Title" />
+                        <a class="zoomThumbActive" href="javascript:void(0)" data-rel="{gallery:'gal-1', smallimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}', largeimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}'}">
+                            <img src="{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}" alt="Image Alternative text" title="Image Title" />
                         </a>
                     </li>
                     <li>
-                        <a class="zoomThumbActive" href="javascript:void(0)" data-rel="{gallery:'gal-1', smallimage: '{{ asset('public/img/500x500.png') }}', largeimage: '{{ asset('public/img/800x800.png') }}'}">
-                            <img src="{{ asset('public/img/100x100.png') }}" alt="Image Alternative text" title="Image Title" />
+                        <a class="zoomThumbActive" href="javascript:void(0)" data-rel="{gallery:'gal-1', smallimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}', largeimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}'}">
+                            <img src="{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}" alt="Image Alternative text" title="Image Title" />
                         </a>
                     </li>
                     <li>
-                        <a class="zoomThumbActive" href="javascript:void(0)" data-rel="{gallery:'gal-1', smallimage: '{{ asset('public/img/500x500.png') }}', largeimage: '{{ asset('public/img/800x800.png') }}'}">
-                            <img src="{{ asset('public/img/100x100.png') }}" alt="Image Alternative text" title="Image Title" />
+                        <a class="zoomThumbActive" href="javascript:void(0)" data-rel="{gallery:'gal-1', smallimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}', largeimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}'}">
+                            <img src="{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}" alt="Image Alternative text" title="Image Title" />
                         </a>
                     </li>
                 </ul>

@@ -21,9 +21,7 @@
         </div>
     </div>
     <div class="wrapper wrapper-content animated fadeInRight">
-        
         @include('admin.layouts.message')
-
         <div class="row">
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
@@ -41,46 +39,31 @@
                     <table class="table table-striped table-bordered table-hover dataTables-example" >
                     <thead>
                     <tr>
-                        <th>SL.</th>
-                        <th>Company Name</th>
-                        <th>Login Email</th>
-                        <th>Email of MD/Chairman</th>
-                        <th>Email of Contact</th>
-                        <th>Phone of Contact</th>
-                        <th>Date of Join</th>
+                        <th>Product ID</th>
+                        <th>Vendor</th>
+                        <th>Product</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach($coustomer_buyer_list as $coustomer_buyer)
-                        <tr>
-                            <td>{{ $coustomer_buyer->web_user_id }}</td>
-                            <td>{{ $coustomer_buyer->company_name }}</td>
-                            <td>{{ $coustomer_buyer->login_email }}</td>
-                            <td>{{ $coustomer_buyer->email_of_MD_Chairman }} 95+</td>
-                            <td>{{ $coustomer_buyer->email_of_contact_person }}</td>
-                            <td>{{ $coustomer_buyer->phone_of_contact_person }}</td>
-                            <td>{{ Carbon::parse($coustomer_buyer->created_at)->format('d-m-Y') }}</td>
-                            <td class="center">
-                                    <a href="{{ url('/admin/coustomer_buyer/view').'/'.$coustomer_buyer->web_user_id }}" class="btn btn-info btn-xs">View</a>
-                                @if( $coustomer_buyer->web_user_status==0 )
-                                    <a href="{{ url('/admin/coustomer_buyer/status_change').'/'.$coustomer_buyer->web_user_id }}" class="btn btn-primary btn-xs">Activate</a>
-                                @elseif( $coustomer_buyer->web_user_status==1 )
-                                    <a href="{{ url('/admin/coustomer_buyer/status_change').'/'.$coustomer_buyer->web_user_id }}" class="btn btn-danger btn-xs">Deactivate</a>
-                                @endif
-                            </td>
-                        </tr>
-                        @endforeach
+                    @foreach($update_product_ap_rj as $product_data)
+                    <tr>
+                        <td>{{$product_data->product_number}}</td>
+                        <td>{{$product_data->name}}</td>
+                        <td>{{$product_data->productName}}</td>
+                        <td class="center">
+                            <a href="{{ url('/admin/product/view').'/'.$product_data->product_number }}" class="btn btn-info btn-xs">{{ __('View') }}</a>
+                            <a href="{{ url('/admin/product/status_approve').'/'.$product_data->product_number }}" class="btn btn-primary btn-xs">{{ __('Approve') }}</a>
+                            <a href="{{ url('/admin/product/status_disapprove').'/'.$product_data->product_number }}" class="btn btn-danger btn-xs">{{ __('Disapprove') }}</a>
+                        </td>
+                    </tr>
+                    @endforeach
                     </tbody>
                     <tfoot>
                     <tr>
-                        <th>SL.</th>
-                        <th>Company Name</th>
-                        <th>Login Email</th>
-                        <th>Email of MD/Chairman</th>
-                        <th>Email of Contact</th>
-                        <th>Phone of Contact</th>
-                        <th>Date of Join</th>
+                        <th>Product ID</th>
+                        <th>Vendor</th>
+                        <th>Product</th>
                         <th>Action</th>
                     </tr>
                     </tfoot>

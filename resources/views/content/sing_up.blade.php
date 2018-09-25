@@ -13,7 +13,7 @@
                 <h1 class="page-title">Create Account</h1>
             </header>
             <div class="box-lg">
-                @include('Admin.Layouts.message')
+                @include('admin.layouts.message')
                 <div class="row" data-gutter="60">
                 	<div class="col-md-4">
                         <form method="POST" action="{{ url('/sing_up') }}" aria-label="{{ __('Register') }}">

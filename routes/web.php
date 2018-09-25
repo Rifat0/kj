@@ -6,8 +6,9 @@
 
 Route::get('/', 'Content\Home@index')->name('home');
 Route::get('/home', 'Content\Home@index')->name('home');
-Route::get('/category', 'Content\Home@category')->name('category');
-Route::get('/product', 'Content\Home@product')->name('product');
+Route::get('/category/{cat_id}', 'Content\Product@get_category_product');
+Route::get('/category/sub-category/{cat_id}/{sub_cat_id}', 'Content\Product@get_sub_category_product');
+Route::get('/product/{cat_id}/{sub_cat_id}/{p_id}', 'Content\Product@get_product');
 Route::get('/cart_empty', 'Content\Home@cart_empty')->name('cart_empty');
 Route::get('/cart_item', 'Content\Home@cart_item')->name('cart_item');
 Route::get('/checkout ', 'Content\Home@checkout')->name('checkout');
@@ -43,7 +44,7 @@ Route::group(['middleware' => 'vendore_user'], function () {
 	Route::get('/vendor/products/create_new_product', 'Vendor\Products@create_new_product');
 	Route::post('/vendor/products/store_new_product', 'Vendor\Products@store_new_product');
 	Route::get('/vendor/products/update_product/{id}', 'Vendor\Products@update_product');
-	Route::post('/vendor/products/update_product_request', 'Vendor\Products@update_product_request');
+	Route::post('/vendor/products/products_update', 'Vendor\Products@update_product_request');
 	// Inventory Products
 	Route::get('/vendor/products/inventory_products', 'Vendor\Products@inventory_products');
 	Route::post('/vendor/products/stock_updaet', 'Vendor\Products@stock_updaet');
@@ -94,7 +95,7 @@ Route::group(['middleware' => 'admin_user'], function () {
 	Route::post('/admin/update_sub-category', 'Admin\Home@update_sub_category_submit');
 
 	Route::get('/admin/today_fetured', 'Admin\Home@today_fetured')->name('admin_today_fetured');
-	Route::get('/admin/add_today_fetured', 'Admin\Home@add_today_fetured')->name('admin_add_today_fetured');
+	Route::get('/admin/add_today_fetured', 'Admin\Home@add_today_fetured');
 
 	Route::get('/admin/banar', 'Admin\Home@banar')->name('admin_banar');
 	Route::get('/admin/add_banar', 'Admin\Home@add_banar')->name('admin_add_banar');
@@ -118,6 +119,11 @@ Route::group(['middleware' => 'admin_user'], function () {
 	Route::get('/admin/product/status_approve/{id}', 'Admin\Home@product_status_approve');
 	Route::get('/admin/product/status_disapprove/{id}', 'Admin\Home@product_status_disapprove');
 	Route::get('/admin/product_data', 'Admin\Home@product_data')->name('admin_product_data');
+
+	Route::get('/admin/products/create_new_product', 'Admin\Product@create_new_product');
+	Route::post('/admin/store_new_product', 'Admin\Product@store_new_product');
+
+	Route::get('/admin/update_product_ap_rj', 'Admin\Product@update_product_ap_rj');
 
 	Route::get('/admin/vendor_ap_rj', 'Admin\Home@vendor_ap_rj');
 	Route::get('/admin/vendore/status_change/{id}', 'Admin\Home@vendore_status_change');

@@ -18,26 +18,15 @@ class Home extends Controller
 
     public function index()
     {
-        $category_sub_category = DB::table('category_sub_category')->get();
         $banar_data = DB::table('banar')->get();
         $adv_sec_1 = DB::table('adv_sec_1')->get();
         $adv_sec_2 = DB::table('adv_sec_2')->get();
         $today_feture = DB::table('vendor_products')
                         ->join('vendor_product_images', 'vendor_products.product_number', '=', 'vendor_product_images.product_number')
+                        ->where('product_status', '=','1')
                         ->get();
 
-        $shop_settings = DB::table('shop_settings')->first();
-        return view('content.home',compact('banar_data','category_sub_category','adv_sec_1','adv_sec_2','today_feture','shop_settings'));
-    }
-
-    public function category()
-    {
-        return view('content.category');
-    }
-
-    public function product()
-    {
-        return view('content.product');
+        return view('content.home',compact('banar_data','category_sub_category','adv_sec_1','adv_sec_2','today_feture'));
     }
 
     public function cart_empty()
@@ -97,7 +86,8 @@ class Home extends Controller
 
     public function sing_up()
     {
-        return view('content.sing_up');
+        $shop_settings = DB::table('shop_settings')->first();
+        return view('content.sing_up',compact('shop_settings'));
     }
 
     public function sing_up_submit(Request $request)
