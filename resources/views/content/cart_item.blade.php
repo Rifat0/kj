@@ -25,13 +25,18 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($cart_product_data as $item)
                         <tr>
+                            @foreach($product_image as $image)
+                            @if($item[0]->product_number == $image->product_number)
                             <td class="table-shopping-cart-img">
                                 <a href="#">
-                                    <img src="{{ asset('public/img/100x100.png') }}" alt="Image Alternative text" title="Image Title" />
+                                    <img src="{{ asset('public/backend/img/vendor/products').'/'.$image->productImage1 }}" alt="Image Alternative text" title="Image Title" />
                                 </a>
                             </td>
-                            <td class="table-shopping-cart-title"><a href="#">Gucci Patent Leather Open Toe Platform</a>
+                            @endif
+                            @endforeach
+                            <td class="table-shopping-cart-title"><a href="#">{{ $item[0]->productName }}</a>
                             </td>
                             <td>Green</td>
                             <td>$499</td>
@@ -43,60 +48,7 @@
                                 <a class="fa fa-close table-shopping-remove" href="#"></a>
                             </td>
                         </tr>
-                        <tr>
-                            <td class="table-shopping-cart-img">
-                                <a href="#">
-                                    <img src="{{ asset('public/img/100x100.png') }}" alt="Image Alternative text" title="Image Title" />
-                                </a>
-                            </td>
-                            <td class="table-shopping-cart-title"><a href="#">Nikon D5200 24.1 MP Digital SLR Camera</a>
-                            </td>
-                            <td>Black</td>
-                            <td>$350</td>
-                            <td>
-                                <input class="form-control table-shopping-qty" type="text" value="1" />
-                            </td>
-                            <td>$350</td>
-                            <td>
-                                <a class="fa fa-close table-shopping-remove" href="#"></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="table-shopping-cart-img">
-                                <a href="#">
-                                    <img src="{{ asset('public/img/100x100.png') }}" alt="Image Alternative text" title="Image Title" />
-                                </a>
-                            </td>
-                            <td class="table-shopping-cart-title"><a href="#">Apple 11.6" MacBook Air Notebook</a>
-                            </td>
-                            <td>Silver</td>
-                            <td>$1100</td>
-                            <td>
-                                <input class="form-control table-shopping-qty" type="text" value="1" />
-                            </td>
-                            <td>$1100</td>
-                            <td>
-                                <a class="fa fa-close table-shopping-remove" href="#"></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="table-shopping-cart-img">
-                                <a href="#">
-                                    <img src="{{ asset('public/img/100x100.png') }}" alt="Image Alternative text" title="Image Title" />
-                                </a>
-                            </td>
-                            <td class="table-shopping-cart-title"><a href="#">Fossil Women's Original Boyfriend</a>
-                            </td>
-                            <td>Gold</td>
-                            <td>$250</td>
-                            <td>
-                                <input class="form-control table-shopping-qty" type="text" value="1" />
-                            </td>
-                            <td>$250</td>
-                            <td>
-                                <a class="fa fa-close table-shopping-remove" href="#"></a>
-                            </td>
-                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
                 <div class="gap gap-small"></div>

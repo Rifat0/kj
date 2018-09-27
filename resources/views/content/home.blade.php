@@ -701,7 +701,7 @@
                                 @if($product_category->sub_category_id==0 )
                             <li><a href="{{ url('/category/'.$product_category->category_id) }}">
                                 <i class="fa dropdown-menu-category-icon">
-                                <img src="{{ asset('public/content/category_icone').'/'.$product_category->category_image }}" /></i>
+                                <img src="{{ asset('public/content/category_icone').'/'.$product_category->category_image }}" height="30" width="30" /></i>
                                 {{ $product_category->category_name }}</a>
                                 <div class="dropdown-menu-category-section">
                                     <div class="dropdown-menu-category-section-inner">
@@ -806,7 +806,7 @@
                 @foreach($category_sub_category as $product_category)
                 @if($product_category->sub_category_id==0 )
                 <div class="col-md-2">
-                    <a class="banner-category" href="#">
+                    <a class="banner-category" href="{{ url('/category/'.$product_category->category_id) }}">
                         <img class="banner-category-img-full" src="{{ asset('public/content/category_icone').'/'.$product_category->category_image }}" alt="Image Alternative text" />
                         <h5 class="banner-category-title">{{ $product_category->category_name }}</h5>
                     </a>

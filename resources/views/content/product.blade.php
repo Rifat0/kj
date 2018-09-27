@@ -19,36 +19,41 @@
         </header>
         <div class="row">
             <div class="col-md-5">
-                <div class="product-page-product-wrap jqzoom-stage">
-                    <div class="clearfix">
-                        <a href="{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}" id="jqzoom" data-rel="gal-1">
-                            <img src="{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}" alt="Image Alternative text" title="Image Title" />
-                        </a>
+                    <div class="product-page-product-wrap jqzoom-stage">
+                        <div class="clearfix">
+                            <a href="{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}" id="jqzoom" data-rel="gal-1">
+                                <img src="{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}" alt="Image Alternative text" title="Image Title" height="450" width="400" />
+                            </a>
+                        </div>
                     </div>
+                    <ul class="jqzoom-list">
+                        <li>
+                            <a class="zoomThumbActive" href="javascript:void(0)" data-rel="{gallery:'gal-1', smallimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}', largeimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}'}">
+                                <img src="{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}" alt="Image Alternative text" title="Image Title" />
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" data-rel="{gallery:'gal-1', smallimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage2 }}', largeimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage2 }}'}">
+                                <img src="{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage2 }}" alt="Image Alternative text" title="Image Title" />
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" data-rel="{gallery:'gal-1', smallimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage3 }}', largeimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage3 }}'}">
+                                <img src="{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage3 }}" alt="Image Alternative text" title="Image Title" />
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" data-rel="{gallery:'gal-1', smallimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage4 }}', largeimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage4 }}'}">
+                                <img src="{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage4 }}" alt="Image Alternative text" title="Image Title" />
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" data-rel="{gallery:'gal-1', smallimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage5 }}', largeimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage5 }}'}">
+                                <img src="{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage5 }}" alt="Image Alternative text" title="Image Title" />
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                <ul class="jqzoom-list">
-                    <li>
-                        <a class="zoomThumbActive" href="javascript:void(0)" data-rel="{gallery:'gal-1', smallimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage2 }}', largeimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage2 }}'}">
-                            <img src="{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage2 }}" alt="Image Alternative text" title="Image Title" />
-                        </a>
-                    </li>
-                    <li>
-                        <a class="zoomThumbActive" href="javascript:void(0)" data-rel="{gallery:'gal-1', smallimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}', largeimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}'}">
-                            <img src="{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}" alt="Image Alternative text" title="Image Title" />
-                        </a>
-                    </li>
-                    <li>
-                        <a class="zoomThumbActive" href="javascript:void(0)" data-rel="{gallery:'gal-1', smallimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}', largeimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}'}">
-                            <img src="{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}" alt="Image Alternative text" title="Image Title" />
-                        </a>
-                    </li>
-                    <li>
-                        <a class="zoomThumbActive" href="javascript:void(0)" data-rel="{gallery:'gal-1', smallimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}', largeimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}'}">
-                            <img src="{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}" alt="Image Alternative text" title="Image Title" />
-                        </a>
-                    </li>
-                </ul>
-            </div>
             <div class="col-md-7">
                 <div class="row" data-gutter="10">
                     <div class="col-md-8">
@@ -113,9 +118,10 @@
                     </div>
                     <div class="col-md-4">
                         <div class="box-highlight">
-                            <p class="product-page-price-list">$498</p>
-                            <p class="product-page-price">$199.99</p>
-                            <p class="text-muted text-sm text-uppercase">Free Shipping</p><a class="btn btn-block btn-primary" href="#"><i class="fa fa-shopping-cart"></i>Add to Cart</a><a class="btn btn-block btn-default" href="#"><i class="fa fa-star"></i>Wishlist</a>
+                            <p class="product-page-price">${{ $product->pd_price }}</p>
+                            <hr>
+                            <a class="btn btn-block btn-primary" href="{{ url('/add-to-cart/'.$product->product_number) }}"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+                            <a class="btn btn-block btn-default" href="#"><i class="fa fa-star"></i>Wishlist</a>
                             <div class="product-page-side-section">
                                 <h5 class="product-page-side-title">Share This Item</h5>
                                 <ul class="product-page-share-item">
@@ -136,6 +142,7 @@
                                     </li>
                                 </ul>
                             </div>
+                            <hr>
                             <div class="product-page-side-section">
                                 <h5 class="product-page-side-title">Shipping & Returns</h5>
                                 <p class="product-page-side-text">In the store of your choice in 3-5 working days</p>
@@ -167,7 +174,7 @@
                 <div class="tab-pane fade in active" id="tab-1">
                     <div class="row row-eq-height product-overview-section">
                         <div class="col-md-6">
-                            <img class="product-overview-img" src="{{ asset('public/img/348x382.png') }}" alt="Image Alternative text" title="Image Title" />
+                            <img class="product-overview-img" src="{{ asset('public/content/img/348x382.png') }}" alt="Image Alternative text" title="Image Title" />
                         </div>
                         <div class="col-md-6">
                             <div class="product-overview-text">
@@ -184,12 +191,12 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <img class="product-overview-img" src="{{ asset('public/img/376x476.png') }}" alt="Image Alternative text" title="Image Title" />
+                            <img class="product-overview-img" src="{{ asset('public/content/img/376x476.png') }}" alt="Image Alternative text" title="Image Title" />
                         </div>
                     </div>
                     <div class="row row-eq-height product-overview-section">
                         <div class="col-md-6">
-                            <img class="product-overview-img" src="{{ asset('public/img/620x400.png') }}" alt="Image Alternative text" title="Image Title" />
+                            <img class="product-overview-img" src="{{ asset('public/content/img/620x400.png') }}" alt="Image Alternative text" title="Image Title" />
                         </div>
                         <div class="col-md-6">
                             <div class="product-overview-text">
@@ -206,12 +213,12 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <img class="product-overview-img" src="{{ asset('public/img/430x450.png') }}" alt="Image Alternative text" title="Image Title" />
+                            <img class="product-overview-img" src="{{ asset('public/content/img/430x450.png') }}" alt="Image Alternative text" title="Image Title" />
                         </div>
                     </div>
                     <div class="row row-eq-height product-overview-section">
                         <div class="col-md-6">
-                            <img class="product-overview-img" src="{{ asset('public/img/620x323.png') }}" alt="Image Alternative text" title="Image Title" />
+                            <img class="product-overview-img" src="{{ asset('public/content/img/620x323.png') }}" alt="Image Alternative text" title="Image Title" />
                         </div>
                         <div class="col-md-6">
                             <div class="product-overview-text">
@@ -228,12 +235,12 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <img class="product-overview-img" src="{{ asset('public/img/346x445.png') }}" alt="Image Alternative text" title="Image Title" />
+                            <img class="product-overview-img" src="{{ asset('public/content/img/346x445.png') }}" alt="Image Alternative text" title="Image Title" />
                         </div>
                     </div>
                     <div class="row row-eq-height product-overview-section">
                         <div class="col-md-6">
-                            <img class="product-overview-img" src="{{ asset('public/img/620x300.png') }}" alt="Image Alternative text" title="Image Title" />
+                            <img class="product-overview-img" src="{{ asset('public/content/img/620x300.png') }}" alt="Image Alternative text" title="Image Title" />
                         </div>
                         <div class="col-md-6">
                             <div class="product-overview-text">
@@ -251,7 +258,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <img class="product-overview-img" src="{{ asset('public/img/620x283.png') }}" alt="Image Alternative text" title="Image Title" />
+                            <img class="product-overview-img" src="{{ asset('public/content/img/620x283.png') }}" alt="Image Alternative text" title="Image Title" />
                         </div>
                     </div>
                 </div>
@@ -450,7 +457,7 @@
                     <hr />
                     <article class="product-review">
                         <div class="product-review-author">
-                            <img class="product-review-author-img" src="{{ asset('public/img/70x70.png') }}" alt="Image Alternative text" title="Image Title" />
+                            <img class="product-review-author-img" src="{{ asset('public/content/img/70x70.png') }}" alt="Image Alternative text" title="Image Title" />
                         </div>
                         <div class="product-review-content">
                             <h5 class="product-review-title">Terrific Buy!</h5>
@@ -484,7 +491,7 @@
                     </article>
                     <article class="product-review">
                         <div class="product-review-author">
-                            <img class="product-review-author-img" src="{{ asset('public/img/70x70.png') }}" alt="Image Alternative text" title="Image Title" />
+                            <img class="product-review-author-img" src="{{ asset('public/content/img/70x70.png') }}" alt="Image Alternative text" title="Image Title" />
                         </div>
                         <div class="product-review-content">
                             <h5 class="product-review-title">Too Big. Unusable.</h5>
@@ -518,7 +525,7 @@
                     </article>
                     <article class="product-review">
                         <div class="product-review-author">
-                            <img class="product-review-author-img" src="{{ asset('public/img/70x70.png') }}" alt="Image Alternative text" title="Image Title" />
+                            <img class="product-review-author-img" src="{{ asset('public/content/img/70x70.png') }}" alt="Image Alternative text" title="Image Title" />
                         </div>
                         <div class="product-review-content">
                             <h5 class="product-review-title">Worth it</h5>
@@ -553,7 +560,7 @@
                     </article>
                     <article class="product-review">
                         <div class="product-review-author">
-                            <img class="product-review-author-img" src="{{ asset('public/img/70x70.png') }}" alt="Image Alternative text" title="Image Title" />
+                            <img class="product-review-author-img" src="{{ asset('public/content/img/70x70.png') }}" alt="Image Alternative text" title="Image Title" />
                         </div>
                         <div class="product-review-content">
                             <h5 class="product-review-title">Great Affordable Phone</h5>
@@ -587,7 +594,7 @@
                     </article>
                     <article class="product-review">
                         <div class="product-review-author">
-                            <img class="product-review-author-img" src="{{ asset('public/img/70x70.png') }}" alt="Image Alternative text" title="Image Title" />
+                            <img class="product-review-author-img" src="{{ asset('public/content/img/70x70.png') }}" alt="Image Alternative text" title="Image Title" />
                         </div>
                         <div class="product-review-content">
                             <h5 class="product-review-title">Excellent</h5>
@@ -652,7 +659,7 @@
                                     <div class="row">
                                         <div class="col-md-2">
                                             <a href="#">
-                                                <img class="product-accessory-img" src="{{ asset('public/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
+                                                <img class="product-accessory-img" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
                                             </a>
                                         </div>
                                         <div class="col-md-7">
@@ -679,7 +686,7 @@
                                     <div class="row">
                                         <div class="col-md-2">
                                             <a href="#">
-                                                <img class="product-accessory-img" src="{{ asset('public/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
+                                                <img class="product-accessory-img" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
                                             </a>
                                         </div>
                                         <div class="col-md-7">
@@ -706,7 +713,7 @@
                                     <div class="row">
                                         <div class="col-md-2">
                                             <a href="#">
-                                                <img class="product-accessory-img" src="{{ asset('public/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
+                                                <img class="product-accessory-img" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
                                             </a>
                                         </div>
                                         <div class="col-md-7">
@@ -733,7 +740,7 @@
                                     <div class="row">
                                         <div class="col-md-2">
                                             <a href="#">
-                                                <img class="product-accessory-img" src="{{ asset('public/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
+                                                <img class="product-accessory-img" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
                                             </a>
                                         </div>
                                         <div class="col-md-7">
@@ -760,7 +767,7 @@
                                     <div class="row">
                                         <div class="col-md-2">
                                             <a href="#">
-                                                <img class="product-accessory-img" src="{{ asset('public/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
+                                                <img class="product-accessory-img" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
                                             </a>
                                         </div>
                                         <div class="col-md-7">
@@ -896,8 +903,8 @@
                 <div class="product ">
                     <ul class="product-labels"></ul>
                     <div class="product-img-wrap">
-                        <img class="product-img-primary" src="{{ asset('public/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
-                        <img class="product-img-alt" src="{{ asset('public/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
+                        <img class="product-img-primary" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
+                        <img class="product-img-alt" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
                     </div>
                     <a class="product-link" href="#"></a>
                     <div class="product-caption">
@@ -928,8 +935,8 @@
                         <li>-20%</li>
                     </ul>
                     <div class="product-img-wrap">
-                        <img class="product-img-primary" src="{{ asset('public/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
-                        <img class="product-img-alt" src="{{ asset('public/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
+                        <img class="product-img-primary" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
+                        <img class="product-img-alt" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
                     </div>
                     <a class="product-link" href="#"></a>
                     <div class="product-caption">
@@ -958,8 +965,8 @@
                 <div class="product ">
                     <ul class="product-labels"></ul>
                     <div class="product-img-wrap">
-                        <img class="product-img-primary" src="{{ asset('public/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
-                        <img class="product-img-alt" src="{{ asset('public/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
+                        <img class="product-img-primary" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
+                        <img class="product-img-alt" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
                     </div>
                     <a class="product-link" href="#"></a>
                     <div class="product-caption">
@@ -988,8 +995,8 @@
                 <div class="product ">
                     <ul class="product-labels"></ul>
                     <div class="product-img-wrap">
-                        <img class="product-img-primary" src="{{ asset('public/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
-                        <img class="product-img-alt" src="{{ asset('public/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
+                        <img class="product-img-primary" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
+                        <img class="product-img-alt" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
                     </div>
                     <a class="product-link" href="#"></a>
                     <div class="product-caption">
@@ -1020,8 +1027,8 @@
                 <div class="product ">
                     <ul class="product-labels"></ul>
                     <div class="product-img-wrap">
-                        <img class="product-img-primary" src="{{ asset('public/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
-                        <img class="product-img-alt" src="{{ asset('public/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
+                        <img class="product-img-primary" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
+                        <img class="product-img-alt" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
                     </div>
                     <a class="product-link" href="#"></a>
                     <div class="product-caption">
@@ -1050,8 +1057,8 @@
                 <div class="product ">
                     <ul class="product-labels"></ul>
                     <div class="product-img-wrap">
-                        <img class="product-img-primary" src="{{ asset('public/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
-                        <img class="product-img-alt" src="{{ asset('public/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
+                        <img class="product-img-primary" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
+                        <img class="product-img-alt" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
                     </div>
                     <a class="product-link" href="#"></a>
                     <div class="product-caption">
@@ -1080,8 +1087,8 @@
                 <div class="product ">
                     <ul class="product-labels"></ul>
                     <div class="product-img-wrap">
-                        <img class="product-img-primary" src="{{ asset('public/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
-                        <img class="product-img-alt" src="{{ asset('public/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
+                        <img class="product-img-primary" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
+                        <img class="product-img-alt" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
                     </div>
                     <a class="product-link" href="#"></a>
                     <div class="product-caption">
@@ -1110,8 +1117,8 @@
                 <div class="product ">
                     <ul class="product-labels"></ul>
                     <div class="product-img-wrap">
-                        <img class="product-img-primary" src="{{ asset('public/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
-                        <img class="product-img-alt" src="{{ asset('public/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
+                        <img class="product-img-primary" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
+                        <img class="product-img-alt" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
                     </div>
                     <a class="product-link" href="#"></a>
                     <div class="product-caption">
@@ -1141,5 +1148,6 @@
 @endsection
 
 @section('js')
+
 
 @endsection

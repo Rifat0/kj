@@ -39,4 +39,21 @@ class Product extends Controller
         $sub_category = DB::table('category_sub_category')->where('sub_category_id',$sub_cat_id)->first();
         return view('content.product',compact('product','category','sub_category','vendor_product_images'));
     }
+
+    public function add_to_cart($id)
+    {
+        echo $id;
+        $session_item = [ $id ];
+
+        Session::push('cart_data', $session_item);
+
+        print_r(Session::get('cart_data'));
+    }
+
+    public function cart_des()
+    {
+        // Session::forget('cart_data');
+
+        print_r(Session::get('cart_data'));
+    }
 }

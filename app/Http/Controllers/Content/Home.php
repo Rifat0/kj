@@ -36,7 +36,18 @@ class Home extends Controller
 
     public function cart_item()
     {
-        return view('content.cart_item');
+        $cart_product = Session::get('cart_data');
+
+        foreach ($cart_product as $value) {
+            $cart_product_data[] = DB::table('vendor_products')->where('product_number',$value)->get();
+            $product_image[] = DB::table('vendor_product_images')->where('product_number',$value)->first();
+        }
+
+        // foreach ($cart_product_image as $key) {
+        //     echo $key->productImage1."<br>";
+        // }exit();
+        // print_r($ko);
+        return view('content.cart_item',compact('cart_product_data','product_image'));
     }
 
     public function checkout()

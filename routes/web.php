@@ -9,8 +9,12 @@ Route::get('/home', 'Content\Home@index')->name('home');
 Route::get('/category/{cat_id}', 'Content\Product@get_category_product');
 Route::get('/category/sub-category/{cat_id}/{sub_cat_id}', 'Content\Product@get_sub_category_product');
 Route::get('/product/{cat_id}/{sub_cat_id}/{p_id}', 'Content\Product@get_product');
+
+Route::get('/add-to-cart/{id}', 'Content\Product@add_to_cart');
+Route::get('/cart_item', 'Content\Home@cart_item');
+Route::get('/add-to-cart_des', 'Content\Product@cart_des');
+
 Route::get('/cart_empty', 'Content\Home@cart_empty')->name('cart_empty');
-Route::get('/cart_item', 'Content\Home@cart_item')->name('cart_item');
 Route::get('/checkout ', 'Content\Home@checkout')->name('checkout');
 Route::get('/summery ', 'Content\Home@summery')->name('summery');
 Route::get('/about_us ', 'Content\Home@about_us')->name('about_us');
