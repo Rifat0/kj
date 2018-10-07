@@ -16,17 +16,10 @@ class CreateVendorPaymentDelivery extends Migration
         Schema::create('vendor_payment_delivery', function (Blueprint $table) {
             $table->increments('id');
             $table->string('vendore_user_id',255);
-<<<<<<< HEAD
-            $table->string('smallOrdersAccepted',3);
-            $table->string('minimumOrderQuantity',255)->nullable();
-            $table->string('unitOfMeasure',255)->nullable();
-            $table->string('pd_price',255);
-=======
             $table->string('product_number',255);
             $table->string('smallOrdersAccepted',3);
             $table->string('minimumOrderQuantity',255)->nullable();
             $table->string('unitOfMeasure',255)->nullable();
->>>>>>> 40c6a31b5ead0d6e363124b0dbea6166b49af97d
             $table->string('pd_priceForOptional',255)->nullable();
             $table->string('instantPrice',255)->nullable();
             $table->string('fifteenDaysPrice',255)->nullable();

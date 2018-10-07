@@ -2,42 +2,59 @@
             <div class="sidebar-collapse">
                 <ul class="nav metismenu" id="side-menu">
                     <li class="nav-header">
-                        <div class="dropdown profile-element"> 
-                            <!-- <span><img alt="image" class="img-circle" src="img/profile_small.jpg" /></span> -->
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="text-muted text-xs block"><strong class="font-bold">{{ Session::get('vendore_user_data')[0] ['vendore_name'] }}</strong> </span> </span> </a>
+                        <div class="dropdown profile-element">
+                            <!-- <span>
+                                <img alt="image" class="img-circle" src="img/profile_small.jpg" />
+                             </span> -->
+                            <a href="{{ url('/vendor/general_settings') }}">
+                            <span class="clear"> <span class="text-muted text-xs block"><strong class="font-bold">{{ Session::get('vendore_user_data')[0] ['vendore_name'] }}</strong></span> </span> </a>
                         </div>
                         <div class="logo-element">
-                            KJ
+                            {{ Session::get('vendore_user_data')[0] ['vendore_name'] }}
                         </div>
                     </li>
                     <li class="active">
-                        <a href="{{ url('/vendor/dashboard') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span> </a>
+                        <a href="{{ url('/buyer/dashboard') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span> </a>
                     </li>
                     <li>
-                        <a href="{{ url('/vendor/products') }}"><i class="fa fa-product-hunt"></i> <span class="nav-label">Products</span> </a>
-                        <!-- <ul class="nav nav-second-level collapse">
-                            <li><a href="{{ url('/vendor/create_new_product') }}">Create New Product</a></li>
-                            <li><a href="{{ url('/vendor/total_products') }}">Total Products</a></li>
-                            <li><a href="{{ url('/vendor/inventory_products') }}">Inventory Products</a></li>
-                            <li><a href="{{ url('/vendor/pending_review') }}">Pending Review</a></li>
-                        </ul> -->
+                        <a href="{{ url('/buyer/orders') }}"><i class="fa fa-first-order"></i> <span class="nav-label">Orders</span    ></a>
                     </li>
                     <li>
-                        <a href="{{ url('/vendor/customers') }}"><i class="fa fa-users"></i> <span class="nav-label">Customers/Clients</span></a>
+                        <a href="{{ url('/buyer/report') }}"><i class="fa fa-file"></i> <span class="nav-label">Reports</span></a>
                     </li>
                     <li>
-                        <a href="{{ url('/vendor/orders') }}"><i class="fa fa-first-order"></i> <span class="nav-label">Requisition/Orders</span></a>
+                        <a href="{{ url('/buyer/accounting') }}"><i class="fa fa-money"></i> <span class="nav-label">Accounting</span></a>
                     </li>
                     <li>
-                        <a href="{{ url('/vendor/report') }}"><i class="fa fa-file"></i> <span class="nav-label">Reports</span></a>
+                        <a href="{{ url('/buyer/due_and_outstanding_payment') }}"><i class="fa fa-credit-card"></i> <span class="nav-label">Due & Outstanding Payment</span> </a>
                     </li>
                     <li>
-                        <a href="{{ url('/vendor/message') }}"><i class="fa fa-envelope"></i> <span class="nav-label">Message</span><span class="label label-warning pull-right">0/0</span></a>
+                        <a href="{{ url('/buyer/supplier_research_and_selection') }}"><i class="fa fa-check-square-o"></i> <span class="nav-label">Supplier Research & Selection</span> </a>
                     </li>
                     <li>
+                        <a href="{{ url('/buyer/favorite_and_credit_vendors') }}"><i class="fa fa-star"></i> <span class="nav-label">Favorite and Credit Vendors</span> </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/buyer/my_vendor_products') }}"><i class="fa fa-star-half"></i> <span class="nav-label">My Vendor Products</span> </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/buyer/tenders_and_bids') }}"><i class="fa fa-gavel"></i> <span class="nav-label">Tenders & Bids</span> </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/buyer/vendor_profile') }}"><i class="fa fa-users"></i> <span class="nav-label">Vendor Profile</span> </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('#') }}"><i class="fa fa-star-half"></i> <span class="nav-label">Manage User</span> </a>
+                    </li>
+                    <!-- <li>
+                        <a href="{{ url('/buyer/message') }}"><i class="fa fa-envelope"></i> <span class="nav-label">Message</span><span class="label label-warning pull-right">0/0</span></a>
+                    </li> -->
+                    <!-- <li>
+                        <a href="{{ url('/vendor/mailbox') }}"><i class="fa fa-envelope"></i> <span class="nav-label">Mailbox</span><span class="label label-warning pull-right">0/0</span></a>
+                    </li> -->
+                    <!-- <li>
                         <a href="{{ url('/vendor/general_settings') }}"><i class="fa fa-cog"></i> <span class="nav-label">General Settings</span></a>
-                    </li>
+                    </li> -->
                 </ul>
 
             </div>
@@ -58,7 +75,7 @@
                         <li>
                             <div class="dropdown-messages-box">
                                 <a href="profile.html" class="pull-left">
-                                    <img alt="image" class="img-circle" src="img/a7.jpg">
+                                    <img alt="image" class="img-circle" src="{{ asset('public/backend/img/buyer/profilePicture/a4.jpg') }}">
                                 </a>
                                 <div class="media-body">
                                     <small class="pull-right">46h ago</small>
@@ -69,34 +86,8 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <div class="dropdown-messages-box">
-                                <a href="profile.html" class="pull-left">
-                                    <img alt="image" class="img-circle" src="img/a4.jpg">
-                                </a>
-                                <div class="media-body ">
-                                    <small class="pull-right text-navy">5h ago</small>
-                                    <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
-                                    <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <div class="dropdown-messages-box">
-                                <a href="profile.html" class="pull-left">
-                                    <img alt="image" class="img-circle" src="img/profile.jpg">
-                                </a>
-                                <div class="media-body ">
-                                    <small class="pull-right">23h ago</small>
-                                    <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
-                                    <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
                             <div class="text-center link-block">
-                                <a href="mailbox.html">
+                                <a href="{{ url('/vendor/message') }}">
                                     <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
                                 </a>
                             </div>

@@ -1,4 +1,4 @@
-@extends('vendor.layouts.layout')
+@extends('buyer.layouts.layout')
 
 @section('css')
     <link href="{{ asset('public/backend/css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">
@@ -47,140 +47,74 @@
 
 @section('content')
     <div class="row wrapper border-bottom white-bg page-heading">
-        <div class="col-lg-4">
-            <?php $segment1 = Request::segment(1); ?>
-            <?php $segment2 = Request::segment(2); ?>
-            <h2><?php echo str_replace('_', ' ', ucfirst($segment2)); ?></h2>
+        <div class="col-lg-6">
+            <?php $segment = Request::segment(2); ?>
+            <h2><?php echo str_replace('_', ' ', ucfirst($segment)); ?></h2>
             <ol class="breadcrumb">
                 <li>
                     <a href="{{ url('/vendor/dashboard') }}">Dashboard</a>
                 </li>
-                <li>
-                    <?php echo str_replace('_', ' ', ucfirst($segment1)); ?>
-                </li>
                 <li class="active">
-                    <strong><?php echo str_replace('_', ' ', ucfirst($segment2)); ?></strong>
+                    <strong><?php echo str_replace('_', ' ', ucfirst($segment)); ?></strong>
                 </li>
             </ol>
         </div>
-        <div class="col-lg-8">
+        <div class="col-lg-6">
             <div class="title-action">
-                <button type="submit" form="form-generalSettings" class="btn btn-primary btn-sm"><i class="fa fa-save"></i> </button>
+                <a href="{{ url('/buyer/accounting') }}" data-toggle="tooltip" title="" class="btn btn-default btn-sm" data-original-title="Cancel"><i class="fa fa-reply"></i></a>
             </div>
         </div>
     </div>
     <div class="wrapper wrapper-content animated fadeInRight ecommerce">
         <div class="row">
             <div class="col-lg-12">
-                @if (session('status'))
-
-                    <div class="alert alert-success">
-                        <strong>{{ session('status') }}</strong>
-                    </div>
-
-                @endif
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-12">
                 <div class="tabs-container">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#tab-1"> Vendor Information</a></li>
-                    </ul>
-                    <form method="POST" action="{{ url('/vendor/general_settings/update_general_settings_request') }}" class="form-horizontal" id="form-generalSettings" enctype="multipart/form-data">
-                    {{ csrf_field() }}
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#tab-1"> Account Summery Info</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="tab-1" class="tab-pane active">
+                                <div class="panel-body">
 
-                    <input type="hidden" id="vendore_user_id" name="vendore_user_id" value="{{ Session::get('vendore_user_data')[0] ['vendore_user_id'] }}" class="form-control">
-
-                    <div class="tab-content">
-                        <div id="tab-1" class="tab-pane active">
-                            <div class="panel-body">
-
-                                <fieldset class="form-horizontal">
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Vendor Name: <font color="red">*</font></label>
-                                        <div class="col-sm-10">
-                                            <input name="name" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['vendore_name'] }}" placeholder="Enter Company Name">
-                                            @if ($errors->has('name'))
-                                                <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('name') }}</font></strong>
-                                                </span>
-                                            @endif
+                                    <fieldset class="form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Total Amount Spent:</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" disabled>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Company Name:</label>
-                                        <div class="col-sm-10">
-                                            <input name="companyName" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['companyName'] }}" placeholder="Enter Company Name">
-                                            @if ($errors->has('companyName'))
-                                                <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('companyName') }}</font></strong>
-                                                </span>
-                                            @endif
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Total Amount Spent for the Month:</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" disabled>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Email: <font color="red">*</font></label>
-                                        <div class="col-sm-10">
-                                            <input name="email" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['email'] }}" placeholder="Enter Email">
-                                            @if ($errors->has('email'))
-                                                <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('email') }}</font></strong>
-                                                </span>
-                                            @endif
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Due Payment:</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" disabled>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Vendor Type:</label>
-                                        <div class="col-sm-10">
-                                            <input name="vendor_type" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['vendor_type'] }}" placeholder="Enter Company Owner">
-                                            @if ($errors->has('vendor_type'))
-                                                <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('vendor_type') }}</font></strong>
-                                                </span>
-                                            @endif
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Outstanding Payment:</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" disabled>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Fax</label>
-                                        <div class="col-sm-10">
-                                            <input name="fax" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['fax'] }}" placeholder="Enter Fax">
-                                            @if ($errors->has('fax'))
-                                                <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('fax') }}</font></strong>
-                                                </span>
-                                            @endif
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Payment Type:</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control" disabled>
+                                            </div>
+                                            <label class="col-sm-2 control-label">Payment Amount:</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control" disabled>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Address:</label>
-                                        <div class="col-sm-10">
-                                            <input name="address" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['address'] }}" placeholder="Enter Address">
-                                            @if ($errors->has('address'))
-                                                <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('address') }}</font></strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Mobile:</label>
-                                        <div class="col-sm-10">
-                                            <input name="mobile" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['mobile'] }}" placeholder="Enter Telephone">
-                                            @if ($errors->has('mobile'))
-                                                <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('mobile') }}</font></strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </fieldset>
-
+                                    </fieldset>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -567,6 +501,33 @@
                 autoclose: true
             });
 
+        });
+    </script>
+
+    <script>
+        $(document).ready(function(){
+  
+          $('#category').change(function(){
+              var value = $(this).val();
+
+              // AJAX request
+              $.ajax({
+                  url:baseURL+'/sub_category',
+                  method: 'get',
+                  data: {key: value},
+                  dataType: 'json',
+                  success: function(response){
+
+                      // Remove options
+                      $('#sub_category').find('option').not(':first').remove();
+
+                      // Add options
+                      $.each(response,function(index,data){
+                          $('#sub_category').append('<option value="'+data['sub_category_id']+'">'+data['sub_category_name']+'</option>');
+                      });
+                  }
+              });
+          });
         });
     </script>
     

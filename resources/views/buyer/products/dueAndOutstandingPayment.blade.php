@@ -1,11 +1,10 @@
-@extends('vendor.layouts.layout')
+@extends('buyer.layouts.layout')
 
 @section('css')
     <link href="{{ asset('public/backend/css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
-
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-6">
             <?php $segment = Request::segment(2); ?>
@@ -21,12 +20,11 @@
         </div>
     </div>
     <div class="wrapper wrapper-content animated fadeInRight">
-        @include('Admin.Layouts.message')
         <div class="row">
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5><?php echo str_replace('_', ' ', ucfirst($segment)); ?></h5>
+                        <h5>List of all <?php echo str_replace('_', ' ', ucfirst($segment)); ?></h5>
                     </div>
                     <div class="ibox-content">
 
@@ -34,50 +32,32 @@
                     <table class="table table-striped table-bordered table-hover dataTables-example" >
                     <thead>
                     <tr>
-                        <th>Order ID</th>
-                        <th>Company Name</th>
-                        <th>Country</th>
-                        <th>City</th>
-                        <th>Address</th>
-                        <th>Order Date</th>
-                        <th>Status</th>
-                        <th>Action</th>
+                        <th>S/N</th>
+                        <th>Transection Type</th>
+                        <th>Transection Id</th>
+                        <th>Ammount</th>
+                        <th>Balace</th>
+                        <th>Transection Date</th>
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach($order_data as $key => $order_data)
-                        <tr>
-                            <td>{{ $order_data['order_id'] }}</td>
-                            <td>{{ $order_data['ordrer_person'] }}</td>
-                            <td>{{ $order_data['country'] }}</td>
-                            <td>{{ $order_data['city'] }}</td>
-                            <td>{{ $order_data['address'] }}</td>
-                            <td>{{ Carbon::parse($order_data['date'])->format('d-m-Y') }}</td>
-                            <td>
-                                @if($order_data['status']==0)
-                                <label>Pending</label>
-                                @elseif($order_data['status']==1)
-                                <label>Accepted</label>
-                                @elseif($order_data['status']==2)
-                                <label>Rejected</label>
-                                @endif
-                            </td>
-                            <td class="center">
-                                <a href="{{ url('/vendor/orders/view/'.$order_data['order_id']) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                            </td>
-                        </tr>
-                        @endforeach
+                    <tr>
+                        <td>Trident</td>
+                        <td>Internet</td>
+                        <td>Internet</td>
+                        <td>Win 95+</td>
+                        <td>4</td>
+                        <td>4</td>
+                    </tr>
                     </tbody>
                     <tfoot>
                     <tr>
-                        <th>Order ID</th>
-                        <th>Company Name</th>
-                        <th>Country</th>
-                        <th>City</th>
-                        <th>Address</th>
-                        <th>Order Date</th>
-                        <th>Status</th>
-                        <th>Action</th>
+                        <th>S/N</th>
+                        <th>Transection Type</th>
+                        <th>Transection Id</th>
+                        <th>Ammount</th>
+                        <th>Balace</th>
+                        <th>Transection Date</th>
                     </tr>
                     </tfoot>
                     </table>

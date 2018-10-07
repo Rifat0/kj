@@ -33,30 +33,14 @@
                     </div>
                     <div class="form-group">
 
-                        <input type="text" class="form-control" name="companyName" value="{{ old('companyName') }}" placeholder="Enter Company Name" >
-                    </div>
-                    <div class="form-group">
-
                         <input type="text" class="form-control" name="vendor_type" value="{{ old('vendor_type') }}" placeholder="Enter Vendor Type" >
-                    </div>
-                    <div class="form-group">
-
-                        <input type="text" class="form-control" name="address" value="{{ old('address') }}" placeholder="Enter Address" >
-                    </div>
-                    <div class="form-group">
-
-                        <input type="text" class="form-control" name="fax" value="{{ old('fax') }}" placeholder="Enter Fax" >
                     </div>
                 </div>
 
                 <div class="col-sm-6">
                     <div class="form-group">
 
-                        <input type="text" class="form-control" name="mobile" value="{{ old('mobile') }}" placeholder="Enter Mobile" >
-                    </div>
-                    <div class="form-group">
-
-                        <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Enter Email" >
+                        <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Enter email" >
                       
                     </div>
                     <div class="form-group">

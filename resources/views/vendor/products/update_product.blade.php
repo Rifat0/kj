@@ -351,30 +351,14 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Small Orders Accepted:</label>
                                         <div class="col-sm-10">
-                                            @if( $get_payment_delivery[0]->smallOrdersAccepted =="yes")
-                                            <div class="radio radio-info radio-inline">
-                                                <input type="radio" id="inlineRadio1" value="yes" name="smallOrdersAccepted" checked>
-                                                
-                                                <label for="inlineRadio1"> Yes </label>
-                                            </div>
-                                            <div class="radio radio-inline">
-                                                <input type="radio" id="inlineRadio1" value="no" name="smallOrdersAccepted">
-                                                <label for="inlineRadio2"> No </label>
-                                            </div>
-                                            @else
                                             <div class="radio radio-info radio-inline">
                                                 <input type="radio" id="inlineRadio1" value="yes" name="smallOrdersAccepted">
-                                                
                                                 <label for="inlineRadio1"> Yes </label>
                                             </div>
                                             <div class="radio radio-inline">
-                                                <input type="radio" id="inlineRadio1" value="no" name="smallOrdersAccepted" checked>
+                                                <input type="radio" id="inlineRadio2" value="no" name="smallOrdersAccepted" checked="">
                                                 <label for="inlineRadio2"> No </label>
                                             </div>
-<<<<<<< HEAD
-                                            @endif
-                                            <span class="help-block m-b-none"></span>
-=======
                                             @if ($errors->has('smallOrdersAccepted'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
@@ -382,7 +366,6 @@
                                                     </strong>
                                                 </span>
                                             @endif
->>>>>>> 40c6a31b5ead0d6e363124b0dbea6166b49af97d
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -649,12 +632,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($get_product_images as $image)
                                         <tr>
-<<<<<<< HEAD
-                                            <td>
-                                                <img src="{{ asset('public/backend/img/vendor/products/'. $image->productImage) }}" class="img-lg">
-=======
                                             <td><img src="{{ asset('public/backend/img/vendor/products'.'/'.$product_images_data->productImage1) }}" height="100" width="100" ></td>
                                             <td>
                                                 <div class="fileinput fileinput-new" data-provides="fileinput">
@@ -688,7 +666,6 @@
                                                     <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
                                                 </div>
                                                 <input type="hidden" name="p_productImage2" value="{{ $product_images_data->productImage2 }}">
->>>>>>> 40c6a31b5ead0d6e363124b0dbea6166b49af97d
                                             </td>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label"></label>
@@ -704,12 +681,6 @@
                                         <tr>
                                             <td><img src="{{ asset('public/backend/img/vendor/products'.'/'.$product_images_data->productImage3) }}" height="100" width="100" ></td>
                                             <td>
-<<<<<<< HEAD
-                                                <input type="file" name="productImage" class="form-control">
-                                            </td>
-                                            <td>
-                                                <a href="{{ url('/vendor/products/delete_product_request/'.$image->id) }}" class="btn btn-primary"><i class="fa fa-trash"></i></a>
-=======
                                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                                     <span class="btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span>
                                                     <input type="file" name="productImage3"></span>
@@ -761,7 +732,6 @@
                                                     <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
                                                 </div>
                                                 <input type="hidden" name="p_productImage5" value="{{ $product_images_data->productImage5 }}">
->>>>>>> 40c6a31b5ead0d6e363124b0dbea6166b49af97d
                                             </td>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label"></label>
@@ -774,7 +744,6 @@
                                                 @endif
                                             </div>
                                         </tr>
-                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -1181,8 +1150,4 @@
 
         });
     </script>
-<<<<<<< HEAD
-    
-=======
->>>>>>> 40c6a31b5ead0d6e363124b0dbea6166b49af97d
 @endsection

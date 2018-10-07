@@ -181,15 +181,9 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Product Category: <font color="red">*</font></label>
-<<<<<<< HEAD
-                                        <div class="col-sm-10">
-                                            <select name="productCategory" id="category" class="form-control">
-                                                <option value="">-- Select Product Category --</option>
-=======
                                         <div class="col-sm-4">
                                             <select name="productCategory" class="form-control">
                                                 <option disabled>-- Select Product Category --</option>
->>>>>>> 40c6a31b5ead0d6e363124b0dbea6166b49af97d
                                                 @foreach($product_category as $category)
                                                 <option value="{{ $category->category_id }}">{{ $category->category_name }}</option>
                                                 @endforeach
@@ -208,15 +202,9 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Product Sub-Category: <font color="red">*</font></label>
-<<<<<<< HEAD
-                                        <div class="col-sm-10">
-                                            <select name="productSubCategory" id="sub_category" class="form-control" >
-                                                <option value="">-- Select --</option>
-=======
                                         <div class="col-sm-4">
                                             <select name="productSubCategory" class="form-control" >
                                                 <option disabled>-- Select Sub Category --</option>
->>>>>>> 40c6a31b5ead0d6e363124b0dbea6166b49af97d
                                             </select>
                                         </div>
                                     </div>
@@ -1159,35 +1147,4 @@
 
         });
     </script>
-<<<<<<< HEAD
-
-    <script>
-        $(document).ready(function(){
-  
-          $('#category').change(function(){
-              var value = $(this).val();
-
-              // AJAX request
-              $.ajax({
-                  url:baseURL+'/sub_category',
-                  method: 'get',
-                  data: {key: value},
-                  dataType: 'json',
-                  success: function(response){
-
-                      // Remove options
-                      $('#sub_category').find('option').not(':first').remove();
-
-                      // Add options
-                      $.each(response,function(index,data){
-                          $('#sub_category').append('<option value="'+data['sub_category_id']+'">'+data['sub_category_name']+'</option>');
-                      });
-                  }
-              });
-          });
-        });
-    </script>
-    
-=======
->>>>>>> 40c6a31b5ead0d6e363124b0dbea6166b49af97d
 @endsection

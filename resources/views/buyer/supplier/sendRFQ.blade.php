@@ -1,4 +1,4 @@
-@extends('vendor.layouts.layout')
+@extends('buyer.layouts.layout')
 
 @section('css')
     <link href="{{ asset('public/backend/css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">
@@ -47,140 +47,163 @@
 
 @section('content')
     <div class="row wrapper border-bottom white-bg page-heading">
-        <div class="col-lg-4">
-            <?php $segment1 = Request::segment(1); ?>
-            <?php $segment2 = Request::segment(2); ?>
-            <h2><?php echo str_replace('_', ' ', ucfirst($segment2)); ?></h2>
+        <div class="col-lg-6">
+            <?php $segment = Request::segment(2); ?>
+            <h2><?php echo str_replace('_', ' ', ucfirst($segment)); ?></h2>
             <ol class="breadcrumb">
                 <li>
                     <a href="{{ url('/vendor/dashboard') }}">Dashboard</a>
                 </li>
-                <li>
-                    <?php echo str_replace('_', ' ', ucfirst($segment1)); ?>
-                </li>
                 <li class="active">
-                    <strong><?php echo str_replace('_', ' ', ucfirst($segment2)); ?></strong>
+                    <strong><?php echo str_replace('_', ' ', ucfirst($segment)); ?></strong>
                 </li>
             </ol>
         </div>
-        <div class="col-lg-8">
+        <div class="col-lg-6">
             <div class="title-action">
-                <button type="submit" form="form-generalSettings" class="btn btn-primary btn-sm"><i class="fa fa-save"></i> </button>
+                <button type="submit" form="form-search" title="Save" class="btn btn-primary btn-sm"><i class="fa fa-save"></i> Save</button>
+                <a href="{{ url('/buyer/tenders_and_bids') }}" data-toggle="tooltip" title="" class="btn btn-default btn-sm" data-original-title="Cancel"><i class="fa fa-reply"></i></a>
             </div>
         </div>
     </div>
     <div class="wrapper wrapper-content animated fadeInRight ecommerce">
         <div class="row">
             <div class="col-lg-12">
-                @if (session('status'))
-
-                    <div class="alert alert-success">
-                        <strong>{{ session('status') }}</strong>
-                    </div>
-
-                @endif
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-12">
                 <div class="tabs-container">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#tab-1"> Vendor Information</a></li>
-                    </ul>
-                    <form method="POST" action="{{ url('/vendor/general_settings/update_general_settings_request') }}" class="form-horizontal" id="form-generalSettings" enctype="multipart/form-data">
-                    {{ csrf_field() }}
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#tab-1"> General</a></li>
+                            <li class=""><a data-toggle="tab" href="#tab-2"> Product/service</a></li>
+                            <li class=""><a data-toggle="tab" href="#tab-4"> Images</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="tab-1" class="tab-pane active">
+                                <div class="panel-body">
 
-                    <input type="hidden" id="vendore_user_id" name="vendore_user_id" value="{{ Session::get('vendore_user_data')[0] ['vendore_user_id'] }}" class="form-control">
+                                    <fieldset class="form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Product/Service Name:</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" placeholder="Product name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Category</label>
+                                            <div class="col-sm-4">
+                                                <select class="form-control">
+                                                    <option value="">-- Select Category --</option>
+                                                    <option value=""></option>
+                                                </select>
+                                            </div>
+                                            <label class="col-sm-2 control-label">Sub Category</label>
+                                            <div class="col-sm-4">
+                                                <select class="form-control">
+                                                    <option value="">-- Select Sub Category --</option>
+                                                    <option value=""></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group"><label class="col-sm-2 control-label">Product Generic Name:</label>
+                                            <div class="col-sm-10"><input type="text" class="form-control" placeholder="Product Generic Name"></div>
+                                        </div>
+                                        <div class="form-group"><label class="col-sm-2 control-label">Description:</label>
+                                            <div class="col-sm-10">
+                                                <textarea class="form-control summernote">
+                                                    
+                                                </textarea>
+                                            </div>
+                                        </div>
+                                    </fieldset>
 
-                    <div class="tab-content">
-                        <div id="tab-1" class="tab-pane active">
-                            <div class="panel-body">
+                                </div>
+                            </div>
+                            <div id="tab-2" class="tab-pane">
+                                <div class="panel-body">
 
-                                <fieldset class="form-horizontal">
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Vendor Name: <font color="red">*</font></label>
-                                        <div class="col-sm-10">
-                                            <input name="name" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['vendore_name'] }}" placeholder="Enter Company Name">
-                                            @if ($errors->has('name'))
-                                                <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('name') }}</font></strong>
-                                                </span>
-                                            @endif
+                                    <fieldset class="form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">For Products:</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control" placeholder="Estimated Order">
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input type="text" class="form-control" placeholder="Units">
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input type="text" class="form-control" placeholder="Quantity">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Company Name:</label>
-                                        <div class="col-sm-10">
-                                            <input name="companyName" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['companyName'] }}" placeholder="Enter Company Name">
-                                            @if ($errors->has('companyName'))
-                                                <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('companyName') }}</font></strong>
-                                                </span>
-                                            @endif
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">For Service:</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" placeholder="Estimated Duration">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Email: <font color="red">*</font></label>
-                                        <div class="col-sm-10">
-                                            <input name="email" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['email'] }}" placeholder="Enter Email">
-                                            @if ($errors->has('email'))
-                                                <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('email') }}</font></strong>
-                                                </span>
-                                            @endif
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Payment Method:</label>
+                                            <div class="col-sm-10">
+                                                <select class="form-control">
+                                                    <option>-- Select Payment Method --</option>
+                                                    <option></option>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Vendor Type:</label>
-                                        <div class="col-sm-10">
-                                            <input name="vendor_type" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['vendor_type'] }}" placeholder="Enter Company Owner">
-                                            @if ($errors->has('vendor_type'))
-                                                <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('vendor_type') }}</font></strong>
-                                                </span>
-                                            @endif
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Business Email:</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" placeholder="Business Email">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Fax</label>
-                                        <div class="col-sm-10">
-                                            <input name="fax" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['fax'] }}" placeholder="Enter Fax">
-                                            @if ($errors->has('fax'))
-                                                <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('fax') }}</font></strong>
-                                                </span>
-                                            @endif
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Required:</label>
+                                            <div class="col-sm-10">
+                                                <label class="checkbox-inline"> 
+                                                    <input type="checkbox" value="option1" id="inlineCheckbox1"> Required Product Certification </label>
+                                                <label class="checkbox-inline">
+                                                    <input type="checkbox" value="option2" id="inlineCheckbox2"> Required Company Certification </label>
+                                                <label class="checkbox-inline">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Address:</label>
-                                        <div class="col-sm-10">
-                                            <input name="address" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['address'] }}" placeholder="Enter Address">
-                                            @if ($errors->has('address'))
-                                                <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('address') }}</font></strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Mobile:</label>
-                                        <div class="col-sm-10">
-                                            <input name="mobile" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['mobile'] }}" placeholder="Enter Telephone">
-                                            @if ($errors->has('mobile'))
-                                                <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('mobile') }}</font></strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </fieldset>
+                                    </fieldset>
 
+
+                                </div>
+                            </div>
+                            <div id="tab-4" class="tab-pane">
+                                <div class="panel-body">
+
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-stripped">
+                                            <thead>
+                                            <tr>
+                                                <th>
+                                                    Upload Image or File
+                                                    <small>(PDF, Jpg, excel)</small>
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>
+                                                    <input type="file" class="form-control">
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <fieldset class="form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Select term:</label>
+                                            <div class="col-sm-10">
+                                                <label class="checkbox-inline"> 
+                                                    <input type="checkbox" value="option1" id="inlineCheckbox1"> I'd like to send this RFQ to other suppliers, if I have not received quotations within the next 24hours </label>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -567,6 +590,33 @@
                 autoclose: true
             });
 
+        });
+    </script>
+
+    <script>
+        $(document).ready(function(){
+  
+          $('#category').change(function(){
+              var value = $(this).val();
+
+              // AJAX request
+              $.ajax({
+                  url:baseURL+'/sub_category',
+                  method: 'get',
+                  data: {key: value},
+                  dataType: 'json',
+                  success: function(response){
+
+                      // Remove options
+                      $('#sub_category').find('option').not(':first').remove();
+
+                      // Add options
+                      $.each(response,function(index,data){
+                          $('#sub_category').append('<option value="'+data['sub_category_id']+'">'+data['sub_category_name']+'</option>');
+                      });
+                  }
+              });
+          });
         });
     </script>
     

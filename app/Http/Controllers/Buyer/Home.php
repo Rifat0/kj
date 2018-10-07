@@ -71,11 +71,7 @@ class Home extends Controller
     {
         $this->validate($request, [
             'name'=> 'required',
-            'companyName'=> 'required',
             'vendor_type' => 'required',
-            'address' => 'required',
-            'fax' => 'nullable|required',
-            'mobile' => 'required',
             'email' => 'required',
             'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
             'password_confirmation' => 'min:6'
@@ -85,11 +81,7 @@ class Home extends Controller
                 ->insert(
                     [
                         'name' => $request->input('name'),
-                        'companyName' => $request->input('companyName'),
                         'vendor_type' => $request->input('vendor_type'),
-                        'address' => $request->input('address'),
-                        'fax' => $request->input('fax'),
-                        'mobile' => $request->input('mobile'),
                         'email' => $request->input('email'),
                      	'password' => Hash::make($request->input('password')),
                         'created_at' => Carbon::now()->format('Y-m-d H:i:s')

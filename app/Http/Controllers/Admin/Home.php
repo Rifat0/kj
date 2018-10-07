@@ -561,6 +561,10 @@ class Home extends Controller
         }
     }
 
+    public function orders_list(){
+        return view('Admin.Orders.orders_list');
+    }
+
     public function requisitions_list(){
     	return view('Admin.Requisitions.requisitions_list');
     }
