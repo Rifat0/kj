@@ -454,7 +454,94 @@ class Products extends Controller
     // Orders
     public function orders()
     {
-        return view('vendor.orders.orders');
+        $vendor_products = DB::table('vendor_products')
+                                ->where('vendore_user_id', Session::get('vendore_user_data')[0] ['vendore_user_id'])->pluck('product_number');
+        $ordered_product = DB::table('ordered_product')->get();
+
+        $order_id_array = array();
+        
+        foreach ($vendor_products as $vendor_product) {
+            foreach ($ordered_product as $key => $order_product) {
+                if ($vendor_product == $order_product->product_id) {
+                    array_push($order_id_array,$order_product->order_id);
+                }
+            }
+        }
+
+        $order_data = array();
+
+        foreach ($order_id_array as $value) {
+            $orders = DB::table('order_data')
+                        ->where('order_id',$value)->get();
+
+            foreach ($orders as $values) {
+                if ($values->shipping_country == null) {
+                    $country = $values->country;
+                    $city = $values->city;
+                    $address = $values->address;
+                } else {
+                    $country = $values->shipping_country;
+                    $city = $values->shipping_city;
+                    $address = $values->shipping_address;
+                }
+                
+                $person = DB::table('web_user')->where('web_user_id',$values->web_user_id)->pluck('company_name');
+
+                if (count($person)>0) {
+                    $user = $person;
+                } else {
+                    $user = "Guest";
+                }
+                
+
+                $ordered = [
+                        'order_id' => $values->order_id,
+                        'status' => $values->status,
+                        'ordrer_person' => $user,
+                        'country' => $country,
+                        'city' => $city,
+                        'address' => $address,
+                        'date' => $values->created_at
+                    ];
+
+                array_push($order_data,$ordered);
+            }
+        }
+
+        return view('vendor.orders.orders',compact('order_data'));
+    }
+
+    public function orders_view($id)
+    {
+        $products = DB::table('ordered_product')
+                                ->where('order_id', $id)
+                                ->join('vendor_products', 'vendor_products.product_number', '=', 'ordered_product.product_id')
+                                ->get();
+        $order_data = DB::table('order_data')->where('order_id', $id)->first();
+
+        return view('vendor.orders.order_view',compact('order_data','products'));
+    }
+
+    public function orders_accept($id)
+    {
+        DB::table('order_data')->where('order_id', $id)
+                ->update(
+                    [
+                        'status' => "1",
+                        'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+                    ]);
+        return redirect('/vendor/orders')->with('status', 'Order accepted.');
+    }
+
+    public function orders_reject($id)
+    {
+        DB::table('order_data')->where('order_id', $id)
+                ->update(
+                    [
+                        'status' => "2",
+                        'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+                    ]);
+        return redirect('/vendor/orders')->with('status', 'Order rejected.');
     }
 
     // Report

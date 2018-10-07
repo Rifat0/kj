@@ -76,7 +76,7 @@
                         </div>
                         <a class="product-link" href="{{ url('/product/'.$product_data->productCategory.'/'.$product_data->productSubCategory.'/'.$product_data->product_number) }}"></a>
                         <div class="product-caption">
-                            <ul class="product-caption-rating">
+                            <!-- <ul class="product-caption-rating">
                                 <li class="rated"><i class="fa fa-star"></i>
                                 </li>
                                 <li class="rated"><i class="fa fa-star"></i>
@@ -87,7 +87,7 @@
                                 </li>
                                 <li class="rated"><i class="fa fa-star"></i>
                                 </li>
-                            </ul>
+                            </ul> -->
                             <h5 class="product-caption-title">{{ $product_data->productName }}</h5>
                             <div class="product-caption-price"><span class="product-caption-price-new">${{ $product_data->pd_price }}</span>
                             </div>
@@ -96,10 +96,8 @@
                 </div>
                 @endforeach
             </div>
-            
-            
-            
-            <div class="row">
+
+            <!-- <div class="row">
                 <div class="col-md-6">
                     <nav>
                         <ul class="pagination category-pagination pull-right">
@@ -118,7 +116,7 @@
                         </ul>
                     </nav>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

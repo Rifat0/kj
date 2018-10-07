@@ -47,31 +47,13 @@
                 </div> -->
                 <input class="btn btn-primary" type="submit" value="Sign In" />
             </form>
-            <div class="gap gap-small"></div>
-            <ul class="list-inline">
-                <li><a href="#nav-pwd-dialog" class="popup-text">Forgot Password?</a>
-                </li>
-            </ul>
         </div>
-        
-        <div class="mfp-with-anim mfp-hide mfp-dialog clearfix" id="nav-pwd-dialog">
-            <h3 class="widget-title">Password Recovery</h3>
-            <p>Enter Your Email and We Will Send the Instructions</p>
-            <hr />
-            <form>
-                @csrf
-                <div class="form-group">
-                    <label>Your Email</label>
-                    <input class="form-control" type="text" />
-                </div>
-                <input class="btn btn-primary" type="submit" value="Recover Password" />
-            </form>
-        </div>
+
         <nav class="navbar navbar-inverse navbar-main yamm">
             <div class="container">
                 <div class="navbar-header">
-                    <!-- <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-nav-collapse" area_expanded="false"><span class="sr-only">Main Menu</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-                    </button> -->
+                    <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-nav-collapse" area_expanded="false"><span class="sr-only">Main Menu</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                    </button>
                     <a class="navbar-brand" href="{{ url('/') }}">
                         Kajandi
                     </a>
@@ -275,7 +257,7 @@
                     </form>
                     <ul class="nav navbar-nav navbar-right">
                         @if (Session::get('web_user_data')[0] ['web_user_id'])
-                        <li class="dropdown"><a href="#" class="popup-text"><span>User</span>Your Account</a>
+                        <li class="dropdown"><a class="popup-text">Your Account</a>
 
                             <ul class="dropdown-menu dropdown-menu-shipping-cart">
                                 <li>
@@ -299,52 +281,47 @@
                             <li><a href="{{ url('/sing_up') }}">Create Account</a></li>
                         @endif
                         <li class="dropdown">
-                            <a class="fa fa-shopping-cart" href="shopping-cart.html"></a>
+                            <a class="fa fa-shopping-cart" href="{{ url('/cart_item') }}"></a>
                             <ul class="dropdown-menu dropdown-menu-shipping-cart">
+                                @if(@$cart_product_data)
+                                @if(count($cart_product_data)>0)
+                                <?php $balence=0; ?>
+                                @foreach((array) $cart_product_data as $item)
+                                <?php $st = isset($item[0]) ? $item[0] : false; ?>
+                                @if($st)
+                                @foreach (session()->get('cart_data') as $cart_item)
+                                @if($item[0]->product_number == $cart_item['product_id'])
+                                <?php $product_price = $item[0]->pd_price*$cart_item['quantity']; ?>
                                 <li>
+                                    @foreach($product_image as $image)
+                                    @if($item[0]->product_number == $image->product_number)
                                     <a class="dropdown-menu-shipping-cart-img" href="#">
-                                        <img src="img/100x100.png" alt="Image Alternative text" title="Image Title" />
+                                        <img src="{{ asset('public/backend/img/vendor/products').'/'.$image->productImage1 }}" alt="Image Alternative text" title="Image Title" />
                                     </a>
+                                    @endif
+                                    @endforeach
                                     <div class="dropdown-menu-shipping-cart-inner">
-                                        <p class="dropdown-menu-shipping-cart-price">$45</p>
-                                        <p class="dropdown-menu-shipping-cart-item"><a href="#">Gucci Patent Leather Open Toe Platform</a>
+                                        <p class="dropdown-menu-shipping-cart-price">${{ $item[0]->pd_price." * ".$cart_item['quantity']." = $".$product_price }}</p>
+                                        <p class="dropdown-menu-shipping-cart-item"><a href="#">{{ $item[0]->productName }}</a>
                                         </p>
                                     </div>
                                 </li>
+                                @endif
+                                @endforeach
+                                <?php $balence = $balence+$product_price; ?>
+                                @endif
+                                @endforeach
                                 <li>
-                                    <a class="dropdown-menu-shipping-cart-img" href="#">
-                                        <img src="img/100x100.png" alt="Image Alternative text" title="Image Title" />
-                                    </a>
-                                    <div class="dropdown-menu-shipping-cart-inner">
-                                        <p class="dropdown-menu-shipping-cart-price">$57</p>
-                                        <p class="dropdown-menu-shipping-cart-item"><a href="#">Nikon D5200 24.1 MP Digital SLR Camera</a>
-                                        </p>
-                                    </div>
+                                    <p class="dropdown-menu-shipping-cart-total">Subtotal: ${{ $balence }}</p>
+                                    <a href="{{ url('/cart_item') }}" class="dropdown-menu-shipping-cart-checkout btn btn-primary">Cart</a>
                                 </li>
+                                @endif
+                                @else
                                 <li>
-                                    <a class="dropdown-menu-shipping-cart-img" href="#">
-                                        <img src="img/100x100.png" alt="Image Alternative text" title="Image Title" />
-                                    </a>
-                                    <div class="dropdown-menu-shipping-cart-inner">
-                                        <p class="dropdown-menu-shipping-cart-price">$66</p>
-                                        <p class="dropdown-menu-shipping-cart-item"><a href="#">Apple 11.6" MacBook Air Notebook </a>
-                                        </p>
-                                    </div>
+                                    <i class="fa fa-cart-arrow-down empty-cart-icon"></i>
+                                    <p class="dropdown-menu-shipping-cart-total">Your Cart is empty</p>
                                 </li>
-                                <li>
-                                    <a class="dropdown-menu-shipping-cart-img" href="#">
-                                        <img src="img/100x100.png" alt="Image Alternative text" title="Image Title" />
-                                    </a>
-                                    <div class="dropdown-menu-shipping-cart-inner">
-                                        <p class="dropdown-menu-shipping-cart-price">$76</p>
-                                        <p class="dropdown-menu-shipping-cart-item"><a href="#">Fossil Women's Original Boyfriend</a>
-                                        </p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <p class="dropdown-menu-shipping-cart-total">Total: $150</p>
-                                    <button class="dropdown-menu-shipping-cart-checkout btn btn-primary">Checkout</button>
-                                </li>
+                                @endif
                             </ul>
                         </li>
                     </ul>

@@ -91,6 +91,21 @@
     <script src="{{ asset('public/content/js/magnific.js') }}"></script>
     <script src="{{ asset('public/content/js/custom.js') }}"></script>
 
+    <script type="text/javascript">
+        $("[type='number']").keypress(function (evt) {
+            evt.preventDefault();
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).keydown(function(e) {
+            var elid = $(document.activeElement).hasClass('number');
+            if (e.keyCode === 8 && !elid) {
+                return false;
+            };
+        });
+    </script>
+
     @yield('js')
 
     </div>

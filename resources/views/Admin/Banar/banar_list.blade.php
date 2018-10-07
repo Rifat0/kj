@@ -1,4 +1,4 @@
-@extends('admin.layouts.layout')
+@extends('Admin.Layouts.layout')
 
 @section('css')
     <!-- <link href="{{ asset('public/backend/css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet"> -->
@@ -27,7 +27,7 @@
     </div>
     <div class="wrapper wrapper-content animated fadeInRight">
 
-        @include('admin.layouts.message')
+        @include('Admin.Layouts.message')
 
         <div class="row">
             <div class="col-lg-12">

@@ -1,4 +1,4 @@
-@extends('admin.layouts.layout')
+@extends('Admin.Layouts.layout')
 
 @section('css')
 
@@ -21,7 +21,7 @@
         </div>
     </div>
     <div class="wrapper wrapper-content animated fadeInRight">
-        @include('admin.layouts.message')
+        @include('Admin.Layouts.message')
         <div class="row">
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">

@@ -14,7 +14,7 @@ class Product extends Controller
     {
         $product_category = DB::table('category_sub_category')->where('category_id', '!=', '0')->get();
 
-        return view('admin.Products.create_new_product', compact('product_category'));
+        return view('Admin.Products.create_new_product', compact('product_category'));
     }
 
     public function store_new_product(Request $request)
@@ -202,6 +202,6 @@ class Product extends Controller
                                 ->where('product_status', '=', '3')
                                 ->join('vendore_user', 'vendor_products.vendore_user_id', '=', 'vendore_user.vendore_user_id')
                                 ->get();
-        return view('admin.Product_ap_rj.update_product_ap_rj', compact('update_product_ap_rj'));
+        return view('Admin.Product_ap_rj.update_product_ap_rj', compact('update_product_ap_rj'));
     }
 }

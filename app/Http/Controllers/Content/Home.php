@@ -36,28 +36,181 @@ class Home extends Controller
 
     public function cart_item()
     {
-        $cart_product = Session::get('cart_data');
-
-        foreach ($cart_product as $value) {
-            $cart_product_data[] = DB::table('vendor_products')->where('product_number',$value)->get();
-            $product_image[] = DB::table('vendor_product_images')->where('product_number',$value)->first();
-        }
-
-        // foreach ($cart_product_image as $key) {
-        //     echo $key->productImage1."<br>";
-        // }exit();
-        // print_r($ko);
-        return view('content.cart_item',compact('cart_product_data','product_image'));
+        return view('content.cart_item');
     }
 
     public function checkout()
     {
-        return view('content.checkout');
+        if(session()->has('cart_data')){
+            return view('content.checkout');
+        }else{
+            return redirect('/')->with('error_message', 'You have no product in your shopping cart for checkout.');
+        }
     }
 
-    public function summery()
+    public function checkout_submit(Request $checkout)
     {
-        return view('content.summery');
+        $this->validate($checkout, [
+            'company_name'=> 'required',
+            'login_email'=> 'required|email',
+            'phone'=> 'required',
+            'password' => 'required_with:password_confirmation|same:password_confirmation',
+            'country'=> 'required',
+            'city'=> 'required',
+            'zip_postal'=> 'required',
+            'address'=> 'required'
+         ]);
+
+        if (empty($checkout->input('web_user_id')) && !empty($checkout->input('password'))) {
+
+            DB::table('web_user')
+                    ->insert(
+                        [
+                            'company_name' => $checkout->input('company_name'),
+                            'login_email' => $checkout->input('login_email'),
+                            'phone_of_contact_person' => $checkout->input('phone'),
+                            'password' => Hash::make($checkout->input('password')),
+                            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+                        ]);
+
+            $web_user_data = DB::table('web_user')->where('login_email', $checkout->input('login_email'))->first();
+
+            $session_data = [
+                    'web_user_id' => $web_user_data->web_user_id,
+                    'company_name' => $web_user_data->company_name,
+                    'phone' => $web_user_data->phone_of_contact_person,
+                    'login_email' => $web_user_data->login_email
+                ];
+
+            Session::push('web_user_data', $session_data);
+        }
+        elseif(empty($checkout->input('web_user_id')) && empty($checkout->input('password'))){
+            $guest=true;
+            $session_data = [
+                    'web_user_id' => "9999999",
+                    'company_name' => $checkout->input('company_name'),
+                    'phone' => $checkout->input('phone'),
+                    'login_email' => $checkout->input('login_email')
+                ];
+
+            Session::push('web_user_data', $session_data);
+        }
+
+        $previous_order_id = DB::table('order_data')->orderBy('order_id', 'desc')->first();
+
+        if (!empty($previous_order_id)) {
+
+            $p_order_id = explode("_",$previous_order_id->order_id);
+            $alpha = $p_order_id[0];
+            $numeric = $p_order_id[1]+1;
+            $order_id = $alpha."_".$numeric;
+
+            $reserved_order_id_check = DB::table('reserved_order_id')->where('order_id', $order_id)->first();
+                
+                if (empty($reserved_order_id_check)) {
+
+                    DB::table('reserved_order_id')
+                            ->insert(
+                                [
+                                    'order_id' => $order_id,
+                                    'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+                                ]);
+
+                }elseif (!empty($reserved_order_id_check)) {
+
+                    $reserved_order_id_check = DB::table('reserved_order_id')->orderBy('order_id', 'desc')->first();
+                    $r_order_id = explode("_",$reserved_order_id_check->order_id);
+                    $alpha = $r_order_id[0];
+                    $numeric = $r_order_id[1]+1;
+                    $order_id = $alpha."_".$numeric;
+                    
+
+                        DB::table('reserved_order_id')
+                                ->insert(
+                                    [
+                                        'order_id' => $order_id,
+                                        'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+                                    ]);
+                }
+
+        }else{
+
+            $order_id = "kj_1";
+
+            $reserved_order_id_check = DB::table('reserved_order_id')->where('order_id', $order_id)->first();
+            if (empty($reserved_order_id_check)) {
+
+                DB::table('reserved_order_id')
+                        ->insert(
+                            [
+                                'order_id' => $order_id,
+                                'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+                            ]);
+
+            }elseif (!empty($reserved_order_id_check)) {
+
+                $reserved_order_id_check = DB::table('reserved_order_id')->orderBy('order_id', 'desc')->first();
+                
+                $r_order_id = explode("_",$reserved_order_id_check->order_id);
+                $alpha = $r_order_id[0];
+                $numeric = $r_order_id[1]+1;
+                $order_id = $alpha."_".$numeric;
+
+                    DB::table('reserved_order_id')
+                            ->insert(
+                                [
+                                    'order_id' => $order_id,
+                                    'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+                                ]);
+            }
+
+        }
+
+        DB::table('order_data')
+                ->insert(
+                    [
+                        'order_id' => $order_id,
+                        'web_user_id' => Session::get('web_user_data')[0] ['web_user_id'],
+                        'country' => $checkout->input('country'),
+                        'city' => $checkout->input('city'),
+                        'zip_postal' => $checkout->input('zip_postal'),
+                        'address' => $checkout->input('address'),
+                        'shipping_country' => $checkout->input('shipping_country'),
+                        'shipping_city' => $checkout->input('shipping_city'),
+                        'shipping_zip_postal' => $checkout->input('shipping_zip_postal'),
+                        'shipping_address' => $checkout->input('shipping_address'),
+                        'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+                    ]);
+
+        foreach(Session::get('cart_data') as $cart_data){
+
+            $ordered_product[] = [
+                'order_id' => $order_id,
+                'web_user_id' => Session::get('web_user_data')[0] ['web_user_id'],
+                'product_id' => $cart_data['product_id'],
+                'quantity' => $cart_data['quantity'],
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ];
+        }
+
+        DB::table('ordered_product')->insert($ordered_product);
+
+        DB::table('reserved_order_id')->where('order_id', $order_id)->delete();
+
+        Session::flash('cart_data');
+        Session::reflash('cart_data');
+
+        $ordered_product = DB::table('ordered_product')
+                        ->where('web_user_id',Session::get('web_user_data')[0] ['web_user_id'])
+                        ->where('order_id',$order_id)
+                        ->join('vendor_products', 'ordered_product.product_id', '=', 'vendor_products.product_number')
+                        ->get();
+        $order_data = DB::table('order_data')
+                        ->where('web_user_id',Session::get('web_user_data')[0] ['web_user_id'])
+                        ->where('order_id',$order_id)
+                        ->first();
+        return view('content.summery',compact('ordered_product','order_data'));
+
     }
 
     public function about_us()
@@ -146,6 +299,7 @@ class Home extends Controller
         $session_data = [
                 'web_user_id' => $web_user_data[0]->web_user_id,
                 'company_name' => $web_user_data[0]->company_name,
+                'phone' => $web_user_data[0]->phone_of_contact_person,
                 'login_email' => $web_user_data[0]->login_email
             ];
 
@@ -171,6 +325,7 @@ class Home extends Controller
                     $session_data = [
                             'web_user_id' => $web_user[0]->web_user_id,
                             'company_name' => $web_user[0]->company_name,
+                            'phone' => $web_user[0]->phone_of_contact_person,
                             'login_email' => $web_user[0]->login_email
                         ];
 

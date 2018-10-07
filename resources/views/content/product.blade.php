@@ -18,7 +18,9 @@
             </ol>
         </header>
         <div class="row">
+            @include('Admin.Layouts.message')
             <div class="col-md-5">
+                    @if($vendor_product_images->productImage1 != null)
                     <div class="product-page-product-wrap jqzoom-stage">
                         <div class="clearfix">
                             <a href="{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}" id="jqzoom" data-rel="gal-1">
@@ -26,91 +28,112 @@
                             </a>
                         </div>
                     </div>
+                    @endif
                     <ul class="jqzoom-list">
+
+                        @if($vendor_product_images->productImage1 != null)
                         <li>
                             <a class="zoomThumbActive" href="javascript:void(0)" data-rel="{gallery:'gal-1', smallimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}', largeimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}'}">
                                 <img src="{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}" alt="Image Alternative text" title="Image Title" />
                             </a>
                         </li>
+                        @endif
+                        @if($vendor_product_images->productImage2 != null)
                         <li>
                             <a href="javascript:void(0)" data-rel="{gallery:'gal-1', smallimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage2 }}', largeimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage2 }}'}">
                                 <img src="{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage2 }}" alt="Image Alternative text" title="Image Title" />
                             </a>
                         </li>
+                        @endif
+                        @if($vendor_product_images->productImage3 != null)
                         <li>
                             <a href="javascript:void(0)" data-rel="{gallery:'gal-1', smallimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage3 }}', largeimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage3 }}'}">
                                 <img src="{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage3 }}" alt="Image Alternative text" title="Image Title" />
                             </a>
                         </li>
+                        @endif
+                        @if($vendor_product_images->productImage4 != null)
                         <li>
                             <a href="javascript:void(0)" data-rel="{gallery:'gal-1', smallimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage4 }}', largeimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage4 }}'}">
                                 <img src="{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage4 }}" alt="Image Alternative text" title="Image Title" />
                             </a>
                         </li>
+                        @endif
+                        @if($vendor_product_images->productImage5 != null)
                         <li>
                             <a href="javascript:void(0)" data-rel="{gallery:'gal-1', smallimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage5 }}', largeimage: '{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage5 }}'}">
                                 <img src="{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage5 }}" alt="Image Alternative text" title="Image Title" />
                             </a>
                         </li>
+                        @endif
                     </ul>
                 </div>
             <div class="col-md-7">
                 <div class="row" data-gutter="10">
                     <div class="col-md-8">
                         <div class="box">
-                            <ul class="product-page-product-rating">
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                            </ul>
-                            <p class="product-page-product-rating-sign"><a href="#">238 customer reviews</a>
-                            </p>
-                            <p class="product-page-desc">The first Android smartphone with a 6.4” Full HD Display and the first one ever to incorporate a TRILUMINOS™ Display with X-Reality for mobile – Xperia Z Ultra is the smartphone that takes you beyond your wildest dreams.</p>
                             <table
                             class="table table-striped product-page-features-table">
                                 <tbody>
                                     <tr>
-                                        <td>Display:</td>
-                                        <td>6.4 inches</td>
+                                        <td>Generic Name:</td>
+                                        <td>{{ $product->productGenericName }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Camera:</td>
-                                        <td>8.0MP</td>
+                                        <td>Menufacturer:</td>
+                                        <td>{{ $product->menufacturer }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Cellular Band:</td>
-                                        <td>GSM/GPRS/EDGE 850/900/1800/1900 (Quadband) UMTS/HSPA+ 850/900/1700/1900/2100</td>
+                                        <td>Vendor:</td>
+                                        <td>{{ $product->companyName }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Contract:</td>
-                                        <td>Without Contract</td>
+                                        <td>Model Number:</td>
+                                        <td>{{ $product->modelNumber }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Supply Type:</td>
+                                        <td>{{ $product->supplyType }}</td>
                                     </tr>
                                     <tr>
                                         <td>Color:</td>
-                                        <td>Black</td>
+                                        <td>{{ $product->color }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Brand:</td>
-                                        <td>Sony</td>
+                                        <td>Small Orders:</td>
+                                        <td>{{ $product_details->smallOrdersAccepted }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Features:</td>
-                                        <td>3G Data Capable, 4G Data Capable, Internet Browser, Wi-Fi Capable, GPS, Touchscreen, Music Player, Bluetooth Enabled</td>
+                                        <td>Minimum Order:</td>
+                                        <td>{{ $product_details->minimumOrderQuantity }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Network:</td>
-                                        <td>Unlocked</td>
+                                        <td>Unit Of Measure:</td>
+                                        <td>{{ $product_details->unitOfMeasure }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Storage:</td>
-                                        <td>16GB</td>
+                                        <td>Optional Price:</td>
+                                        <td>{{ $product_details->pd_priceForOptional }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Instant Price:</td>
+                                        <td>{{ $product_details->instantPrice }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>15 Days Price:</td>
+                                        <td>{{ $product_details->fifteenDaysPrice }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>30 Days Price:</td>
+                                        <td>{{ $product_details->thirteenDaysPrice }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Weight Per Pack:</td>
+                                        <td>{{ $product_details->weightPerPack }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Key Specification:</td>
+                                        <td>{!! $product->keySpecification !!}</td>
                                     </tr>
                                 </tbody>
                                 </table>
@@ -121,7 +144,7 @@
                             <p class="product-page-price">${{ $product->pd_price }}</p>
                             <hr>
                             <a class="btn btn-block btn-primary" href="{{ url('/add-to-cart/'.$product->product_number) }}"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
-                            <a class="btn btn-block btn-default" href="#"><i class="fa fa-star"></i>Wishlist</a>
+                            <a class="btn btn-block btn-default" href="{{ url('/add-to-wishlist/'.$product->product_number) }}"><i class="fa fa-star"></i>Wishlist</a>
                             <div class="product-page-side-section">
                                 <h5 class="product-page-side-title">Share This Item</h5>
                                 <ul class="product-page-share-item">
@@ -173,93 +196,42 @@
             <div class="tab-content">
                 <div class="tab-pane fade in active" id="tab-1">
                     <div class="row row-eq-height product-overview-section">
-                        <div class="col-md-6">
-                            <img class="product-overview-img" src="{{ asset('public/content/img/348x382.png') }}" alt="Image Alternative text" title="Image Title" />
-                        </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="product-overview-text">
-                                <h5 class="product-overview-title">The only waterproof Full HD smartphone</h5>
-                                <p class="product-overview-desc">Waterproof**, dust resistant and with tough tempered glass coated with an anti-shatter film, this Android smartphone is much tougher than it looks.</p>
+                                <p class="product-overview-desc">{!! $product->productDescription !!}</p>
                             </div>
                         </div>
                     </div>
                     <div class="row row-eq-height product-overview-section">
+                        @if($vendor_product_images->productImage1 != null)
                         <div class="col-md-6">
-                            <div class="product-overview-text text-right">
-                                <h5 class="product-overview-title">Ultra entertainment. Ultra business. An ultra experience. Experience 60% more</h5>
-                                <p class="product-overview-desc">From reading e-books to browsing web pages – the Full HD display has been optimized so you can see and experience 60% more than most smartphones.</p>
-                            </div>
+                            <img class="product-overview-img" src="{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage1 }}" />
                         </div>
+                        @endif
+                        @if($vendor_product_images->productImage2 != null)
                         <div class="col-md-6">
-                            <img class="product-overview-img" src="{{ asset('public/content/img/376x476.png') }}" alt="Image Alternative text" title="Image Title" />
+                            <img class="product-overview-img" src="{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage2 }}" />
                         </div>
+                        @endif
                     </div>
                     <div class="row row-eq-height product-overview-section">
+                        @if($vendor_product_images->productImage3 != null)
                         <div class="col-md-6">
-                            <img class="product-overview-img" src="{{ asset('public/content/img/620x400.png') }}" alt="Image Alternative text" title="Image Title" />
+                            <img class="product-overview-img" src="{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage3 }}" />
                         </div>
+                        @endif
+                        @if($vendor_product_images->productImage4 != null)
                         <div class="col-md-6">
-                            <div class="product-overview-text">
-                                <h5 class="product-overview-title">Get precise</h5>
-                                <p class="product-overview-desc">Xperia Z Ultra works with a pencil or stylus, and the super responsive screen lets you to write and sketch with precise accuracy.</p>
-                            </div>
+                            <img class="product-overview-img" src="{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage4 }}" />
                         </div>
+                        @endif
                     </div>
                     <div class="row row-eq-height product-overview-section">
+                        @if($vendor_product_images->productImage5 != null)
                         <div class="col-md-6">
-                            <div class="product-overview-text text-right">
-                                <h5 class="product-overview-title">Increase productivity</h5>
-                                <p class="product-overview-desc">An easy-toggle keyboard for one-handed input, plus multi-tasking apps that improve productivity help make this big screen Android smartphone the perfect business partner.</p>
-                            </div>
+                            <img class="product-overview-img" src="{{ asset('public/backend/img/vendor/products').'/'.$vendor_product_images->productImage5 }}" />
                         </div>
-                        <div class="col-md-6">
-                            <img class="product-overview-img" src="{{ asset('public/content/img/430x450.png') }}" alt="Image Alternative text" title="Image Title" />
-                        </div>
-                    </div>
-                    <div class="row row-eq-height product-overview-section">
-                        <div class="col-md-6">
-                            <img class="product-overview-img" src="{{ asset('public/content/img/620x323.png') }}" alt="Image Alternative text" title="Image Title" />
-                        </div>
-                        <div class="col-md-6">
-                            <div class="product-overview-text">
-                                <h5 class="product-overview-title">Be immersed</h5>
-                                <p class="product-overview-desc">The 6.4” TRILUMINOS™ Display with X-Reality for mobile creates rich, natural colours delivered in the crispest and sharpest images imaginable – turning every flick into a blockbuster experience.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row row-eq-height product-overview-section">
-                        <div class="col-md-6">
-                            <div class="product-overview-text text-right">
-                                <h5 class="product-overview-title">Extend the universe of Xperia Z Ultra</h5>
-                                <p class="product-overview-desc">With its tasteful design and amazing sound quality, this wireless headset can be used as either a smart mini-handset to take phone calls or a Bluetooth® headset, the perfect partner to your big screen phone.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <img class="product-overview-img" src="{{ asset('public/content/img/346x445.png') }}" alt="Image Alternative text" title="Image Title" />
-                        </div>
-                    </div>
-                    <div class="row row-eq-height product-overview-section">
-                        <div class="col-md-6">
-                            <img class="product-overview-img" src="{{ asset('public/content/img/620x300.png') }}" alt="Image Alternative text" title="Image Title" />
-                        </div>
-                        <div class="col-md-6">
-                            <div class="product-overview-text">
-                                <h5 class="product-overview-title">Go connected</h5>
-                                <p class="product-overview-desc">A clever extension of you Xperia Z Ultra, this Android-compatible SmartWatch will keep you discreetly informed of incoming calls, messages and more.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row row-eq-height product-overview-section">
-                        <div class="col-md-6">
-                            <div class="product-overview-text text-right">
-                                <h5 class="product-overview-title">Go easy</h5>
-                                <p class="product-overview-desc">This magnet docking station is designed for ease of use, letting you charge your Xperia Z Ultra without opening the USB protective cover. And while charging, you can browse menus and view content – all from a comfortable
-                                    viewing angle.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <img class="product-overview-img" src="{{ asset('public/content/img/620x283.png') }}" alt="Image Alternative text" title="Image Title" />
-                        </div>
+                        @endif
                     </div>
                 </div>
                 <div class="tab-pane fade" id="tab-2">
@@ -268,97 +240,103 @@
                             <tr>
                                 <th>Specs:</th>
                                 <th>Details:</th>
-                                <th>Description:</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="product-page-features-table-specs">Warranty Terms - Parts:</td>
-                                <td class="product-page-features-table-details">1 Year</td>
-                                <td></td>
+                                <td class="product-page-features-table-specs">Dimensions Per Unit Length:</td>
+                                <td class="product-page-features-table-details">{{ $product_details->dpu_w_p_length }}</td>
                             </tr>
                             <tr>
-                                <td class="product-page-features-table-specs">Height:</td>
-                                <td class="product-page-features-table-details">5.7 inches</td>
-                                <td></td>
+                                <td class="product-page-features-table-specs">Dimensions Per Unit Width:</td>
+                                <td class="product-page-features-table-details">{{ $product_details->dpu_w_p_width }}</td>
                             </tr>
                             <tr>
-                                <td class="product-page-features-table-specs">Width:</td>
-                                <td class="product-page-features-table-details">2.9 inches</td>
-                                <td></td>
+                                <td class="product-page-features-table-specs">Dimensions Per Unit Height:</td>
+                                <td class="product-page-features-table-details">{{ $product_details->dpu_w_p_height }}</td>
                             </tr>
                             <tr>
-                                <td class="product-page-features-table-specs">Depth:</td>
-                                <td class="product-page-features-table-details">0.3 inches</td>
-                                <td></td>
+                                <td class="product-page-features-table-specs">Dimensions Per Unit weight:</td>
+                                <td class="product-page-features-table-details">{{ $product_details->dpu_w_p_weight }}</td>
                             </tr>
                             <tr>
-                                <td class="product-page-features-table-specs">Weight:</td>
-                                <td class="product-page-features-table-details">6 oz</td>
-                                <td></td>
+                                <td class="product-page-features-table-specs">Dimensions Per Unit Volume:</td>
+                                <td class="product-page-features-table-details">{{ $product_details->dpu_w_p_volume }}</td>
                             </tr>
                             <tr>
-                                <td class="product-page-features-table-specs">Bluetooth-Enabled:</td>
-                                <td class="product-page-features-table-details">Yes</td>
-                                <td></td>
+                                <td class="product-page-features-table-specs">Packaging Dimensions Per Unit Length:</td>
+                                <td class="product-page-features-table-details">{{ $product_details->p_d_p_u_length }}</td>
                             </tr>
                             <tr>
-                                <td class="product-page-features-table-specs">Network:</td>
-                                <td class="product-page-features-table-details">Unlocked</td>
-                                <td></td>
+                                <td class="product-page-features-table-specs">Packaging Dimensions Per Unit Width:</td>
+                                <td class="product-page-features-table-details">{{ $product_details->p_d_p_u_width }}</td>
                             </tr>
                             <tr>
-                                <td class="product-page-features-table-specs">Phone Style:</td>
-                                <td class="product-page-features-table-details">Bar phone</td>
-                                <td></td>
+                                <td class="product-page-features-table-specs">Packaging Dimensions Per Unit Height:</td>
+                                <td class="product-page-features-table-details">{{ $product_details->p_d_p_u_height }}</td>
                             </tr>
                             <tr>
-                                <td class="product-page-features-table-specs">Operating System:</td>
-                                <td class="product-page-features-table-details">Android 4.3 Jelly Bean</td>
-                                <td>The master software that controls hardware functions and provides a platform on top of which any software applications will run. Commonly used systems include Microsoft Windows, Mac OS and Chrome OS for computers; Android,
-                                    Apple iOS, BlackBerry and Windows Phone for cell phones; and Android, Apple iOS and Windows for tablets.</td>
+                                <td class="product-page-features-table-specs">Export Carton Dimension:</td>
+                                <td class="product-page-features-table-details">{{ $product_details->exportCartonDimension }}</td>
                             </tr>
                             <tr>
-                                <td class="product-page-features-table-specs">Touch Screen:</td>
-                                <td class="product-page-features-table-details">Yes</td>
-                                <td></td>
+                                <td class="product-page-features-table-specs">Export Carton Weight:</td>
+                                <td class="product-page-features-table-details">{{ $product_details->exportCartonWeight }}</td>
                             </tr>
                             <tr>
-                                <td class="product-page-features-table-specs">MMS:</td>
-                                <td class="product-page-features-table-details">Yes</td>
-                                <td>Multimedia Messaging Service enables cell phone users to send text messages, graphics, photos and audio and video clips to other MMS users or to e-mail accounts.</td>
+                                <td class="product-page-features-table-specs">Delivery With in State:</td>
+                                <td class="product-page-features-table-details">{{ $product_details->DeliveryWithinState }}</td>
                             </tr>
                             <tr>
-                                <td class="product-page-features-table-specs">Color Display:</td>
-                                <td class="product-page-features-table-details">Yes</td>
-                                <td></td>
+                                <td class="product-page-features-table-specs">Delivery Within Geographic Range:</td>
+                                <td class="product-page-features-table-details">{{ $product_details->DeliveryWithinGR }}</td>
                             </tr>
                             <tr>
-                                <td class="product-page-features-table-specs">Vibration Alert:</td>
-                                <td class="product-page-features-table-details">Yes</td>
-                                <td></td>
+                                <td class="product-page-features-table-specs">Delivery Out Geographic Range:</td>
+                                <td class="product-page-features-table-details">{{ $product_details->DeliveryOutsideGR }}</td>
                             </tr>
                             <tr>
-                                <td class="product-page-features-table-specs">Build-In GPS:</td>
-                                <td class="product-page-features-table-details">Yes</td>
-                                <td></td>
+                                <td class="product-page-features-table-specs">Duration Delivery Within State:</td>
+                                <td class="product-page-features-table-details">{{ $product_details->DurationDeliveryWithinState }}</td>
                             </tr>
                             <tr>
-                                <td class="product-page-features-table-specs">Mobile Operating System:</td>
-                                <td class="product-page-features-table-details">Android</td>
-                                <td></td>
+                                <td class="product-page-features-table-specs">Duration Delivery Within Geographic Range:</td>
+                                <td class="product-page-features-table-details">{{ $product_details->DurationDeliveryWithinGR }}</td>
                             </tr>
                             <tr>
-                                <td class="product-page-features-table-specs">Band and Mode:</td>
-                                <td class="product-page-features-table-details">Quad-band</td>
-                                <td>Number/type of bands and modes the phone can use, which affects coverage and capabilities.</td>
+                                <td class="product-page-features-table-specs">Duration Delivery Outside Geographic Range:</td>
+                                <td class="product-page-features-table-details">{{ $product_details->DurationDeliveryOutsideGR }}</td>
+                            </tr>
+                            <tr>
+                                <td class="product-page-features-table-specs">Payment Method:</td>
+                                <td class="product-page-features-table-details">{{ $product_details->paymentMethod }}</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+                <div class="mfp-with-anim mfp-hide mfp-dialog clearfix" id="write-review-dialog">
+                    <h3 class="widget-title">Write Your Review</h3>
+                    @if (Session::get('web_user_data')[0] ['web_user_id'])
+                    @else
+                    <p>You need to singin or singup to write review.</p>
+                    @endif
+                    <hr />
+                    <form method="POST" action="{{ url('/review_submit') }}" aria-label="{{ __('review_submit') }}">
+                        @csrf
+                        <div class="form-group">
+                            <label>Review</label>
+                            <textarea class="form-control" name="review">{{ old('review') }}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Rating</label>
+                            <input type="number" class="form-control" step="1" name="rating" min="1" max="5" placeholder="Minimum 1 and Maximum 5" >
+                        </div>
+                        <input class="btn btn-primary" type="submit" value="Submit" />
+                    </form>
+                </div>
                 <div class="tab-pane fade" id="tab-3">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-12">
                             <h3 class="product-tab-rating-title">Overall Customer Rating:</h3>
                             <ul class="product-page-product-rating product-rating-big">
                                 <li class="rated"><i class="fa fa-star"></i>
@@ -373,88 +351,15 @@
                                 </li>
                                 <li class="count">4.9</li>
                             </ul><small>238 customer reviews</small>
-                            <p><strong>98%</strong> of reviewers would recommend this product</p><a class="btn btn-primary" href="#">Write a Review</a>
+
+                            <a href="#write-review-dialog" data-effect="mfp-move-from-top" class="popup-text btn btn-primary">Write a Review</a>
                         </div>
-                        <div class="col-md-5">
-                            <ul class="product-rate-list">
-                                <li>
-                                    <p class="product-rate-list-item">Camera</p>
-                                    <div class="product-rate-list-bar">
-                                        <div style="width:95%;"></div>
-                                    </div>
-                                    <p class="product-rate-list-count">95%</p>
-                                </li>
-                                <li>
-                                    <p class="product-rate-list-item">Sound Quality</p>
-                                    <div class="product-rate-list-bar">
-                                        <div style="width:90%;"></div>
-                                    </div>
-                                    <p class="product-rate-list-count">90%</p>
-                                </li>
-                                <li>
-                                    <p class="product-rate-list-item">Screen</p>
-                                    <div class="product-rate-list-bar">
-                                        <div style="width:100%;"></div>
-                                    </div>
-                                    <p class="product-rate-list-count">100%</p>
-                                </li>
-                                <li>
-                                    <p class="product-rate-list-item">Battery Life</p>
-                                    <div class="product-rate-list-bar">
-                                        <div style="width:95%;"></div>
-                                    </div>
-                                    <p class="product-rate-list-count">95%</p>
-                                </li>
-                                <li>
-                                    <p class="product-rate-list-item">Look & Feel</p>
-                                    <div class="product-rate-list-bar">
-                                        <div style="width:100%;"></div>
-                                    </div>
-                                    <p class="product-rate-list-count">100%</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-md-3">
-                            <ul class="product-rate-list">
-                                <li>
-                                    <p class="product-rate-list-item">5 Stars</p>
-                                    <div class="product-rate-list-bar">
-                                        <div style="width:96%;"></div>
-                                    </div>
-                                    <p class="product-rate-list-count">210</p>
-                                </li>
-                                <li>
-                                    <p class="product-rate-list-item">4 Stars</p>
-                                    <div class="product-rate-list-bar">
-                                        <div style="width:3%;"></div>
-                                    </div>
-                                    <p class="product-rate-list-count">10</p>
-                                </li>
-                                <li>
-                                    <p class="product-rate-list-item">3 Stars</p>
-                                    <div class="product-rate-list-bar">
-                                        <div style="width:0%;"></div>
-                                    </div>
-                                    <p class="product-rate-list-count">0</p>
-                                </li>
-                                <li>
-                                    <p class="product-rate-list-item">2 Stars</p>
-                                    <div class="product-rate-list-bar">
-                                        <div style="width:2%;"></div>
-                                    </div>
-                                    <p class="product-rate-list-count">6</p>
-                                </li>
-                                <li>
-                                    <p class="product-rate-list-item">1 Star</p>
-                                    <div class="product-rate-list-bar">
-                                        <div style="width:1%;"></div>
-                                    </div>
-                                    <p class="product-rate-list-count">3</p>
-                                </li>
-                            </ul>
-                        </div>
+                        
+                        
                     </div>
                     <hr />
+
+
                     <article class="product-review">
                         <div class="product-review-author">
                             <img class="product-review-author-img" src="{{ asset('public/content/img/70x70.png') }}" alt="Image Alternative text" title="Image Title" />
@@ -470,185 +375,14 @@
                                 </li>
                                 <li class="rated"><i class="fa fa-star"></i>
                                 </li>
-                                <li class="rated"><i class="fa fa-star"></i>
+                                <li class="rated"><i class="fa fa-star-half-o"></i>
                                 </li>
                             </ul>
                             <p class="product-review-meta">by Keith Churchill on 08/14/2015</p>
                             <p class="product-review-body">Maecenas vestibulum primis et congue enim convallis pharetra mi diam a venenatis venenatis nibh fames pretium convallis</p>
-                            <p class="text-success"><strong><i class="fa fa-check"></i> I would recommend this to a friend!</strong>
-                            </p>
-                            <ul class="list-inline product-review-actions">
-                                <li><a href="#"><i class="fa fa-flag"></i> Flag this review</a>
-                                </li>
-                                <li><a href="#"><i class="fa fa-comment"></i> Comment review</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="product-review-side">
-                            <p><strong>6</strong> out of <strong>6</strong> found this review helpful</p>
-                            <p class="product-review-side-sign">Was this review helpful?</p><a class="product-review-rate" href="#"><i class="fa fa-thumbs-up"></i>6</a><a class="product-review-rate" href="#"><i class="fa fa-thumbs-down"></i>0</a>
                         </div>
                     </article>
-                    <article class="product-review">
-                        <div class="product-review-author">
-                            <img class="product-review-author-img" src="{{ asset('public/content/img/70x70.png') }}" alt="Image Alternative text" title="Image Title" />
-                        </div>
-                        <div class="product-review-content">
-                            <h5 class="product-review-title">Too Big. Unusable.</h5>
-                            <ul class="product-page-product-rating">
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li><i class="fa fa-star"></i>
-                                </li>
-                                <li><i class="fa fa-star"></i>
-                                </li>
-                                <li><i class="fa fa-star"></i>
-                                </li>
-                            </ul>
-                            <p class="product-review-meta">by Carl Butler on 08/14/2015</p>
-                            <p class="product-review-body">Ac donec dictum sociis pharetra cubilia bibendum convallis volutpat in placerat suscipit urna mus posuere habitasse venenatis praesent himenaeos litora arcu magna imperdiet mollis phasellus vel</p>
-                            <p class="text-danger"><strong><i class="fa fa-close"></i> No, I would not recommend this to a friend.</strong>
-                            </p>
-                            <ul class="list-inline product-review-actions">
-                                <li><a href="#"><i class="fa fa-flag"></i> Flag this review</a>
-                                </li>
-                                <li><a href="#"><i class="fa fa-comment"></i> Comment review</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="product-review-side">
-                            <p><strong>1</strong> out of <strong>2</strong> found this review helpful</p>
-                            <p class="product-review-side-sign">Was this review helpful?</p><a class="product-review-rate" href="#"><i class="fa fa-thumbs-up"></i>1</a><a class="product-review-rate" href="#"><i class="fa fa-thumbs-down"></i>1</a>
-                        </div>
-                    </article>
-                    <article class="product-review">
-                        <div class="product-review-author">
-                            <img class="product-review-author-img" src="{{ asset('public/content/img/70x70.png') }}" alt="Image Alternative text" title="Image Title" />
-                        </div>
-                        <div class="product-review-content">
-                            <h5 class="product-review-title">Worth it</h5>
-                            <ul class="product-page-product-rating">
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                            </ul>
-                            <p class="product-review-meta">by John Doe on 08/14/2015</p>
-                            <p class="product-review-body">Rhoncus elementum lobortis parturient tempus vestibulum suscipit proin mus vel et suscipit consequat ornare senectus elit lacus aenean commodo nostra senectus nascetur dignissim dictumst cubilia eget porta pharetra proin
-                                luctus</p>
-                            <p class="text-success"><strong><i class="fa fa-check"></i> I would recommend this to a friend!</strong>
-                            </p>
-                            <ul class="list-inline product-review-actions">
-                                <li><a href="#"><i class="fa fa-flag"></i> Flag this review</a>
-                                </li>
-                                <li><a href="#"><i class="fa fa-comment"></i> Comment review</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="product-review-side">
-                            <p><strong>6</strong> out of <strong>6</strong> found this review helpful</p>
-                            <p class="product-review-side-sign">Was this review helpful?</p><a class="product-review-rate" href="#"><i class="fa fa-thumbs-up"></i>6</a><a class="product-review-rate" href="#"><i class="fa fa-thumbs-down"></i>0</a>
-                        </div>
-                    </article>
-                    <article class="product-review">
-                        <div class="product-review-author">
-                            <img class="product-review-author-img" src="{{ asset('public/content/img/70x70.png') }}" alt="Image Alternative text" title="Image Title" />
-                        </div>
-                        <div class="product-review-content">
-                            <h5 class="product-review-title">Great Affordable Phone</h5>
-                            <ul class="product-page-product-rating">
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                            </ul>
-                            <p class="product-review-meta">by Joe Smith on 08/14/2015</p>
-                            <p class="product-review-body">Elit habitant dictumst sociis vitae maecenas ante est netus magna duis morbi sed porttitor dapibus risus suscipit vestibulum tellus montes leo nunc rutrum ut sed mi tincidunt</p>
-                            <p class="text-success"><strong><i class="fa fa-check"></i> I would recommend this to a friend!</strong>
-                            </p>
-                            <ul class="list-inline product-review-actions">
-                                <li><a href="#"><i class="fa fa-flag"></i> Flag this review</a>
-                                </li>
-                                <li><a href="#"><i class="fa fa-comment"></i> Comment review</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="product-review-side">
-                            <p><strong>5</strong> out of <strong>6</strong> found this review helpful</p>
-                            <p class="product-review-side-sign">Was this review helpful?</p><a class="product-review-rate" href="#"><i class="fa fa-thumbs-up"></i>5</a><a class="product-review-rate" href="#"><i class="fa fa-thumbs-down"></i>1</a>
-                        </div>
-                    </article>
-                    <article class="product-review">
-                        <div class="product-review-author">
-                            <img class="product-review-author-img" src="{{ asset('public/content/img/70x70.png') }}" alt="Image Alternative text" title="Image Title" />
-                        </div>
-                        <div class="product-review-content">
-                            <h5 class="product-review-title">Excellent</h5>
-                            <ul class="product-page-product-rating">
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                            </ul>
-                            <p class="product-review-meta">by Oliver Ross on 08/14/2015</p>
-                            <p class="product-review-body">Aptent leo dapibus arcu inceptos orci nunc sollicitudin vestibulum diam magnis posuere vulputate tincidunt proin eget</p>
-                            <p class="text-success"><strong><i class="fa fa-check"></i> I would recommend this to a friend!</strong>
-                            </p>
-                            <ul class="list-inline product-review-actions">
-                                <li><a href="#"><i class="fa fa-flag"></i> Flag this review</a>
-                                </li>
-                                <li><a href="#"><i class="fa fa-comment"></i> Comment review</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="product-review-side">
-                            <p><strong>8</strong> out of <strong>8</strong> found this review helpful</p>
-                            <p class="product-review-side-sign">Was this review helpful?</p><a class="product-review-rate" href="#"><i class="fa fa-thumbs-up"></i>8</a><a class="product-review-rate" href="#"><i class="fa fa-thumbs-down"></i>0</a>
-                        </div>
-                    </article>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p class="category-pagination-sign">238 customer reviews found. Showing 1 - 5</p>
-                        </div>
-                        <div class="col-md-6">
-                            <nav>
-                                <ul class="pagination category-pagination pull-right">
-                                    <li class="active"><a href="#">1</a>
-                                    </li>
-                                    <li><a href="#">2</a>
-                                    </li>
-                                    <li><a href="#">3</a>
-                                    </li>
-                                    <li><a href="#">4</a>
-                                    </li>
-                                    <li><a href="#">5</a>
-                                    </li>
-                                    <li class="last"><a href="#"><i class="fa fa-long-arrow-right"></i></a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
+
                 </div>
                 <div class="tab-pane fade" id="tab-4">
                     <div class="row">
@@ -898,17 +632,20 @@
         </div>
         <div class="gap"></div>
         <h3 class="widget-title">You Might Also Like</h3>
+        
+        @foreach($related as $product_data)
+
         <div class="row" data-gutter="15">
             <div class="col-md-3">
                 <div class="product ">
                     <ul class="product-labels"></ul>
                     <div class="product-img-wrap">
-                        <img class="product-img-primary" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
-                        <img class="product-img-alt" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
+                        <img class="product-img-primary" src="{{ asset('public/backend/img/vendor/products').'/'.$product_data->productImage1 }}" />
+                        <img class="product-img-alt" src="{{ asset('public/backend/img/vendor/products').'/'.$product_data->productImage2 }}" />
                     </div>
-                    <a class="product-link" href="#"></a>
+                    <a class="product-link" href="{{ url('/product/'.$product_data->productCategory.'/'.$product_data->productSubCategory.'/'.$product_data->product_number) }}"></a>
                     <div class="product-caption">
-                        <ul class="product-caption-rating">
+                        <!-- <ul class="product-caption-rating">
                             <li class="rated"><i class="fa fa-star"></i>
                             </li>
                             <li class="rated"><i class="fa fa-star"></i>
@@ -919,235 +656,22 @@
                             </li>
                             <li><i class="fa fa-star"></i>
                             </li>
-                        </ul>
-                        <h5 class="product-caption-title">Apple iPhone 4S 16GB Factory Unlocked Black and White Smartphone</h5>
-                        <div class="product-caption-price"><span class="product-caption-price-new">$51</span>
+                        </ul> -->
+                        <h5 class="product-caption-title">{{ $product_data->productName }}</h5>
+                        <div class="product-caption-price"><span class="product-caption-price-new">${{ $product_data->pd_price }}</span>
                         </div>
-                        <ul class="product-caption-feature-list">
-                            <li>Free Shipping</li>
-                        </ul>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="product ">
-                    <ul class="product-labels">
-                        <li>-20%</li>
-                    </ul>
-                    <div class="product-img-wrap">
-                        <img class="product-img-primary" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
-                        <img class="product-img-alt" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
-                    </div>
-                    <a class="product-link" href="#"></a>
-                    <div class="product-caption">
-                        <ul class="product-caption-rating">
-                            <li class="rated"><i class="fa fa-star"></i>
-                            </li>
-                            <li class="rated"><i class="fa fa-star"></i>
-                            </li>
-                            <li class="rated"><i class="fa fa-star"></i>
-                            </li>
-                            <li class="rated"><i class="fa fa-star"></i>
-                            </li>
-                            <li class="rated"><i class="fa fa-star"></i>
-                            </li>
-                        </ul>
-                        <h5 class="product-caption-title">LG G Flex D959 - 32GB - Titan Silver GSM Unlocked Android Smartphone (B)</h5>
-                        <div class="product-caption-price"><span class="product-caption-price-old">$85</span><span class="product-caption-price-new">$68</span>
-                        </div>
-                        <ul class="product-caption-feature-list">
-                            <li>Free Shipping</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="product ">
-                    <ul class="product-labels"></ul>
-                    <div class="product-img-wrap">
-                        <img class="product-img-primary" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
-                        <img class="product-img-alt" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
-                    </div>
-                    <a class="product-link" href="#"></a>
-                    <div class="product-caption">
-                        <ul class="product-caption-rating">
-                            <li class="rated"><i class="fa fa-star"></i>
-                            </li>
-                            <li class="rated"><i class="fa fa-star"></i>
-                            </li>
-                            <li class="rated"><i class="fa fa-star"></i>
-                            </li>
-                            <li><i class="fa fa-star"></i>
-                            </li>
-                            <li><i class="fa fa-star"></i>
-                            </li>
-                        </ul>
-                        <h5 class="product-caption-title">HTC One M8 32GB Factory Unlocked Smartphone  Gold / Silver Gray</h5>
-                        <div class="product-caption-price"><span class="product-caption-price-new">$86</span>
-                        </div>
-                        <ul class="product-caption-feature-list">
-                            <li>Free Shipping</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="product ">
-                    <ul class="product-labels"></ul>
-                    <div class="product-img-wrap">
-                        <img class="product-img-primary" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
-                        <img class="product-img-alt" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
-                    </div>
-                    <a class="product-link" href="#"></a>
-                    <div class="product-caption">
-                        <ul class="product-caption-rating">
-                            <li class="rated"><i class="fa fa-star"></i>
-                            </li>
-                            <li class="rated"><i class="fa fa-star"></i>
-                            </li>
-                            <li class="rated"><i class="fa fa-star"></i>
-                            </li>
-                            <li class="rated"><i class="fa fa-star"></i>
-                            </li>
-                            <li class="rated"><i class="fa fa-star"></i>
-                            </li>
-                        </ul>
-                        <h5 class="product-caption-title">Samsung Galaxy Note 4 IV 4G FACTORY UNLOCKED Black or White</h5>
-                        <div class="product-caption-price"><span class="product-caption-price-new">$68</span>
-                        </div>
-                        <ul class="product-caption-feature-list">
-                            <li>Free Shipping</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row" data-gutter="15">
-            <div class="col-md-3">
-                <div class="product ">
-                    <ul class="product-labels"></ul>
-                    <div class="product-img-wrap">
-                        <img class="product-img-primary" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
-                        <img class="product-img-alt" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
-                    </div>
-                    <a class="product-link" href="#"></a>
-                    <div class="product-caption">
-                        <ul class="product-caption-rating">
-                            <li class="rated"><i class="fa fa-star"></i>
-                            </li>
-                            <li class="rated"><i class="fa fa-star"></i>
-                            </li>
-                            <li class="rated"><i class="fa fa-star"></i>
-                            </li>
-                            <li><i class="fa fa-star"></i>
-                            </li>
-                            <li><i class="fa fa-star"></i>
-                            </li>
-                        </ul>
-                        <h5 class="product-caption-title">HTC One M8 32GB Factory Unlocked Smartphone  Gold / Silver Gray</h5>
-                        <div class="product-caption-price"><span class="product-caption-price-new">$86</span>
-                        </div>
-                        <ul class="product-caption-feature-list">
-                            <li>Free Shipping</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="product ">
-                    <ul class="product-labels"></ul>
-                    <div class="product-img-wrap">
-                        <img class="product-img-primary" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
-                        <img class="product-img-alt" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
-                    </div>
-                    <a class="product-link" href="#"></a>
-                    <div class="product-caption">
-                        <ul class="product-caption-rating">
-                            <li class="rated"><i class="fa fa-star"></i>
-                            </li>
-                            <li class="rated"><i class="fa fa-star"></i>
-                            </li>
-                            <li class="rated"><i class="fa fa-star"></i>
-                            </li>
-                            <li><i class="fa fa-star"></i>
-                            </li>
-                            <li><i class="fa fa-star"></i>
-                            </li>
-                        </ul>
-                        <h5 class="product-caption-title">HTC One M8 32GB Factory Unlocked Smartphone  Gold / Silver Gray</h5>
-                        <div class="product-caption-price"><span class="product-caption-price-new">$86</span>
-                        </div>
-                        <ul class="product-caption-feature-list">
-                            <li>Free Shipping</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="product ">
-                    <ul class="product-labels"></ul>
-                    <div class="product-img-wrap">
-                        <img class="product-img-primary" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
-                        <img class="product-img-alt" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
-                    </div>
-                    <a class="product-link" href="#"></a>
-                    <div class="product-caption">
-                        <ul class="product-caption-rating">
-                            <li class="rated"><i class="fa fa-star"></i>
-                            </li>
-                            <li class="rated"><i class="fa fa-star"></i>
-                            </li>
-                            <li class="rated"><i class="fa fa-star"></i>
-                            </li>
-                            <li><i class="fa fa-star"></i>
-                            </li>
-                            <li><i class="fa fa-star"></i>
-                            </li>
-                        </ul>
-                        <h5 class="product-caption-title">HTC One M8 32GB Factory Unlocked Smartphone  Gold / Silver Gray</h5>
-                        <div class="product-caption-price"><span class="product-caption-price-new">$86</span>
-                        </div>
-                        <ul class="product-caption-feature-list">
-                            <li>Free Shipping</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="product ">
-                    <ul class="product-labels"></ul>
-                    <div class="product-img-wrap">
-                        <img class="product-img-primary" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
-                        <img class="product-img-alt" src="{{ asset('public/content/img/500x500.png') }}" alt="Image Alternative text" title="Image Title" />
-                    </div>
-                    <a class="product-link" href="#"></a>
-                    <div class="product-caption">
-                        <ul class="product-caption-rating">
-                            <li class="rated"><i class="fa fa-star"></i>
-                            </li>
-                            <li class="rated"><i class="fa fa-star"></i>
-                            </li>
-                            <li class="rated"><i class="fa fa-star"></i>
-                            </li>
-                            <li><i class="fa fa-star"></i>
-                            </li>
-                            <li><i class="fa fa-star"></i>
-                            </li>
-                        </ul>
-                        <h5 class="product-caption-title">HTC One M8 32GB Factory Unlocked Smartphone  Gold / Silver Gray</h5>
-                        <div class="product-caption-price"><span class="product-caption-price-new">$86</span>
-                        </div>
-                        <ul class="product-caption-feature-list">
-                            <li>Free Shipping</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            
+            @endforeach
+            
         </div>
     </div>
 @endsection
 
 @section('js')
+
 
 
 @endsection

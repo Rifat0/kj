@@ -1,4 +1,4 @@
-@extends('admin.layouts.layout')
+@extends('Admin.Layouts.layout')
 
 @section('css')
     <link href="{{ asset('public/backend/css/plugins/morris/morris-0.4.3.min.css') }}" rel="stylesheet">

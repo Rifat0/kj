@@ -11,12 +11,19 @@ Route::get('/category/sub-category/{cat_id}/{sub_cat_id}', 'Content\Product@get_
 Route::get('/product/{cat_id}/{sub_cat_id}/{p_id}', 'Content\Product@get_product');
 
 Route::get('/add-to-cart/{id}', 'Content\Product@add_to_cart');
-Route::get('/cart_item', 'Content\Home@cart_item');
+Route::get('/cart_item', 'Content\Home@cart_item')->name('cart_item');
+Route::get('/remove_cart_product/{key}', 'Content\Product@remove_cart_product');
 Route::get('/add-to-cart_des', 'Content\Product@cart_des');
+Route::post('/update_cart', 'Content\Product@update_cart');
 
-Route::get('/cart_empty', 'Content\Home@cart_empty')->name('cart_empty');
-Route::get('/checkout ', 'Content\Home@checkout')->name('checkout');
-Route::get('/summery ', 'Content\Home@summery')->name('summery');
+Route::post('/review_submit', 'Content\Product@review_submit');
+
+Route::get('/add-to-wishlist/{id}', 'Content\Product@add_to_wishlist');
+
+Route::get('/checkout ', 'Content\Home@checkout');
+Route::post('/checkout ', 'Content\Home@checkout_submit');
+
+Route::get('/summery/{order_id} ', 'Content\Home@summery')->name('summery');
 Route::get('/about_us ', 'Content\Home@about_us')->name('about_us');
 Route::get('/legal ', 'Content\Home@legal')->name('legal');
 Route::get('/favorite ', 'Content\Home@favorite')->name('favorite');
@@ -31,7 +38,7 @@ Route::post('/newsletter_submit ', 'Content\Home@newsletter_submit');
 // Vendor
 // ==========================================================================================================
 Route::get('/vendore', 'Vendor\Home@login');
-Route::get('/vendore/signUp', 'Vendor\Home@signUp');
+Route::get('/vendore/singup', 'Vendor\Home@signUp');
 Route::post('/vendore/login', 'Vendor\Home@login_submit');
 Route::post('/vendore/signUp', 'Vendor\Home@signUp_submit');
 	
@@ -56,6 +63,9 @@ Route::group(['middleware' => 'vendore_user'], function () {
 	Route::get('/vendor/products/pending_review', 'Vendor\Products@pending_review');
 	// Orders
 	Route::get('/vendor/orders', 'Vendor\Products@orders');
+	Route::get('/vendor/orders/view/{id}', 'Vendor\Products@orders_view');
+	Route::get('/vendor/orders/accept/{id}', 'Vendor\Products@orders_accept');
+	Route::get('/vendor/orders/reject/{id}', 'Vendor\Products@orders_reject');
 	// Report
 	Route::get('/vendor/report', 'Vendor\Products@report');
 	// Customers

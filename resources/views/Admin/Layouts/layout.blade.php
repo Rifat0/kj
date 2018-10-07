@@ -1,11 +1,11 @@
     <!-- Start Head --> 
-        @include ('admin.layouts.head')
+        @include ('Admin.Layouts.head')
     
     <!-- Start Navigation -->
-        @include ('admin.layouts.nav')
+        @include ('Admin.Layouts.nav')
 
     <!-- Start Content -->
         @yield('content')
             
     <!-- Start footer -->
-        @include ('admin.layouts.footer')
+        @include ('Admin.Layouts.footer')

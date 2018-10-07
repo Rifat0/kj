@@ -15,13 +15,13 @@ class CreateVendorProductImages extends Migration
     {
         Schema::create('vendor_product_images', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('vendore_user_id',255);
-            $table->string('product_number',255);
-            $table->string('productImage1',20);
-            $table->string('productImage2',20);
-            $table->string('productImage3',20);
-            $table->string('productImage4',20);
-            $table->string('productImage5',20);
+            $table->string('vendore_user_id',20);
+            $table->string('product_number',40);
+            $table->string('productImage1',20)->nullable();
+            $table->string('productImage2',20)->nullable();
+            $table->string('productImage3',20)->nullable();
+            $table->string('productImage4',20)->nullable();
+            $table->string('productImage5',20)->nullable();
             $table->timestamps();
         });
     }

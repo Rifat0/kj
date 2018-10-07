@@ -22,7 +22,7 @@
         <div>
             
             <h2>Vendor Sing up.</h2>
-            @include('admin.layouts.message')
+            @include('Admin.Layouts.message')
             <form method="POST" action="{{ url('vendore/signUp') }}">
                         @csrf
                 <div class="col-sm-6">

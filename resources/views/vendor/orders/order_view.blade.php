@@ -1,4 +1,4 @@
-@extends('Admin.Layouts.layout')
+@extends('vendor.layouts.layout')
 
 @section('css')
     
@@ -25,19 +25,20 @@
                 <div class="col-md-6">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Vendor Profile</h5>
+                            <h5>Order Details</h5>
                         </div>
                         <div>
                             <div class="ibox-content profile-content">
-                                <h4><strong>{{ $vendore_data->name }}</strong></h4>
-                                <p><i class="fa fa-map-marker"></i> join Date {{ Carbon::parse($vendore_data->created_at)->format('d-m-Y') }}</p>
-                                <br>
-                                <h4>
-                                    Vendore Type : {{ $vendore_data->vendor_type }}
-                                </h4>
-                                <h4>
-                                    Vendore Email : {{ $vendore_data->email }}
-                                </h4>
+                                @foreach($products as $products)
+                                <p><a target="_blank" href="{{ url('/product').'/'.$products->productCategory.'/'.$products->productSubCategory.'/'.$products->product_number }}">{{ $products->productName }}</a> * {{ $products->quantity }}</p>
+                                @endforeach
+                                <h4>Order Person: <strong>{{ $order_data->web_user_id }}</strong></h4>
+                                <h4>Shipping Country: <strong>{{ $order_data->country }}</strong></h4>
+                                <h4>Shipping City: <strong>{{ $order_data->city }}</strong></h4>
+                                <h4>Shipping Address: <strong>{{ $order_data->address }}</strong></h4>
+                                <h4>Order Date: <strong>{{ Carbon::parse($order_data->created_at)->format('d-m-Y') }}</strong></h4>
+                                <a href="{{ url('/vendor/orders/accept').'/'.$order_data->order_id }}" class="btn btn-info btn-xs">Accept</a>
+                                <a href="{{ url('/vendor/orders/reject').'/'.$order_data->order_id }}" class="btn btn-danger btn-xs">Reject</a>
                             </div>
                     </div>
                 </div>

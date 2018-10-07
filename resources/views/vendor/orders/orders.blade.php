@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-6">
             <?php $segment = Request::segment(2); ?>
@@ -20,6 +21,7 @@
         </div>
     </div>
     <div class="wrapper wrapper-content animated fadeInRight">
+        @include('Admin.Layouts.message')
         <div class="row">
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
@@ -32,38 +34,49 @@
                     <table class="table table-striped table-bordered table-hover dataTables-example" >
                     <thead>
                     <tr>
-                        <th>Product Name</th>
                         <th>Order ID</th>
-                        <th>Order Date</th>
                         <th>Company Name</th>
-                        <th>Payment Type</th>
-                        <th>Total Price</th>
+                        <th>Country</th>
+                        <th>City</th>
+                        <th>Address</th>
+                        <th>Order Date</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Trident</td>
-                        <td>Internet</td>
-                        <td>Win 95+</td>
-                        <td>4</td>
-                        <td>4</td>
-                        <td>4</td>
-                        <td>4</td>
-                        <td class="center">
-                            <a href="{{ url('#') }}" class="btn btn-primary btn-sm"> Accept Payment </a>
-                        </td>
-                    </tr>
+                        @foreach($order_data as $key => $order_data)
+                        <tr>
+                            <td>{{ $order_data['order_id'] }}</td>
+                            <td>{{ $order_data['ordrer_person'] }}</td>
+                            <td>{{ $order_data['country'] }}</td>
+                            <td>{{ $order_data['city'] }}</td>
+                            <td>{{ $order_data['address'] }}</td>
+                            <td>{{ Carbon::parse($order_data['date'])->format('d-m-Y') }}</td>
+                            <td>
+                                @if($order_data['status']==0)
+                                <label>Pending</label>
+                                @elseif($order_data['status']==1)
+                                <label>Accepted</label>
+                                @elseif($order_data['status']==2)
+                                <label>Rejected</label>
+                                @endif
+                            </td>
+                            <td class="center">
+                                <a href="{{ url('/vendor/orders/view/'.$order_data['order_id']) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye" aria-hidden="true"></i>
+</a>
+                            </td>
+                        </tr>
+                        @endforeach
                     </tbody>
                     <tfoot>
                     <tr>
-                        <th>Product Name</th>
                         <th>Order ID</th>
-                        <th>Order Date</th>
                         <th>Company Name</th>
-                        <th>Payment Type</th>
-                        <th>Total Price</th>
+                        <th>Country</th>
+                        <th>City</th>
+                        <th>Address</th>
+                        <th>Order Date</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
