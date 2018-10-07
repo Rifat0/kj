@@ -15,7 +15,7 @@
                             </ul>
                         </div>
                         <div class="logo-element">
-                            IN+
+                            KJ
                         </div>
                     </li>
                     <li class="active">
@@ -38,18 +38,12 @@
                         <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Product</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li><a href="{{ url('/admin/product_ap_rj') }}">Approve/Reject</a></li>
-                            <li><a href="#">Add Product</a></li>
+                            <li><a href="{{ url('/admin/products/create_new_product') }}">Add Product</a></li>
                             <li><a href="{{ url('/admin/update_product_ap_rj') }}">App/Rej Update</a></li>
-                            <li><a href="{{ url('/admin/product_data') }}">Product Data</a></li>
-                            <li><a href="#">Export Data</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Vendors/Sellers</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a href="{{ url('/admin/vendor_ap_rj') }}">Approve/Reject</a></li>
-                            <li><a href="{{ url('/admin/add_vendor') }}">Add Vendor/Seller</a></li>
-                        </ul>
+                        <a href="{{ url('/admin/vendor_ap_rj') }}"><i class="fa fa-laptop"></i> <span class="nav-label">Vendors/Sellers</span></a>
                     </li>
                     <li>
                         <a href="{{ url('/admin/coustomer_buyer_list') }}"><i class="fa fa-laptop"></i> <span class="nav-label">Coustomer/Buyer</span></a>
@@ -98,16 +92,8 @@
         <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
             <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-            <form role="search" class="navbar-form-custom" action="search_results.html">
-                <div class="form-group">
-                    <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
-                </div>
-            </form>
         </div>
             <ul class="nav navbar-top-links navbar-right">
-                <li>
-                    <span class="m-r-sm text-muted welcome-message">Welcome to INSPINIA+ Admin Theme.</span>
-                </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                         <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
@@ -216,11 +202,6 @@
                         @csrf
                     </form>
 
-                </li>
-                <li>
-                    <a class="right-sidebar-toggle">
-                        <i class="fa fa-tasks"></i>
-                    </a>
                 </li>
             </ul>
 

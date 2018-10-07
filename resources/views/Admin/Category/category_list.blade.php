@@ -1,4 +1,4 @@
-@extends('admin.layouts.layout')
+@extends('Admin.Layouts.layout')
 
 @section('css')
     <link href="{{ asset('public/backend/css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">

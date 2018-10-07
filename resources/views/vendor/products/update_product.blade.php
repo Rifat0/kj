@@ -11,6 +11,7 @@
     <link href="{{ asset('public/backend/css/plugins/summernote/summernote.css') }}" rel="stylesheet">
     <link href="{{ asset('public/backend/css/plugins/summernote/summernote-bs3.css')}}" rel="stylesheet">
     <link href="{{ asset('public/backend/css/plugins/datapicker/datepicker3.css')}}" rel="stylesheet">
+    <link href="{{ asset('public/backend/css/plugins/jasny/jasny-bootstrap.min.css') }}" rel="stylesheet">
 
     <style>
         .imgPopup {
@@ -68,8 +69,8 @@
                 <a href="{{ url('/vendor/products/create_new_product') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Create New Products </a>
                 <a href="{{ url('/vendor/products/inventory_products') }}" class="btn btn-primary btn-sm"><i class="fa fa-houzz"></i> Inventory Products </a>
                 <a href="{{ url('/vendor/products/pending_review') }}" class="btn btn-primary btn-sm"><i class="fa fa-clock-o"></i> Pending Review </a>
-                <button type="submit" form="form-product" class="btn btn-primary btn-sm"><i class="fa fa-save"></i> </button>
-                <a href="{{ url('/vendor/products') }}"class="btn btn-default btn-sm"><i class="fa fa-reply"></i></a>
+                <button type="submit" form="form-product" data-toggle="tooltip" title="Save" class="btn btn-primary btn-sm"><i class="fa fa-save"></i></button>
+                <a href="{{ url('/vendor/products') }}" data-toggle="tooltip" title="" class="btn btn-default btn-sm" data-original-title="Cancel"><i class="fa fa-reply"></i></a>
             </div>
         </div>
     </div>
@@ -83,13 +84,10 @@
                         <li class=""><a data-toggle="tab" href="#tab-3"> Payment & Deliver Information</a></li>
                         <li class=""><a data-toggle="tab" href="#tab-4"> Images</a></li>
                     </ul>
-                    <form method="POST" action="{{ url('/vendor/products/update_product_request') }}" class="form-horizontal" id="form-product" enctype="multipart/form-data">
+                    <form method="POST" action="{{ url('/vendor/products/products_update') }}" class="form-horizontal" id="form-product" enctype="multipart/form-data">
                     {{ csrf_field() }}
 
-                    <input type="hidden" id="id" name="id" value="{{ $get_product_detail[0]->id }}" class="form-control">
-                    <input type="hidden" id="id" name="id" value="{{ $get_payment_delivery[0]->id }}" class="form-control">
-                    <input type="hidden" id="id" name="id" value="{{ $get_product_images[0]->id }}" class="form-control">
-                    <input type="hidden" name="previousProductImg" value="{{ $get_product_images[0]->productImage }}" class="form-control">
+                    <input type="hidden" name="product_number" value="{{ $product_data->product_number }}" class="form-control">
 
                     <div class="tab-content">
                         <div id="tab-1" class="tab-pane active">
@@ -99,7 +97,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Product Name: <font color="red">*</font></label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="productName" value="{{ $get_product_detail[0]->productName }}" class="form-control" placeholder="Enter product name">
+                                            <input type="text" name="productName" class="form-control" value="{{ old('productName') }}{{ $product_data->productName }}">
                                             @if ($errors->has('productName'))
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong><font color="red">{{ $errors->first('productName') }}</font></strong>
@@ -110,7 +108,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Product Generic Name: <font color="red">*</font></label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="productGenericName" value="{{ $get_product_detail[0]->productGenericName }}" class="form-control" placeholder="Enter product generic name">
+                                            <input type="text" name="productGenericName" class="form-control" value="{{ old('productGenericName') }}{{ $product_data->productGenericName }}">
                                             @if ($errors->has('productGenericName'))
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong><font color="red">{{ $errors->first('productGenericName') }}</font></strong>
@@ -120,9 +118,7 @@
                                     </div>
                                     <div class="form-group"><label class="col-sm-2 control-label">Description: <font color="red"> *</font></label>
                                         <div class="col-sm-10">
-                                            <textarea class="summernote" name="productDescription" placeholder="Enter description">
-                                                {{ $get_product_detail[0]->productDescription }}
-                                            </textarea>
+                                            <textarea class="summernote" name="productDescription" value="{{ old('productDescription') }}{{ $product_data->productDescription }}"></textarea>
                                             @if ($errors->has('productDescription'))
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong><font color="red">{{ $errors->first('productDescription') }}</font></strong>
@@ -133,7 +129,8 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Keywords:</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="productKeyword" value="{{ $get_product_detail[0]->productKeyword }}" class="tagsinput form-control" placeholder="Enter keywords">
+                                            <input type="text" name="productKeyword" class="tagsinput form-control">
+                                            </br>
                                             @if ($errors->has('productKeyword'))
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong><font color="red">{{ $errors->first('productKeyword') }}</font></strong>
@@ -152,7 +149,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Part Number:</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="partNumber" value="{{ $get_product_detail[0]->partNumber }}" class="form-control" placeholder="Enter part pumber">
+                                            <input type="text" name="partNumber" class="form-control" value="{{ old('partNumber') }}{{ $product_data->partNumber }}">
                                             @if ($errors->has('partNumber'))
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong><font color="red">{{ $errors->first('partNumber') }}</font></strong>
@@ -163,7 +160,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Menufacturer:</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="menufacturer" value="{{ $get_product_detail[0]->menufacturer }}" class="form-control" placeholder="Enter menufacturer">
+                                            <input type="text" name="menufacturer" class="form-control" value="{{ old('menufacturer') }}{{ $product_data->menufacturer }}">
                                             @if ($errors->has('menufacturer'))
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong><font color="red">{{ $errors->first('menufacturer') }}</font></strong>
@@ -174,7 +171,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Model:</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="modelNumber" value="{{ $get_product_detail[0]->modelNumber }}" class="form-control" placeholder="Enter model number">
+                                            <input type="text" name="modelNumber" class="form-control" value="{{ old('modelNumber') }}{{ $product_data->modelNumber }}">
                                             @if ($errors->has('modelNumber'))
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong><font color="red">{{ $errors->first('modelNumber') }}</font></strong>
@@ -184,16 +181,18 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Product Category: <font color="red">*</font></label>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-4">
                                             <select name="productCategory" class="form-control">
-                                                <option value="{{ $get_product_detail[0]->productCategory }}">{{ $get_product_detail[0]->productCategory }}</option>
-                                                <option>option 2</option>
+                                                <option disabled>-- Select Product Category --</option>
+                                                @foreach($product_category as $category)
+                                                <option value="{{ $category->category_id }}">{{ $category->category_name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label"></label>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-4">
                                             @if ($errors->has('productCategory'))
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong><font color="red">{{ $errors->first('productCategory') }}</font></strong>
@@ -203,16 +202,15 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Product Sub-Category: <font color="red">*</font></label>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-4">
                                             <select name="productSubCategory" class="form-control" >
-                                                <option value="{{ $get_product_detail[0]->productSubCategory }}">{{ $get_product_detail[0]->productSubCategory }}</option>
-                                                <option>option 2</option>
+                                                <option disabled>-- Select Sub Category --</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label"></label>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-4">
                                             @if ($errors->has('productSubCategory'))
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong><font color="red">{{ $errors->first('productSubCategory') }}</font></strong>
@@ -221,9 +219,20 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label class="col-sm-2 control-label">Stock Count:</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="stock_count" class="form-control" value="{{ old('stock_count') }}{{ $product_data->stock_count }}">
+                                            @if ($errors->has('stock_count'))
+                                                <span class="invalid-feedback" role="alert">
+                                                <strong><font color="red">{{ $errors->first('stock_count') }}</font></strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="col-sm-2 control-label">Accessories:</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="accessories" value="{{ $get_product_detail[0]->accessories }}" class="form-control" placeholder="Enter Accessories">
+                                            <input type="text" name="accessories" class="form-control" value="{{ old('accessories') }}{{ $product_data->accessories }}">
                                             @if ($errors->has('accessories'))
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong><font color="red">{{ $errors->first('accessories') }}</font></strong>
@@ -233,12 +242,12 @@
                                     </div>
                                     <div class="form-group"><label class="col-sm-2 control-label">Key Specification: <font color="red">*</font></label>
                                         <div class="col-sm-10">
-                                            <textarea name="keySpecification" class="summernote" placeholder="Enter key specification">
-                                                {{ $get_product_detail[0]->keySpecification }}
-                                            </textarea>
+                                            <textarea name="keySpecification" class="summernote" value="{{ old('keySpecification') }}{{ $product_data->keySpecification }}"></textarea>
                                             @if ($errors->has('keySpecification'))
                                                 <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('keySpecification') }}</font></strong>
+                                                    <strong>
+                                                        <font color="red">{{ $errors->first('keySpecification') }}</font>
+                                                    </strong>
                                                 </span>
                                             @endif
                                         </div>
@@ -246,53 +255,52 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Dimensions Per Unit:</label>
                                         <div class="col-sm-2">
-                                            <input type="text" name="dpu_w_p_length" value="{{ $get_payment_delivery[0]->dpu_w_p_length }}" class="form-control" placeholder="Enter length (Centimeter/CM)">
+                                            <input type="text" name="dpu_w_p_length" class="form-control" value="{{ old('dpu_w_p_length') }}{{ $product_payment_delivery_data->dpu_w_p_length }}">
                                             @if ($errors->has('dpu_w_p_length'))
                                                 <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('dpu_w_p_length') }}</font></strong>
+                                                    <strong>
+                                                        <font color="red">{{ $errors->first('dpu_w_p_length') }}</font>
+                                                    </strong>
                                                 </span>
                                             @endif
                                         </div>
                                         <div class="col-sm-2">
-                                            <input type="text" name="dpu_w_p_width" value="{{ $get_payment_delivery[0]->dpu_w_p_width }}" class="form-control" placeholder="Enter width (Centimeter/CM)">
+                                            <input type="text" name="dpu_w_p_width" class="form-control" value="{{ old('dpu_w_p_width') }}{{ $product_payment_delivery_data->dpu_w_p_width }}" >
                                             @if ($errors->has('dpu_w_p_width'))
                                                 <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('dpu_w_p_width') }}</font></strong>
+                                                    <strong>
+                                                        <font color="red">{{ $errors->first('dpu_w_p_width') }}</font>
+                                                    </strong>
                                                 </span>
                                             @endif
                                         </div>
                                         <div class="col-sm-2">
-                                            <input type="text" name="dpu_w_p_height" value="{{ $get_payment_delivery[0]->dpu_w_p_height }}" class="form-control" placeholder="Enter height (Centimeter/CM)">
+                                            <input type="text" name="dpu_w_p_height" class="form-control" value="{{ old('dpu_w_p_height') }}{{ $product_payment_delivery_data->dpu_w_p_height }}">
                                             @if ($errors->has('dpu_w_p_height'))
                                                 <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('dpu_w_p_height') }}</font></strong>
+                                                    <strong>
+                                                        <font color="red">{{ $errors->first('dpu_w_p_height') }}</font>
+                                                    </strong>
                                                 </span>
                                             @endif
                                         </div>
                                         <div class="col-sm-2">
-                                            <input type="text" name="dpu_w_p_weight" value="{{ $get_payment_delivery[0]->dpu_w_p_weight }}" class="form-control" placeholder="Enter weight (Killogram/KG)">
+                                            <input type="text" name="dpu_w_p_weight" class="form-control" value="{{ old('dpu_w_p_weight') }}{{ $product_payment_delivery_data->dpu_w_p_weight }}">
                                             @if ($errors->has('dpu_w_p_weight'))
                                                 <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('dpu_w_p_weight') }}</font></strong>
+                                                    <strong>
+                                                        <font color="red">{{ $errors->first('dpu_w_p_weight') }}</font>
+                                                    </strong>
                                                 </span>
                                             @endif
                                         </div>
                                         <div class="col-sm-2">
-                                            <input type="text" name="dpu_w_p_volume" value="{{ $get_payment_delivery[0]->dpu_w_p_volume }}" class="form-control" placeholder="Enter volume (Cube meter/CM3)">
+                                            <input type="text" name="dpu_w_p_volume" class="form-control" value="{{ old('dpu_w_p_volume') }}{{ $product_payment_delivery_data->dpu_w_p_volume }}">
                                             @if ($errors->has('dpu_w_p_volume'))
                                                 <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('dpu_w_p_volume') }}</font></strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Vendor/Seller:</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" name="vendor" value="{{ $get_product_detail[0]->vendor }}" class="form-control" placeholder="Enter vendor/seller">
-                                            @if ($errors->has('vendor'))
-                                                <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('vendor') }}</font></strong>
+                                                    <strong>
+                                                        <font color="red">{{ $errors->first('dpu_w_p_volume') }}</font>
+                                                    </strong>
                                                 </span>
                                             @endif
                                         </div>
@@ -301,7 +309,7 @@
                                         <label class="col-sm-2 control-label">Supply Type:</label>
                                         <div class="col-sm-10">
                                             <select name="supplyType" class="form-control">
-                                                <option value="{{ $get_product_detail[0]->supplyType }}">{{ $get_product_detail[0]->supplyType }}</option>
+                                                <option value="">Select</option>
                                                 <option>OEM / Manufacturer</option>
                                                 <option>Distributor</option>
                                                 <option>Wholesaler</option>
@@ -322,10 +330,12 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Color:</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="color" value="{{ $get_product_detail[0]->color }}" class="tagsinput form-control" placeholder="Enter Color">
+                                            <input type="text" name="color" class="tagsinput form-control">
                                             @if ($errors->has('color'))
                                                 <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('color') }}</font></strong>
+                                                    <strong>
+                                                        <font color="red">{{ $errors->first('color') }}</font>
+                                                    </strong>
                                                 </span>
                                             @endif
                                         </div>
@@ -361,26 +371,39 @@
                                                 <input type="radio" id="inlineRadio1" value="no" name="smallOrdersAccepted" checked>
                                                 <label for="inlineRadio2"> No </label>
                                             </div>
+<<<<<<< HEAD
                                             @endif
                                             <span class="help-block m-b-none"></span>
+=======
+                                            @if ($errors->has('smallOrdersAccepted'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>
+                                                        <font color="red">{{ $errors->first('smallOrdersAccepted') }}</font>
+                                                    </strong>
+                                                </span>
+                                            @endif
+>>>>>>> 40c6a31b5ead0d6e363124b0dbea6166b49af97d
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Minimum Order Quantity:</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="minimumOrderQuantity" value="{{ $get_payment_delivery[0]->minimumOrderQuantity }}" class="form-control" placeholder="Enter minimum order quantity">
+                                            <input type="text" name="minimumOrderQuantity" class="form-control" value="{{ old('minimumOrderQuantity') }}{{ $product_payment_delivery_data->minimumOrderQuantity }}">
                                             @if ($errors->has('minimumOrderQuantity'))
                                                 <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('minimumOrderQuantity') }}</font></strong>
+                                                    <strong>
+                                                        <font color="red">{{ $errors->first('minimumOrderQuantity') }}</font>
+                                                    </strong>
                                                 </span>
                                             @endif
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Unit of Measure:</label>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-4">
                                             <select name="unitOfMeasure" class="form-control">
-                                                <option value="{{ $get_payment_delivery[0]->unitOfMeasure }}">{{ $get_payment_delivery[0]->unitOfMeasure }}</option>
+                                                <option value="">Select</option>
+                                                <option>option 1</option>
                                                 <option>option 2</option>
                                             </select>
                                         </div>
@@ -398,10 +421,12 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Price: <font color="red">*</font></label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="pd_price" value="{{ $get_payment_delivery[0]->pd_price }}" class="form-control" placeholder="Enter price">
+                                            <input type="text" name="pd_price" class="form-control" value="{{ old('pd_price') }}{{ $product_data->pd_price }}">
                                             @if ($errors->has('pd_price'))
                                                 <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('pd_price') }}</font></strong>
+                                                    <strong>
+                                                        <font color="red">{{ $errors->first('pd_price') }}</font>
+                                                    </strong>
                                                 </span>
                                             @endif
                                         </div>
@@ -409,10 +434,12 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Price for Optional Units:</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="pd_priceForOptional" value="{{ $get_payment_delivery[0]->pd_priceForOptional }}" class="form-control" placeholder="Enter price for optional">
+                                            <input type="text" name="pd_priceForOptional" class="form-control" value="{{ old('pd_priceForOptional') }}{{ $product_payment_delivery_data->pd_priceForOptional }}">
                                             @if ($errors->has('pd_priceForOptional'))
                                                 <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('pd_priceForOptional') }}</font></strong>
+                                                    <strong>
+                                                        <font color="red">{{ $errors->first('pd_priceForOptional') }}</font>
+                                                    </strong>
                                                 </span>
                                             @endif
                                         </div>
@@ -420,26 +447,32 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Price:</label>
                                         <div class="col-sm-3">
-                                            <input type="text" name="instantPrice" value="{{ $get_payment_delivery[0]->instantPrice }}" class="form-control" placeholder="Enter instant price">
+                                            <input type="text" name="instantPrice" class="form-control" value="{{ old('instantPrice') }}{{ $product_payment_delivery_data->instantPrice }}">
                                             @if ($errors->has('instantPrice'))
                                                 <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('instantPrice') }}</font></strong>
+                                                    <strong>
+                                                        <font color="red">{{ $errors->first('instantPrice') }}</font>
+                                                    </strong>
                                                 </span>
                                             @endif
                                         </div>
                                         <div class="col-sm-3">
-                                            <input type="text" name="fifteenDaysPrice" value="{{ $get_payment_delivery[0]->fifteenDaysPrice }}" class="form-control" placeholder="Enter 15 days price">
+                                            <input type="text" name="fifteenDaysPrice" class="form-control" value="{{ old('fifteenDaysPrice') }}{{ $product_payment_delivery_data->fifteenDaysPrice }}">
                                             @if ($errors->has('fifteenDaysPrice'))
                                                 <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('fifteenDaysPrice') }}</font></strong>
+                                                    <strong>
+                                                        <font color="red">{{ $errors->first('fifteenDaysPrice') }}</font>
+                                                    </strong>
                                                 </span>
                                             @endif
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" name="thirteenDaysPrice" value="{{ $get_payment_delivery[0]->thirteenDaysPrice }}" class="form-control" placeholder="Enter 30 days price">
+                                            <input type="text" name="thirteenDaysPrice" class="form-control" value="{{ old('thirteenDaysPrice') }}{{ $product_payment_delivery_data->thirteenDaysPrice }}">
                                             @if ($errors->has('thirteenDaysPrice'))
                                                 <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('thirteenDaysPrice') }}</font></strong>
+                                                    <strong>
+                                                        <font color="red">{{ $errors->first('thirteenDaysPrice') }}</font>
+                                                    </strong>
                                                 </span>
                                             @endif
                                         </div>
@@ -447,26 +480,32 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Packaging Dimensions Per Unit:</label>
                                         <div class="col-sm-3">
-                                            <input type="text" name="p_d_p_u_length" value="{{ $get_payment_delivery[0]->p_d_p_u_length }}" class="form-control" placeholder="Enter length">
+                                            <input type="text" name="p_d_p_u_length" class="form-control" value="{{ old('p_d_p_u_length') }}{{ $product_payment_delivery_data->p_d_p_u_length }}">
                                             @if ($errors->has('p_d_p_u_length'))
                                                 <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('p_d_p_u_length') }}</font></strong>
+                                                    <strong>
+                                                        <font color="red">{{ $errors->first('p_d_p_u_length') }}</font>
+                                                    </strong>
                                                 </span>
                                             @endif
                                         </div>
                                         <div class="col-sm-3">
-                                            <input type="text" name="p_d_p_u_width" value="{{ $get_payment_delivery[0]->p_d_p_u_width }}" class="form-control" placeholder="Enter width">
+                                            <input type="text" name="p_d_p_u_width" class="form-control" value="{{ old('productName') }}{{ $product_payment_delivery_data->p_d_p_u_width }}">
                                             @if ($errors->has('p_d_p_u_width'))
                                                 <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('p_d_p_u_width') }}</font></strong>
+                                                    <strong>
+                                                        <font color="red">{{ $errors->first('p_d_p_u_width') }}</font>
+                                                    </strong>
                                                 </span>
                                             @endif
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" name="p_d_p_u_height" value="{{ $get_payment_delivery[0]->p_d_p_u_height }}" class="form-control" placeholder="Enter height">
+                                            <input type="text" name="p_d_p_u_height" class="form-control" value="{{ old('p_d_p_u_height') }}{{ $product_payment_delivery_data->p_d_p_u_height }}">
                                             @if ($errors->has('p_d_p_u_height'))
                                                 <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('p_d_p_u_height') }}</font></strong>
+                                                    <strong>
+                                                        <font color="red">{{ $errors->first('p_d_p_u_height') }}</font>
+                                                    </strong>
                                                 </span>
                                             @endif
                                         </div>
@@ -474,26 +513,32 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label"></label>
                                         <div class="col-sm-3">
-                                            <input type="text" name="weightPerPack" value="{{ $get_payment_delivery[0]->weightPerPack }}" class="form-control" placeholder="Enter weight per packaging">
+                                            <input type="text" name="weightPerPack" class="form-control" value="{{ old('weightPerPack') }}{{ $product_payment_delivery_data->weightPerPack }}">
                                             @if ($errors->has('weightPerPack'))
                                                 <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('weightPerPack') }}</font></strong>
+                                                    <strong>
+                                                        <font color="red">{{ $errors->first('weightPerPack') }}</font>
+                                                    </strong>
                                                 </span>
                                             @endif
                                         </div>
                                         <div class="col-sm-3">
-                                            <input type="text" name="exportCartonDimension" value="{{ $get_payment_delivery[0]->exportCartonDimension }}" class="form-control" placeholder="Enter export carton dimension">
+                                            <input type="text" name="exportCartonDimension" class="form-control" value="{{ old('exportCartonDimension') }}{{ $product_payment_delivery_data->exportCartonDimension }}">
                                             @if ($errors->has('exportCartonDimension'))
                                                 <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('exportCartonDimension') }}</font></strong>
+                                                    <strong>
+                                                        <font color="red">{{ $errors->first('exportCartonDimension') }}</font>
+                                                    </strong>
                                                 </span>
                                             @endif
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" name="exportCartonWeight" value="{{ $get_payment_delivery[0]->exportCartonWeight }}" class="form-control" placeholder="Enter export carton weigth">
+                                            <input type="text" name="exportCartonWeight" class="form-control" value="{{ old('exportCartonWeight') }}{{ $product_payment_delivery_data->exportCartonWeight }}">
                                             @if ($errors->has('exportCartonWeight'))
                                                 <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('exportCartonWeight') }}</font></strong>
+                                                    <strong>
+                                                        <font color="red">{{ $errors->first('exportCartonWeight') }}</font>
+                                                    </strong>
                                                 </span>
                                             @endif
                                         </div>
@@ -501,26 +546,32 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Delivery Rate:</label>
                                         <div class="col-sm-3">
-                                            <input type="text" name="DeliveryWithinState" value="{{ $get_payment_delivery[0]->DeliveryWithinState }}" class="form-control" placeholder="Enter delivery within state">
+                                            <input type="text" name="DeliveryWithinState" class="form-control" value="{{ old('DeliveryWithinState') }}{{ $product_payment_delivery_data->DeliveryWithinState }}">
                                             @if ($errors->has('DeliveryWithinState'))
                                                 <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('DeliveryWithinState') }}</font></strong>
+                                                    <strong>
+                                                        <font color="red">{{ $errors->first('DeliveryWithinState') }}</font>
+                                                    </strong>
                                                 </span>
                                             @endif
                                         </div>
                                         <div class="col-sm-3">
-                                            <input type="text" name="DeliveryWithinGR" value="{{ $get_payment_delivery[0]->DeliveryWithinGR }}" class="form-control" placeholder="Enter delivery within geographical range">
+                                            <input type="text" name="DeliveryWithinGR" class="form-control" value="{{ old('DeliveryWithinGR') }}{{ $product_payment_delivery_data->DeliveryWithinGR }}">
                                             @if ($errors->has('DeliveryWithinGR'))
                                                 <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('DeliveryWithinGR') }}</font></strong>
+                                                    <strong>
+                                                        <font color="red">{{ $errors->first('DeliveryWithinGR') }}</font>
+                                                    </strong>
                                                 </span>
                                             @endif
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" name="DeliveryOutsideGR" value="{{ $get_payment_delivery[0]->DeliveryOutsideGR }}" class="form-control" placeholder="Enter delivery outside geographical range">
+                                            <input type="text" name="DeliveryOutsideGR" class="form-control" value="{{ old('DeliveryOutsideGR') }}{{ $product_payment_delivery_data->DeliveryOutsideGR }}">
                                             @if ($errors->has('DeliveryOutsideGR'))
                                                 <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('DeliveryOutsideGR') }}</font></strong>
+                                                    <strong>
+                                                        <font color="red">{{ $errors->first('DeliveryOutsideGR') }}</font>
+                                                    </strong>
                                                 </span>
                                             @endif
                                         </div>
@@ -528,35 +579,41 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label"></label>
                                         <div class="col-sm-3">
-                                            <input type="text" name="DurationDeliveryWithinState" value="{{ $get_payment_delivery[0]->DurationDeliveryWithinState }}" class="form-control" placeholder="Enter duration delivery within state">
+                                            <input type="text" name="DurationDeliveryWithinState" class="form-control" value="{{ old('DurationDeliveryWithinState') }}{{ $product_payment_delivery_data->DurationDeliveryWithinState }}">
                                             @if ($errors->has('DurationDeliveryWithinState'))
                                                 <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('DurationDeliveryWithinState') }}</font></strong>
+                                                    <strong>
+                                                        <font color="red">{{ $errors->first('DurationDeliveryWithinState') }}</font>
+                                                    </strong>
                                                 </span>
                                             @endif
                                         </div>
                                         <div class="col-sm-3">
-                                            <input type="text" name="DurationDeliveryWithinGR" value="{{ $get_payment_delivery[0]->DurationDeliveryWithinGR }}" class="form-control" placeholder="Enter duration delivery within geographical range">
+                                            <input type="text" name="DurationDeliveryWithinGR" class="form-control" value="{{ old('DurationDeliveryWithinGR') }}{{ $product_payment_delivery_data->DurationDeliveryWithinGR }}">
                                             @if ($errors->has('DurationDeliveryWithinGR'))
                                                 <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('DurationDeliveryWithinGR') }}</font></strong>
+                                                    <strong>
+                                                        <font color="red">{{ $errors->first('DurationDeliveryWithinGR') }}</font>
+                                                    </strong>
                                                 </span>
                                             @endif
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" name="DurationDeliveryOutsideGR" value="{{ $get_payment_delivery[0]->DurationDeliveryOutsideGR }}" class="form-control" placeholder="Enter duration delivery outside geographical range">
+                                            <input type="text" name="DurationDeliveryOutsideGR" class="form-control" value="{{ old('DurationDeliveryOutsideGR') }}{{ $product_payment_delivery_data->DurationDeliveryOutsideGR }}">
                                             @if ($errors->has('DurationDeliveryOutsideGR'))
                                                 <span class="invalid-feedback" role="alert">
-                                                <strong><font color="red">{{ $errors->first('DurationDeliveryOutsideGR') }}</font></strong>
+                                                    <strong>
+                                                        <font color="red">{{ $errors->first('DurationDeliveryOutsideGR') }}</font>
+                                                    </strong>
                                                 </span>
                                             @endif
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Payment Method: <font color="red">*</font></label>
-                                        <div class="col-sm-10">
-                                            <select name="paymentMethod" class="form-control" id="paymentTerm" class="inputTxt"> 
-                                                <option value="{{ $get_payment_delivery[0]->paymentMethod }}">{{ $get_payment_delivery[0]->paymentMethod }}</option>
+                                        <div class="col-sm-4">
+                                            <select name="paymentMethod" class="form-control" class="inputTxt"> 
+                                                <option value="">--Select One--</option>
                                                 <option value="CIA">Cash in Advance (CIA)</option>
                                                 <option value="COD">Cash on Delivery (COD)</option>
                                             </select>
@@ -564,7 +621,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label"></label>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-4">
                                             @if ($errors->has('paymentMethod'))
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong><font color="red">{{ $errors->first('paymentMethod') }}</font></strong>
@@ -589,23 +646,133 @@
                                             <th>
                                                 Browse
                                             </th>
-                                            <th>
-                                                Delete
-                                            </th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         @foreach($get_product_images as $image)
                                         <tr>
+<<<<<<< HEAD
                                             <td>
                                                 <img src="{{ asset('public/backend/img/vendor/products/'. $image->productImage) }}" class="img-lg">
-                                            </td>
+=======
+                                            <td><img src="{{ asset('public/backend/img/vendor/products'.'/'.$product_images_data->productImage1) }}" height="100" width="100" ></td>
                                             <td>
+                                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                    <span class="btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span>
+                                                    <input type="file" name="productImage1"></span>
+                                                    <span class="fileinput-filename"></span>
+                                                    <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+                                                </div>
+                                                <input type="hidden" name="p_productImage1" value="{{ $product_images_data->productImage1 }}">
+                                            </td>
+                                            @if ($errors->has('productImage1'))
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label"></label>
+                                                
+                                                <div class="col-sm-10">
+                                                    <span class="invalid-feedback" role="alert">
+                                                    <strong><font color="red">{{ $errors->first('productImage1') }}</font></strong>
+                                                    </span>
+                                                </div>
+                                                
+                                            </div>
+                                            @endif
+                                        </tr>
+                                        <tr>
+                                            <td><img src="{{ asset('public/backend/img/vendor/products'.'/'.$product_images_data->productImage2) }}" height="100" width="100" ></td>
+                                            <td>
+                                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                    <span class="btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span>
+                                                    <input type="file" name="productImage2"></span>
+                                                    <span class="fileinput-filename"></span>
+                                                    <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+                                                </div>
+                                                <input type="hidden" name="p_productImage2" value="{{ $product_images_data->productImage2 }}">
+>>>>>>> 40c6a31b5ead0d6e363124b0dbea6166b49af97d
+                                            </td>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label"></label>
+                                                @if ($errors->has('productImage2'))
+                                                <div class="col-sm-10">
+                                                    <span class="invalid-feedback" role="alert">
+                                                    <strong><font color="red">{{ $errors->first('productImage2') }}</font></strong>
+                                                    </span>
+                                                </div>
+                                                @endif
+                                            </div>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="{{ asset('public/backend/img/vendor/products'.'/'.$product_images_data->productImage3) }}" height="100" width="100" ></td>
+                                            <td>
+<<<<<<< HEAD
                                                 <input type="file" name="productImage" class="form-control">
                                             </td>
                                             <td>
                                                 <a href="{{ url('/vendor/products/delete_product_request/'.$image->id) }}" class="btn btn-primary"><i class="fa fa-trash"></i></a>
+=======
+                                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                    <span class="btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span>
+                                                    <input type="file" name="productImage3"></span>
+                                                    <span class="fileinput-filename"></span>
+                                                    <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+                                                </div>
+                                                <input type="hidden" name="p_productImage3" value="{{ $product_images_data->productImage3 }}">
                                             </td>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label"></label>
+                                                @if ($errors->has('productImage3'))
+                                                <div class="col-sm-10">
+                                                    <span class="invalid-feedback" role="alert">
+                                                    <strong><font color="red">{{ $errors->first('productImage3') }}</font></strong>
+                                                    </span>
+                                                </div>
+                                                @endif
+                                            </div>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="{{ asset('public/backend/img/vendor/products'.'/'.$product_images_data->productImage4) }}" height="100" width="100" ></td>
+                                            <td>
+                                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                    <span class="btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span>
+                                                    <input type="file" name="productImage4" onchange="readURL(this);"></span>
+                                                    <span class="fileinput-filename"></span>
+                                                    <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+                                                </div>
+                                                <input type="hidden" name="p_productImage4" value="{{ $product_images_data->productImage4 }}">
+                                            </td>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label"></label>
+                                                @if ($errors->has('productImage4'))
+                                                <div class="col-sm-10">
+                                                    <span class="invalid-feedback" role="alert">
+                                                    <strong><font color="red">{{ $errors->first('productImage4') }}</font></strong>
+                                                    </span>
+                                                </div>
+                                                @endif
+                                            </div>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="{{ asset('public/backend/img/vendor/products'.'/'.$product_images_data->productImage5) }}" height="100" width="100" ></td>
+                                            <td>
+                                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                    <span class="btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span>
+                                                    <input type="file" name="productImage5" onchange="readURL(this);"></span>
+                                                    <span class="fileinput-filename"></span>
+                                                    <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+                                                </div>
+                                                <input type="hidden" name="p_productImage5" value="{{ $product_images_data->productImage5 }}">
+>>>>>>> 40c6a31b5ead0d6e363124b0dbea6166b49af97d
+                                            </td>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label"></label>
+                                                @if ($errors->has('productImage5'))
+                                                <div class="col-sm-4">
+                                                    <span class="invalid-feedback" role="alert">
+                                                    <strong><font color="red">{{ $errors->first('productImage5') }}</font></strong>
+                                                    </span>
+                                                </div>
+                                                @endif
+                                            </div>
                                         </tr>
                                         @endforeach
                                         </tbody>
@@ -624,7 +791,25 @@
 @endsection
 
 @section('js')
+    <script src="{{ asset('public/backend/js/plugins/jasny/jasny-bootstrap.min.js') }}"></script>
+
+    <script src="{{ asset('public/backend/js/get_sub_category.js') }}"></script>
+
     <script src="{{ asset('public/backend/js/plugins/dataTables/datatables.min.js') }}"></script>
+
+    <script type="text/javascript">
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 
     <!-- Page-Level Scripts -->
     <script>
@@ -852,14 +1037,6 @@
                 $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
             });
 
-            $(".select2_demo_1").select2();
-            $(".select2_demo_2").select2();
-            $(".select2_demo_3").select2({
-                placeholder: "Select a state",
-                allowClear: true
-            });
-
-
             $(".touchspin1").TouchSpin({
                 buttondown_class: 'btn btn-white',
                 buttonup_class: 'btn btn-white'
@@ -1004,5 +1181,8 @@
 
         });
     </script>
+<<<<<<< HEAD
     
+=======
+>>>>>>> 40c6a31b5ead0d6e363124b0dbea6166b49af97d
 @endsection

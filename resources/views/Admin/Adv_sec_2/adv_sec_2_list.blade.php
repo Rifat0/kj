@@ -1,4 +1,4 @@
-@extends('admin.layouts.layout')
+@extends('Admin.Layouts.layout')
 
 @section('css')
     <!-- <link href="{{ asset('public/backend/css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet"> -->
@@ -26,11 +26,13 @@
         </div>
     </div>
     <div class="wrapper wrapper-content animated fadeInRight">
+        @include('Admin.Layouts.message')
+
         <div class="row">
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Banar Table </h5>
+                        <h5>Advertisement Section One </h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -44,33 +46,23 @@
                             <tr>
                                 <th>#</th>
                                 <th>Image</th>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Abbreviation</th>
+                                <th>Vendor</th>
+                                <th>Category</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
+                            @foreach($adv_sec_2_data as $adv_sec_2_data)
                             <tr>
-                                <td>1</td>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
+                                <td>{{ $adv_sec_2_data->adv_sec_2_id }}</td>
+                                <td><img class="" src="{{ asset('public/content/adv_sec_2/' . $adv_sec_2_data->image) }}"  height="200" width="300"></td>
+                                <td>{{ $adv_sec_2_data->vendor_id }}</td>
+                                <td>{{ $adv_sec_2_data->vendor_category_id }}</td>
+                                <td class="center">
+                                    <a href="{{ url('/admin/edit_adv_sec_2/'.$adv_sec_2_data->adv_sec_2_id) }}" class="btn btn-primary btn-xs">Edit</a>
+                                </td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@fat</td>
-                                <td>@twitter</td>
-                            </tr>
+                            @endforeach
                             </tbody>
                         </table>
 

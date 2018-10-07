@@ -1,4 +1,4 @@
-@extends('admin.layouts.layout')
+@extends('Admin.Layouts.layout')
 
 @section('css')
     <link href="{{ asset('public/backend/css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">
@@ -64,8 +64,6 @@
                                 <label class="col-sm-2 control-label">Vendor Category<font color="red">*</font></label>
                                 <div class="col-sm-10">
                                     <select name="productName" class="form-control" >
-                                        <option>Category</option>
-                                        <option>Category</option>
                                     </select>
                                     <span class="help-block m-b-none"></span>
                                 </div>
@@ -83,7 +81,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 @endsection
 

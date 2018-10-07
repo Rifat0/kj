@@ -31,6 +31,7 @@
         </div>
     </div>
     <div class="wrapper wrapper-content animated fadeInRight">
+        @include('Admin.Layouts.message')
         <div class="row">
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
@@ -48,6 +49,7 @@
                     <table class="table table-striped table-bordered table-hover dataTables-example" >
                     <thead>
                     <tr>
+                        <th>Product ID</th>
                         <th>Product Name</th>
                         <th>Price</th>
                         <th>Number In Stock</th>
@@ -56,20 +58,27 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Trident</td>
-                        <td>Internet
-                            Explorer 4.0
-                        </td>
-                        <td>Win 95+</td>
-                        <td>4</td>
-                        <td class="center">
-                            <button type="button" class="btn btn-primary btn-xs">Add Quantity</button>
-                        </td>
-                    </tr>
+                    @foreach($inventory_products as $products)
+                        <tr>
+                            <td>{{ $products->product_number }}</td>
+                            <td>{{ $products->productName }}</td>
+                            <td>{{ $products->pd_price }}</td>
+                            <td>{{ $products->stock_count }}</td>
+                            <td>{{ $products->sold_count }}</td>
+                            <td class="center ">
+                                <form method="post" action="{{ url('/vendor/products/stock_updaet')}}">
+                                    @csrf
+                                <input type="text" class="form-control col-md-2" name="stock_count">
+                                <input type="hidden" name="product_number" value="{{ $products->product_number }}">
+                                <button type="submit" class="btn btn-primary btn-xs">Add</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                     <tfoot>
                     <tr>
+                        <th>Product ID</th>
                         <th>Product Name</th>
                         <th>Price</th>
                         <th>Number In Stock</th>
@@ -90,7 +99,6 @@
 @section('js')
     <script src="{{ asset('public/backend/js/plugins/dataTables/datatables.min.js') }}"></script>
 
-    <!-- Page-Level Scripts -->
     <script>
         $(document).ready(function(){
             $('.dataTables-example').DataTable({
@@ -98,21 +106,8 @@
                 responsive: true,
                 dom: '<"html5buttons"B>lTfgitp',
                 buttons: [
-                    { extend: 'copy'},
-                    {extend: 'csv'},
                     {extend: 'excel', title: 'ExampleFile'},
-                    {extend: 'pdf', title: 'ExampleFile'},
-
-                    {extend: 'print',
-                     customize: function (win){
-                            $(win.document.body).addClass('white-bg');
-                            $(win.document.body).css('font-size', '10px');
-
-                            $(win.document.body).find('table')
-                                    .addClass('compact')
-                                    .css('font-size', 'inherit');
-                    }
-                    }
+                    {extend: 'pdf', title: 'ExampleFile'}
                 ]
 
             });

@@ -10,7 +10,11 @@
                             <span class="clear"> <span class="text-muted text-xs block"><strong class="font-bold">{{ Session::get('vendore_user_data')[0] ['vendore_name'] }}</strong></span> </span> </a>
                         </div>
                         <div class="logo-element">
+<<<<<<< HEAD
                             {{ Session::get('vendore_user_data')[0] ['vendore_name'] }}
+=======
+                            KJ
+>>>>>>> 40c6a31b5ead0d6e363124b0dbea6166b49af97d
                         </div>
                     </li>
                     <li class="active">

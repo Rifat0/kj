@@ -35,6 +35,10 @@
 
                         <input type="text" class="form-control" name="vendor_type" value="{{ old('vendor_type') }}" placeholder="Enter Vendor Type" >
                     </div>
+                    <div class="form-group">
+
+                        <input type="text" class="form-control" name="companyName" value="{{ old('companyName') }}" placeholder="Enter Company Name" >
+                    </div>
                 </div>
 
                 <div class="col-sm-6">

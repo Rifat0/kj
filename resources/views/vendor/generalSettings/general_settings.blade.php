@@ -100,9 +100,15 @@
 
                                 <fieldset class="form-horizontal">
                                     <div class="form-group">
+<<<<<<< HEAD
                                         <label class="col-sm-2 control-label">Vendor Name:</label>
                                         <div class="col-sm-10">
                                             <input class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['vendore_name'] }}" disabled>
+=======
+                                        <label class="col-sm-2 control-label">Vendor Name: <font color="red">*</font></label>
+                                        <div class="col-sm-10">
+                                            <input name="name" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['vendore_name'] }}" placeholder="Enter Company Name">
+>>>>>>> 40c6a31b5ead0d6e363124b0dbea6166b49af97d
                                             @if ($errors->has('name'))
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong><font color="red">{{ $errors->first('name') }}</font></strong>
@@ -122,6 +128,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+<<<<<<< HEAD
                                         <label class="col-sm-2 control-label">Email:</label>
                                         <div class="col-sm-10">
                                             <input class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['email'] }}" disabled>
@@ -139,43 +146,79 @@
                                             @if ($errors->has('vendor_type'))
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong><font color="red">{{ $errors->first('vendor_type') }}</font></strong>
+=======
+                                        <label class="col-sm-2 control-label">Email: <font color="red">*</font></label>
+                                        <div class="col-sm-10">
+                                            <input name="email" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['email'] }}" placeholder="Enter Email">
+                                            @if ($errors->has('email'))
+                                                <span class="invalid-feedback" role="alert">
+                                                <strong><font color="red">{{ $errors->first('email') }}</font></strong>
+>>>>>>> 40c6a31b5ead0d6e363124b0dbea6166b49af97d
                                                 </span>
                                             @endif
                                         </div>
                                     </div>
                                     <div class="form-group">
+<<<<<<< HEAD
                                         <label class="col-sm-2 control-label">Fax</label>
                                         <div class="col-sm-10">
                                             <input name="fax" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['fax'] }}" placeholder="Enter Fax">
                                             @if ($errors->has('fax'))
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong><font color="red">{{ $errors->first('fax') }}</font></strong>
+=======
+                                        <label class="col-sm-2 control-label">Vendor Type:</label>
+                                        <div class="col-sm-10">
+                                            <input name="vendor_type" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['vendor_type'] }}" placeholder="Enter Company Owner">
+                                            @if ($errors->has('vendor_type'))
+                                                <span class="invalid-feedback" role="alert">
+                                                <strong><font color="red">{{ $errors->first('vendor_type') }}</font></strong>
+>>>>>>> 40c6a31b5ead0d6e363124b0dbea6166b49af97d
                                                 </span>
                                             @endif
                                         </div>
                                     </div>
                                     <div class="form-group">
+<<<<<<< HEAD
                                         <label class="col-sm-2 control-label">Address:</label>
                                         <div class="col-sm-10">
                                             <input name="address" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['address'] }}" placeholder="Enter Address">
                                             @if ($errors->has('address'))
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong><font color="red">{{ $errors->first('address') }}</font></strong>
+=======
+                                        <label class="col-sm-2 control-label">Fax</label>
+                                        <div class="col-sm-10">
+                                            <input name="fax" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['fax'] }}" placeholder="Enter Fax">
+                                            @if ($errors->has('fax'))
+                                                <span class="invalid-feedback" role="alert">
+                                                <strong><font color="red">{{ $errors->first('fax') }}</font></strong>
+>>>>>>> 40c6a31b5ead0d6e363124b0dbea6166b49af97d
                                                 </span>
                                             @endif
                                         </div>
                                     </div>
                                     <div class="form-group">
+<<<<<<< HEAD
                                         <label class="col-sm-2 control-label">Mobile:</label>
                                         <div class="col-sm-10">
                                             <input name="mobile" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['mobile'] }}" placeholder="Enter Telephone">
                                             @if ($errors->has('mobile'))
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong><font color="red">{{ $errors->first('mobile') }}</font></strong>
+=======
+                                        <label class="col-sm-2 control-label">Address:</label>
+                                        <div class="col-sm-10">
+                                            <input name="address" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['address'] }}" placeholder="Enter Address">
+                                            @if ($errors->has('address'))
+                                                <span class="invalid-feedback" role="alert">
+                                                <strong><font color="red">{{ $errors->first('address') }}</font></strong>
+>>>>>>> 40c6a31b5ead0d6e363124b0dbea6166b49af97d
                                                 </span>
                                             @endif
                                         </div>
                                     </div>
+<<<<<<< HEAD
 
                                     <!-- <div class="form-group">
                                         <label class="col-sm-2 control-label">Old Password:</label>
@@ -209,6 +252,17 @@
                                                 <strong><font color="red">{{ $errors->first('password') }}</font></strong>
                                                 </span>
                                             @endif
+=======
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Mobile:</label>
+                                        <div class="col-sm-10">
+                                            <input name="mobile" class="form-control" type="text" value="{{ Session::get('vendore_user_data')[0] ['mobile'] }}" placeholder="Enter Telephone">
+                                            @if ($errors->has('mobile'))
+                                                <span class="invalid-feedback" role="alert">
+                                                <strong><font color="red">{{ $errors->first('mobile') }}</font></strong>
+                                                </span>
+                                            @endif
+>>>>>>> 40c6a31b5ead0d6e363124b0dbea6166b49af97d
                                         </div>
                                     </div>
                                 </fieldset>

@@ -56,36 +56,36 @@
                     <table class="table table-striped table-bordered table-hover dataTables-example" >
                     <thead>
                     <tr>
-                        <th>SL.</th>
+                        <th>Product ID</th>
                         <th>Product Name</th>
                         <th>Price</th>
-                        <th>Number In Stock</th>
-                        <th>Sold Quantity</th>
+                        <th>Created</th>
+                        <th>Updated</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($get_products as $products)
+                    @foreach($products_data as $products)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $products->product_number }}</td>
                         <td>{{ $products->productName }}</td>
-                        <td>Price</td>
-                        <td>Win 95+</td>
-                        <td>4</td>
+                        <td>{{ $products->pd_price }}</td>
+                        <td>{{ Carbon::parse($products->created_at)->format('d-m-Y') }}</td>
+                        <td>{{ Carbon::parse($products->updated_at)->format('d-m-Y') }}</td>
                         <td class="center">
-                            <!-- <a href="{{ url('/vendor/products/product_detail', $products->id) }}" class="btn btn-primary btn-xs">View</a> -->
-                            <a href="{{ url('/vendor/products/update_product', $products->id) }}" class="btn btn-primary btn-xs">Update</a>
+                            <a href="{{ url('/vendor/product/view').'/'.$products->product_number }}" class="btn btn-info btn-xs">{{ __('View') }}</a>
+                            <a href="{{ url('/vendor/products/update_product').'/'.$products->product_number }}" class="btn btn-primary btn-xs">{{ __('Update') }}</a>
                         </td>
                     </tr>
                     @endforeach
                     </tbody>
                     <tfoot>
                     <tr>
-                        <th>SL.</th>
+                        <th>Product ID</th>
                         <th>Product Name</th>
                         <th>Price</th>
-                        <th>Number In Stock</th>
-                        <th>Sold Quantity</th>
+                        <th>Created</th>
+                        <th>Updated</th>
                         <th>Action</th>
                     </tr>
                     </tfoot>

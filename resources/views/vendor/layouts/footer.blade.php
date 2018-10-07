@@ -1,3 +1,4 @@
+<<<<<<< HEAD
                 <div class="footer">
                     <div class="pull-right">
                         Powered By <strong>Developer</strong>.
@@ -7,6 +8,13 @@
                     </div>
                 </div>
 
+=======
+            <div class="footer">
+                <div>
+                    <strong>&copy; Kajandi</strong>
+                </div>
+            </div>
+>>>>>>> 40c6a31b5ead0d6e363124b0dbea6166b49af97d
         </div>
     </div>
 

@@ -1,6 +1,92 @@
 <?php
 
+<<<<<<< HEAD
 // ==========================================================================
+=======
+// ==========================================================================================================
+// Content
+// ==========================================================================================================
+
+Route::get('/', 'Content\Home@index')->name('home');
+Route::get('/home', 'Content\Home@index')->name('home');
+Route::get('/category/{cat_id}', 'Content\Product@get_category_product');
+Route::get('/category/sub-category/{cat_id}/{sub_cat_id}', 'Content\Product@get_sub_category_product');
+Route::get('/product/{cat_id}/{sub_cat_id}/{p_id}', 'Content\Product@get_product');
+
+Route::get('/add-to-cart/{id}', 'Content\Product@add_to_cart');
+Route::get('/cart_item', 'Content\Home@cart_item')->name('cart_item');
+Route::get('/remove_cart_product/{key}', 'Content\Product@remove_cart_product');
+Route::get('/add-to-cart_des', 'Content\Product@cart_des');
+Route::post('/update_cart', 'Content\Product@update_cart');
+
+Route::post('/review_submit', 'Content\Product@review_submit');
+
+Route::get('/add-to-wishlist/{id}', 'Content\Product@add_to_wishlist');
+
+Route::get('/checkout ', 'Content\Home@checkout');
+Route::post('/checkout ', 'Content\Home@checkout_submit');
+
+Route::get('/summery/{order_id} ', 'Content\Home@summery')->name('summery');
+Route::get('/about_us ', 'Content\Home@about_us')->name('about_us');
+Route::get('/legal ', 'Content\Home@legal')->name('legal');
+Route::get('/favorite ', 'Content\Home@favorite')->name('favorite');
+Route::get('/compare ', 'Content\Home@compare')->name('compare');
+Route::get('/sing_up ', 'Content\Home@sing_up')->name('sing_up');
+Route::post('/sing_up ', 'Content\Home@sing_up_submit');
+Route::post('/login ', 'Content\Home@login_submit');
+Route::post('/logout ', 'Content\Home@logout');
+Route::post('/newsletter_submit ', 'Content\Home@newsletter_submit');
+
+// ==========================================================================================================
+// Vendor
+// ==========================================================================================================
+Route::get('/vendore', 'Vendor\Home@login');
+Route::get('/vendore/singup', 'Vendor\Home@signUp');
+Route::post('/vendore/login', 'Vendor\Home@login_submit');
+Route::post('/vendore/signUp', 'Vendor\Home@signUp_submit');
+	
+Route::get('sub_category/{id}', 'Vendor\Products@get_sub_category');
+
+Route::group(['middleware' => 'vendore_user'], function () {
+
+	Route::post('/vendore/logout', 'Vendor\Home@logout');
+	// Dashboard
+	Route::get('/vendor/dashboard', 'Vendor\Dashboard@index');
+	// Products
+	Route::get('/vendor/products', 'Vendor\Products@products');
+	Route::get('/vendor/product/view/{id}', 'Vendor\Products@product_detail');
+	Route::get('/vendor/products/create_new_product', 'Vendor\Products@create_new_product');
+	Route::post('/vendor/products/store_new_product', 'Vendor\Products@store_new_product');
+	Route::get('/vendor/products/update_product/{id}', 'Vendor\Products@update_product');
+	Route::post('/vendor/products/products_update', 'Vendor\Products@update_product_request');
+	// Inventory Products
+	Route::get('/vendor/products/inventory_products', 'Vendor\Products@inventory_products');
+	Route::post('/vendor/products/stock_updaet', 'Vendor\Products@stock_updaet');
+	// Products Review
+	Route::get('/vendor/products/pending_review', 'Vendor\Products@pending_review');
+	// Orders
+	Route::get('/vendor/orders', 'Vendor\Products@orders');
+	Route::get('/vendor/orders/view/{id}', 'Vendor\Products@orders_view');
+	Route::get('/vendor/orders/accept/{id}', 'Vendor\Products@orders_accept');
+	Route::get('/vendor/orders/reject/{id}', 'Vendor\Products@orders_reject');
+	// Report
+	Route::get('/vendor/report', 'Vendor\Products@report');
+	// Customers
+	Route::get('/vendor/customers', 'Vendor\Customers@customers');
+	// Mailbox
+	Route::get('/vendor/mailbox', 'Vendor\Customers@mailbox');
+	Route::get('/vendor/mailbox/mail_compose', 'Vendor\Customers@mail_compose');
+	Route::get('/vendor/mailbox/mail_detail', 'Vendor\Customers@mail_detail');
+	// General Settings
+	Route::get('/vendor/general_settings', 'Vendor\Settings@general_settings');
+	Route::post('/vendor/general_settings/update_general_settings_request', 'Vendor\Settings@update_general_settings_request');
+
+});
+
+
+
+// ==========================================================================================================
+>>>>>>> 40c6a31b5ead0d6e363124b0dbea6166b49af97d
 // Admin
 //===========================================================================
 
