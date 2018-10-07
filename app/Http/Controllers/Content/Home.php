@@ -127,7 +127,7 @@ class Home extends Controller
 
         Session::push('web_user_data', $session_data);
 
-        return redirect('/');
+        return redirect('/buyer/dashboard');
     }
 
     public function login_submit(Request $request)

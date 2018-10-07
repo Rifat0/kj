@@ -29,8 +29,11 @@
                         <a href="{{ url('/vendor/report') }}"><i class="fa fa-file"></i> <span class="nav-label">Reports</span></a>
                     </li>
                     <li>
-                        <a href="{{ url('/vendor/mailbox') }}"><i class="fa fa-envelope"></i> <span class="nav-label">Mailbox</span><span class="label label-warning pull-right">0/0</span></a>
+                        <a href="{{ url('/vendor/message') }}"><i class="fa fa-envelope"></i> <span class="nav-label">Message</span><span class="label label-warning pull-right">0/0</span></a>
                     </li>
+                    <!-- <li>
+                        <a href="{{ url('/vendor/mailbox') }}"><i class="fa fa-envelope"></i> <span class="nav-label">Mailbox</span><span class="label label-warning pull-right">0/0</span></a>
+                    </li> -->
                     <li>
                         <a href="{{ url('/vendor/general_settings') }}"><i class="fa fa-cog"></i> <span class="nav-label">General Settings</span></a>
                     </li>
@@ -54,7 +57,7 @@
                         <li>
                             <div class="dropdown-messages-box">
                                 <a href="profile.html" class="pull-left">
-                                    <img alt="image" class="img-circle" src="img/a7.jpg">
+                                    <img alt="image" class="img-circle" src="{{ asset('public/backend/img/buyer/profilePicture/a4.jpg') }}">
                                 </a>
                                 <div class="media-body">
                                     <small class="pull-right">46h ago</small>
@@ -66,7 +69,7 @@
                         <li class="divider"></li>
                         <li>
                             <div class="text-center link-block">
-                                <a href="mailbox.html">
+                                <a href="{{ url('/vendor/message') }}">
                                     <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
                                 </a>
                             </div>

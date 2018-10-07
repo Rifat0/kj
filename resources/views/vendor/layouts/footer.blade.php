@@ -1,9 +1,9 @@
                 <div class="footer">
                     <div class="pull-right">
-                        10GB of <strong>250GB</strong> Free.
+                        Powered By <strong>Developer</strong>.
                     </div>
                     <div>
-                        <strong>Copyright</strong> Example Company &copy; 2014-2017
+                        <strong>Copyright</strong> Kajandi.com &copy; 2018-<?php echo date("Y"); ?>
                     </div>
                 </div>
 

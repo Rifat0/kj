@@ -1,7 +1,7 @@
 @extends('vendor.layouts.layout')
 
 @section('css')
-    <link href="{{ asset('public/vendor/css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/backend/css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -76,7 +76,7 @@
 @endsection
 
 @section('js')
-    <script src="{{ asset('public/vendor/js/plugins/dataTables/datatables.min.js') }}"></script>
+    <script src="{{ asset('public/backend/js/plugins/dataTables/datatables.min.js') }}"></script>
 
     <!-- Page-Level Scripts -->
     <script>
